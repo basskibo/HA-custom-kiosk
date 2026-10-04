@@ -275,7 +275,7 @@ function updateAqiGauge(pm25) {
     color = "var(--good)";
   }
   fillEl.style.stroke = color;
-  if (labelEl) labelEl.textContent = `Kvalitet vazduha · ${quality}`;
+  if (labelEl) labelEl.textContent = quality;
 }
 
 function weatherIconName(state) {

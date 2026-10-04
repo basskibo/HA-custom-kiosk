@@ -42,12 +42,12 @@ html, body {
 }
 
 body {
+  /* Neutralnija, flat tamna pozadina - bliže HA default dashboard-u
+     (manje "glassmorphism" sjaja, više ravnog tamno-sivog tona). */
   background:
-    radial-gradient(circle at 12% 12%, rgba(243, 181, 58, 0.16), transparent 45%),
-    radial-gradient(circle at 90% 8%, rgba(147, 101, 204, 0.16), transparent 42%),
-    radial-gradient(circle at 88% 88%, rgba(70, 120, 190, 0.18), transparent 48%),
-    radial-gradient(circle at 8% 92%, rgba(35, 160, 150, 0.14), transparent 42%),
-    linear-gradient(160deg, #15132a, #100e21 55%, #0c0a1a);
+    radial-gradient(circle at 12% 10%, rgba(243, 181, 58, 0.06), transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(70, 110, 170, 0.06), transparent 50%),
+    linear-gradient(160deg, #15161d, #111218 55%, #0e0f14);
   background-attachment: fixed;
 }
 
@@ -139,27 +139,25 @@ body {
 }
 
 .card {
-  background: linear-gradient(165deg, rgba(10, 9, 18, 0.72), rgba(10, 9, 18, 0.55));
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  border-radius: var(--radius-lg);
+  /* Flatnija, solidnija kartica - bliže HA default tile stilu
+     (manje "glass" sjaja, čvršća boja, blaga senka). */
+  background: #1b1d24;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-md);
   padding: 18px;
-  backdrop-filter: blur(26px) saturate(150%);
-  -webkit-backdrop-filter: blur(26px) saturate(150%);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .card-title {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  gap: 9px;
+  font-size: 15px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-dim);
-  margin-bottom: 14px;
+  color: var(--text);
+  margin-bottom: 16px;
 }
-.card-title svg { width: 15px; height: 15px; }
+.card-title svg { width: 18px; height: 18px; color: var(--text-dim); }
 
 .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .card-header .card-title { margin-bottom: 0; }
@@ -493,7 +491,8 @@ input[type="range"] { accent-color: var(--gold); }
 .aqi-unit { font-size: 10px; color: var(--text-dim); margin-top: 3px; }
 
 .purifier-stats { flex: 1; min-width: 0; }
-.purifier-stat-title { font-size: 12.5px; font-weight: 700; color: var(--text-dim); margin-bottom: 10px; }
+.purifier-stat-title { font-size: 12px; font-weight: 600; color: var(--text-dim); margin-bottom: 2px; }
+.purifier-quality-value { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
 .purifier-stat-row {
   display: flex; align-items: center; gap: 8px;
   font-size: 13.5px; font-weight: 600; color: var(--text);
