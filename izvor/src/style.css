@@ -20,11 +20,11 @@
   --teal: #2dd4bf;
   --teal-soft: rgba(45, 212, 191, 0.16);
 
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 12px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
   --nav-height: 84px;
-  --gap: 14px;
+  --gap: 10px;
 }
 
 * { box-sizing: border-box; }
@@ -141,10 +141,10 @@ body {
 .card {
   /* Flatnija, solidnija kartica - bliže HA default tile stilu
      (manje "glass" sjaja, čvršća boja, blaga senka). */
-  background: #1b1d24;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #1a1c22;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-md);
-  padding: 18px;
+  padding: 14px 16px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -449,7 +449,7 @@ input[type="range"] { accent-color: var(--gold); }
 .stat-label { font-size: 10.5px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.3px; }
 .stat-value { font-size: 16px; font-weight: 700; }
 
-.vacuum-controls { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.vacuum-controls { display: flex; gap: 10px; margin-top: 16px; justify-content: center; }
 .icon-btn {
   flex: 1; min-width: 90px; display: flex; align-items: center; justify-content: center; gap: 6px;
   background: var(--card-soft); border: none; color: var(--text);
@@ -460,6 +460,32 @@ input[type="range"] { accent-color: var(--gold); }
 .icon-btn.stop { background: var(--bad-soft); color: var(--bad); }
 .icon-btn.spot { background: var(--gold-soft); color: var(--gold); }
 .icon-btn:active { transform: scale(0.97); }
+
+/* Okrugla dugmad za usisivač (ikonica u krugu, tekst ispod) - bliže
+   HA "tile" izgledu umesto punih pravougaonih dugmića. */
+.round-icon-btn {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 7px;
+  background: none; border: none; color: var(--text-dim);
+  padding: 4px; cursor: pointer; font-size: 12px; font-weight: 600;
+}
+.round-icon-circle {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--card-soft);
+}
+.round-icon-circle svg { width: 20px; height: 20px; }
+.round-icon-btn.start .round-icon-circle { background: var(--good-soft); color: var(--good); }
+.round-icon-btn.stop .round-icon-circle { background: var(--bad-soft); color: var(--bad); }
+.round-icon-btn.spot .round-icon-circle { background: var(--gold-soft); color: var(--gold); }
+.round-icon-btn:active .round-icon-circle { transform: scale(0.93); }
+
+/* ---------- Entity red (ikonica + ime + vrednost/prekidač) ---------- */
+.entity-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0;
+}
+.entity-row-name { flex: 1; font-size: 13.5px; font-weight: 600; color: var(--text); }
+.entity-row-value { font-size: 13px; font-weight: 600; color: var(--text-dim); }
 
 /* ---------- Prečišćivač vazduha (puna kartica na Home) ---------- */
 .card-purifier { display: flex; flex-direction: column; }
@@ -502,6 +528,7 @@ input[type="range"] { accent-color: var(--gold); }
 }
 .aqi-value { font-size: 26px; font-weight: 800; line-height: 1; }
 .aqi-unit { font-size: 10px; color: var(--text-dim); margin-top: 3px; }
+.aqi-metric { font-size: 10px; color: var(--text-dimmer); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
 
 /* ---------- Ikonica u obojenom krugu (HA stil) ---------- */
 .icon-badge {
