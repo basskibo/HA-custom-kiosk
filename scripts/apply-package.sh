@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 # ====================================================================
 # apply-package.sh — primeni novi paket koji ti Claude pošalje (zip),
-# snimi ga u git (GitHub) kao novu verziju, i odmah ga deploy-uj.
+# snimi ga u git i push-uj na GitHub kao novu verziju.
+#
+# POKREĆE SE NA OVOM RAČUNARU (ne na Raspberry Pi-ju!) — ovaj računar
+# push-uje, Pi samo pull-uje preko update.sh.
 #
 # Upotreba:
-#   ~/dashboard-repo/scripts/apply-package.sh ~/putanja/do/dashboard-vN.zip
+#   ~/homepi-setup/dashboard-repo/scripts/apply-package.sh ~/putanja/do/dashboard-vN.zip
 #
 # (Isto radi i ako prosledis vec raspakovan folder umesto .zip-a.)
 #
@@ -12,7 +15,9 @@
 #   1. Raspakuje zip (ako treba) i proveri da ima izvor/ i dashboard/
 #   2. Prepiše te foldere preko postojećih u ovom repo-u
 #   3. git commit + git push (nova verzija ide na GitHub, čuva istoriju)
-#   4. Pozove update.sh koji deploy-uje na nginx (bez diranja config.js)
+#
+# Deploy na nginx se NE radi ovde — to je zadatak Raspberry Pi-ja.
+# Posle push-a, na Pi-ju pokreni: ~/dashboard-repo/scripts/update.sh
 # ====================================================================
 set -euo pipefail
 
@@ -63,7 +68,8 @@ else
   git commit -m "Update $(date '+%Y-%m-%d %H:%M')"
   echo "==> Šaljem na GitHub..."
   git push
+  echo ""
+  echo "==> Gotovo! Nova verzija je na GitHub-u."
+  echo "    Sledeći korak: na Raspberry Pi-ju pokreni"
+  echo "    ~/dashboard-repo/scripts/update.sh"
 fi
-
-echo "==> Pokrećem deploy..."
-"$REPO_DIR/scripts/update.sh"

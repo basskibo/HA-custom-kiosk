@@ -1,8 +1,12 @@
 # homepi-dashboard
 
-Custom Home Assistant dashboard za kuću (vidi `izvor/` za ceo Vite
-projekat). Ovaj repo je napravljen da ti Raspberry Pi update-uje sam,
-jednom komandom — bez ručnog `scp`-ovanja fajlova.
+Custom Home Assistant dashboard (vidi `izvor/` za ceo Vite projekat).
+
+**Ko šta radi:**
+- **Ovaj računar** (tvoj desktop, na kom pričaš sa Claude-om) — ovde se
+  nove verzije primenjuju i **pushuju** na GitHub.
+- **Raspberry Pi** — samo **pull**-uje (povlači) sa GitHub-a i deploy-uje.
+  Pi nikad ne pushuje ništa.
 
 ## Struktura repo-a
 
@@ -15,108 +19,126 @@ homepi-dashboard/
 ├── dashboard/           Gotovi, već izgrađeni fajlovi (ono što nginx
 │                        stvarno servira) — index.html + assets/
 └── scripts/
-    ├── update.sh         Povuci + deploy (ovo pokrećeš redovno)
-    └── apply-package.sh  Primeni novi zip koji ti Claude pošalje
+    ├── update.sh         Pull + deploy — OVO POKREĆE RASPBERRY PI
+    └── apply-package.sh  Primeni novi paket + commit + push — OVO
+                           POKREĆE OVAJ RAČUNAR (ne Pi)
 ```
 
 **Tvoj pravi Home Assistant token NIKAD nije u ovom repo-u.** On živi
-samo u `~/dashboard/html/config.js` na samom Raspberry Pi-ju — izvan
-repo-a — i `update.sh` ga nikad ne dira.
+samo u `~/dashboard/html/config.js` na Raspberry Pi-ju — izvan repo-a —
+i `update.sh` ga nikad ne dira.
 
-## Gde je šta na Raspberry Pi-ju
+## Gde je šta
 
 ```
-~/dashboard-repo/        <- ovaj git repo (klonirano sa GitHub-a)
-~/dashboard/html/        <- folder koji nginx kontejner stvarno servira
-                             (ovde živi tvoj pravi config.js)
+Ovaj računar:
+  ~/homepi-setup/dashboard-repo/   <- ovaj repo, OVDE SE PUSHUJE
+                                       (već podešeno: git remote origin
+                                       = git@github.com:basskibo/HA-custom-kiosk.git,
+                                       initial commit je već urađen)
+
+Raspberry Pi:
+  ~/dashboard-repo/                <- isti repo, klon SAMO ZA ČITANJE
+                                       (read-only deploy key, vidi ispod)
+  ~/dashboard/html/                <- folder koji nginx kontejner stvarno
+                                       servira (ovde živi tvoj pravi config.js)
 ```
 
-Ništa se više ne šalje ručno preko `scp` — `update.sh` radi tu kopiju
-umesto tebe.
+## Jednokratno podešavanje — prvi push sa ovog računara
 
-## Jednokratno podešavanje (samo prvi put)
-
-### 1. Napravi prazan repo na GitHub-u
-
-Idi na github.com → "New repository" → daj mu ime (npr.
-`homepi-dashboard`) → **nemoj** čekirati "Add README" → Create.
-Zapamti link, izgleda ovako: `https://github.com/TVOJE-IME/homepi-dashboard.git`
-
-### 2. Napravi Personal Access Token (da bi Pi mogao da radi push)
-
-GitHub → klikni na svoj avatar (gore desno) → Settings → skroluj skroz
-dole do "Developer settings" → "Personal access tokens" → "Tokens
-(classic)" → "Generate new token (classic)" → čekiraj samo `repo` →
-Generate → **kopiraj token odmah** (prikaže se samo jednom).
-
-### 3. Na Raspberry Pi-ju: izbaci ovaj paket i poveži sa GitHub-om
+Repo je već napravljen i commit-ovan u `~/homepi-setup/dashboard-repo`,
+sa `origin` podešenim na `git@github.com:basskibo/HA-custom-kiosk.git`.
+Samo treba da ga pošalješ na GitHub prvi put, iz svog pravog terminala
+(ne preko Claude-a — Claude radi u bezbednosnom sandboxu na ovom
+računaru koji nema internet pristup, samo fajl-sistem, pa ovaj korak
+moraš ti):
 
 ```bash
-cd ~
-unzip homepi-dashboard.zip -d dashboard-repo-tmp
-mv dashboard-repo-tmp/homepi-dashboard dashboard-repo
-rm -rf dashboard-repo-tmp
-cd dashboard-repo
-
-git init
-git add -A
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/TVOJE-IME/homepi-dashboard.git
+cd ~/homepi-setup/dashboard-repo
 git push -u origin main
 ```
 
-Kad zatraži username/password: username je tvoje GitHub korisničko ime,
-a za password **zalepi Personal Access Token** iz koraka 2 (ne svoju
-pravu GitHub lozinku). Da ne mora svaki put da pita, sačuvaj ga:
+Koristi tvoj već podešen SSH ključ za GitHub (isti kao za ostale repoe).
+
+## Jednokratno podešavanje — Raspberry Pi (read-only pristup)
+
+Pi treba da može da *povuče* repo, ali ne i da pushuje. Najčistiji način
+je GitHub **Deploy Key** sa read-only pravima (po difoltu je read-only,
+osim ako ne čekiraš "Allow write access" — tako Pi fizički ne može da
+pošalje izmene na GitHub, čak i ako neko greškom pokrene push skriptu
+na njemu):
 
 ```bash
-git config --global credential.helper store
+# na Raspberry Pi-ju:
+ssh-keygen -t ed25519 -C "homepi-pi-readonly" -f ~/.ssh/homepi_dashboard_deploy -N ""
+cat ~/.ssh/homepi_dashboard_deploy.pub
 ```
 
-(posle prvog push-a, token se čuva lokalno i više se ne pita)
+Kopiraj ispis → GitHub repo (`basskibo/HA-custom-kiosk`) → **Settings**
+→ **Deploy keys** → **Add deploy key** → zalepi ključ → **NEMOJ**
+čekirati "Allow write access" → Add key.
 
-### 4. Učini skripte izvršnim
+Zatim na Pi-ju podesi da git koristi baš taj ključ za ovaj repo:
 
 ```bash
-chmod +x scripts/update.sh scripts/apply-package.sh
+mkdir -p ~/.ssh
+cat >> ~/.ssh/config <<'EOF'
+Host github-homepi-dashboard
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/homepi_dashboard_deploy
+    IdentitiesOnly yes
+EOF
+
+git clone github-homepi-dashboard:basskibo/HA-custom-kiosk.git ~/dashboard-repo
+chmod +x ~/dashboard-repo/scripts/update.sh
 ```
 
-### 5. Prvi deploy
+### Prvi deploy na Pi-ju
 
-```bash
-./scripts/update.sh
-```
-
-Ovo bi trebalo da prođe bez greške (tvoj pravi `config.js` već postoji
-u `~/dashboard/html/` od ranije, i `update.sh` ga neće dirati).
-
-## Kako ide svako sledeće ažuriranje
-
-Kad ti Claude pošalje novi zip (npr. `dashboard-v7.zip`), samo:
-
-```bash
-~/dashboard-repo/scripts/apply-package.sh ~/Downloads/dashboard-v7.zip
-```
-
-Ova jedna komanda: snimi novu verziju u git, pošalje je na GitHub (tako
-imaš istoriju svih verzija), i odmah je deploy-uje — bez `scp`-a, bez
-pamćenja koji fajl ide gde.
-
-Ako ikad samo želiš da ponovo deploy-uješ ono što već stoji u repo-u
-(npr. posle reinstalacije Pi-ja), koristi:
+Tvoj pravi `config.js` već treba da postoji u `~/dashboard/html/` od
+ranije:
 
 ```bash
 ~/dashboard-repo/scripts/update.sh
 ```
 
-## Vraćanje na stariju verziju (rollback)
+## Kako ide svako sledeće ažuriranje
 
-Pošto je sve u git-u, možeš da se vratiš na bilo koju prethodnu verziju:
+1. Claude ti pošalje izmene (ili ih primeni direktno u
+   `~/homepi-setup/dashboard-repo` na ovom računaru).
+2. Ti, na **ovom računaru**, u pravom terminalu:
+   ```bash
+   cd ~/homepi-setup/dashboard-repo
+   git push
+   ```
+   (Jedini ručni korak koji je preostao — zato što Claude-ov sandbox na
+   ovom računaru nema internet.)
+3. Na **Raspberry Pi-ju**:
+   ```bash
+   ~/dashboard-repo/scripts/update.sh
+   ```
+
+Ako ikad dobiješ paket kao zip i želiš da ga sam primeniš (umesto da
+Claude direktno menja fajlove), na ovom računaru:
 
 ```bash
-cd ~/dashboard-repo
-git log --oneline          # vidi listu verzija
-git checkout <commit-hash> -- dashboard/
-./scripts/update.sh
+~/homepi-setup/dashboard-repo/scripts/apply-package.sh ~/Downloads/dashboard-vN.zip
 ```
+
+Ova skripta (pokrenuta u tvom terminalu, sa internetom) radi sve u
+jednom koraku: primeni paket, commit, i push.
+
+## Vraćanje na stariju verziju (rollback)
+
+Na **ovom računaru**:
+
+```bash
+cd ~/homepi-setup/dashboard-repo
+git log --oneline                  # vidi listu verzija
+git checkout <commit-hash> -- dashboard/
+git commit -m "Rollback na <commit-hash>"
+git push
+```
+
+Pa na Pi-ju: `~/dashboard-repo/scripts/update.sh`
