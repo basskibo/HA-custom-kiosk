@@ -145,23 +145,23 @@ function applyState(entityId, state) {
       const isOn = s === "on";
       const btn = document.getElementById("purifier-toggle");
       if (btn) {
-        btn.textContent = isOn ? "Isključi" : "Uključi";
         btn.classList.toggle("active", isOn);
+        btn.setAttribute("aria-checked", isOn ? "true" : "false");
       }
       if (attr.percentage != null) {
         const speed = document.getElementById("purifier-speed");
         if (speed) speed.value = attr.percentage;
-        const homeSpeed = document.getElementById("home-purifier-speed");
-        if (homeSpeed) homeSpeed.value = attr.percentage;
+        setText("purifier-speed-label", attr.percentage + "%");
+        document.querySelectorAll("#purifier-speed-presets .fan-preset").forEach((b) => {
+          b.classList.toggle("active", Math.abs(parseInt(b.dataset.pct, 10) - attr.percentage) <= 16);
+        });
       }
-      const homeBtn = document.getElementById("home-purifier-toggle");
-      if (homeBtn) homeBtn.classList.toggle("active", isOn);
       break;
     }
 
     case "pm25": {
-      setText("pm25-value", s + " µg/m³");
-      setText("home-pm25", s);
+      setText("pm25-value", s);
+      updateAqiGauge(parseFloat(s));
       const val = parseFloat(s);
       if (!isNaN(val)) {
         if (val > 35 && prev.pm25 !== "bad") {
@@ -181,8 +181,7 @@ function applyState(entityId, state) {
       if (lastWeatherAttr && lastWeatherAttr.humidity == null) renderWeatherExtra(lastWeatherAttr);
       break;
     case "filter": {
-      setText("filter-value", s + " %");
-      setText("home-filter", s + "%");
+      setText("filter-value", s + "%");
       const val = parseFloat(s);
       if (!isNaN(val)) {
         if (val <= 15 && prev.filter !== "low") {
@@ -196,7 +195,7 @@ function applyState(entityId, state) {
     }
 
     case "vacuumMop":
-      setText("vacuum-mop", s === "on" ? "Da" : "Ne");
+      setText("vacuum-mop", s === "on" ? "Uključeno" : "Isključeno");
       break;
     case "vacuumSleep":
       setText("vacuum-sleep", s === "on" ? "Da" : "Ne");
@@ -207,37 +206,34 @@ function applyState(entityId, state) {
       break;
 
     case "netDown":
-      setText("net-down", formatValue(s, attr.unit_of_measurement));
+      setText("home-net-down", formatValue(s, attr.unit_of_measurement));
       break;
     case "netUp":
-      setText("net-up", formatValue(s, attr.unit_of_measurement));
+      setText("home-net-up", formatValue(s, attr.unit_of_measurement));
       break;
     case "netWan": {
-      const txt = s === "on" ? "Povezano" : "Prekinuto";
-      setText("net-wan", txt);
-      setText("home-net-wan", s === "on" ? "OK" : "Prekinuto");
+      setText("home-net-wan", s === "on" ? "Povezano" : "Prekinuto");
       if (prev.netWan === "on" && s === "off") addNotification("wifi-off", "Internet veza je prekinuta");
       else if (prev.netWan === "off" && s === "on") addNotification("wifi", "Internet veza je ponovo uspostavljena");
       prev.netWan = s;
       break;
     }
     case "netIp":
-      setText("net-ip", s);
+      setText("home-net-ip", s);
       break;
 
     case "xboxStatus":
-      setText("xbox-status", s);
+      setText("home-xbox-status", s);
       break;
     case "xboxGame":
-      setText("xbox-game", s);
+      setText("home-xbox-game", s);
       break;
 
     case "backupServer":
-      setText("backup-server", s);
+      setText("home-backup-server", s);
       break;
     case "backupHa": {
       const formatted = formatBackupTime(s);
-      setText("backup-ha", formatted);
       setText("home-backup-ha", formatted);
       if (prev.backupHa && prev.backupHa !== s && !["unknown", "unavailable", ""].includes(s)) {
         addNotification("database-backup", "Novi Home Assistant backup je uspešno završen");
@@ -246,6 +242,40 @@ function applyState(entityId, state) {
       break;
     }
   }
+}
+
+// ---------- AQI gauge (kružni indikator kvaliteta vazduha) ----------
+
+const AQI_CIRCUMFERENCE = 2 * Math.PI * 52;
+
+function updateAqiGauge(pm25) {
+  const fillEl = document.getElementById("purifier-gauge-fill");
+  const labelEl = document.getElementById("purifier-quality-label");
+  if (!fillEl) return;
+  if (isNaN(pm25)) {
+    fillEl.style.strokeDasharray = `0 ${AQI_CIRCUMFERENCE}`;
+    return;
+  }
+  // Vizuelna popuna prstena: manji PM2.5 = veća popuna (bolji vazduh).
+  const pct = Math.max(8, Math.min(100, 100 - pm25 * 1.8));
+  const offset = AQI_CIRCUMFERENCE * (1 - pct / 100);
+  fillEl.style.strokeDasharray = `${AQI_CIRCUMFERENCE} ${AQI_CIRCUMFERENCE}`;
+  fillEl.style.strokeDashoffset = offset;
+
+  let quality = "Odličan";
+  let color = "var(--good)";
+  if (pm25 > 55) {
+    quality = "Loš";
+    color = "var(--bad)";
+  } else if (pm25 > 35) {
+    quality = "Umeren";
+    color = "var(--gold)";
+  } else if (pm25 > 12) {
+    quality = "Dobar";
+    color = "var(--good)";
+  }
+  fillEl.style.stroke = color;
+  if (labelEl) labelEl.textContent = `Kvalitet vazduha · ${quality}`;
 }
 
 function weatherIconName(state) {
@@ -335,18 +365,20 @@ function renderForecast(forecast, isHourly) {
   const el = document.getElementById("forecast");
   if (!el || !forecast) return;
   el.innerHTML = forecast
-    .slice(0, 6)
+    .slice(0, 5)
     .map((f) => {
       const d = new Date(f.datetime);
       const label = isHourly
         ? d.toLocaleTimeString("sr-RS", { hour: "2-digit" })
         : d.toLocaleDateString("sr-RS", { weekday: "short" });
       const temp = f.temperature != null ? Math.round(f.temperature) : "--";
+      const low = f.templow != null ? Math.round(f.templow) : null;
       const iconName = weatherIconName(f.condition);
       return `<div class="forecast-item">
         <span class="forecast-label">${label}</span>
         <span class="forecast-icon"><i data-lucide="${iconName}"></i></span>
         <span class="forecast-temp">${temp}°</span>
+        ${low != null ? `<span class="forecast-temp-low">${low}°</span>` : ""}
       </div>`;
     })
     .join("");
@@ -376,9 +408,9 @@ function subscribeForecastType(type) {
   return send({ type: "weather/subscribe_forecast", entity_id: E.weather, forecast_type: type }, (msg) => {
     if (!msg.success) {
       console.warn(`[weather] subscribe_forecast (${type}) nije podržan:`, msg.error);
-      if (type === "hourly") {
-        // Integracija ne podržava satnu prognozu - probaj dnevnu.
-        forecastSubId = subscribeForecastType("daily");
+      if (type === "daily") {
+        // Integracija ne podržava dnevnu prognozu - probaj satnu.
+        forecastSubId = subscribeForecastType("hourly");
       }
     }
   });
@@ -386,7 +418,7 @@ function subscribeForecastType(type) {
 
 function subscribeForecast() {
   if (!E.weather || !ws || ws.readyState !== WebSocket.OPEN) return;
-  forecastSubId = subscribeForecastType("hourly");
+  forecastSubId = subscribeForecastType("daily");
 }
 
 // ---------- Notifikacije ----------
@@ -738,7 +770,7 @@ function tickClock() {
 
 // ---------- Navigacija ----------
 
-const VIEWS = ["sec-home", "sec-ciscenje", "sec-kamera", "sec-mreza", "sec-status"];
+const VIEWS = ["sec-home", "sec-kamera"];
 
 function setView(id) {
   VIEWS.forEach((v) => {
@@ -788,28 +820,14 @@ function wireControls() {
 
   document.getElementById("vacuum-start").addEventListener("click", () => callService("button", "press", E.vacuumStart));
   document.getElementById("vacuum-stop").addEventListener("click", () => callService("button", "press", E.vacuumStop));
-
-  // Iste kontrole, duplirane na Home ekranu
-  const homePurifierToggle = document.getElementById("home-purifier-toggle");
-  if (homePurifierToggle) {
-    homePurifierToggle.addEventListener("click", () => {
-      const isOn = states[E.purifier] && states[E.purifier].state === "on";
-      callService("fan", isOn ? "turn_off" : "turn_on", E.purifier);
-    });
-  }
-  const homePurifierSpeed = document.getElementById("home-purifier-speed");
-  if (homePurifierSpeed) {
-    homePurifierSpeed.addEventListener("change", (e) => {
-      callService("fan", "set_percentage", E.purifier, { percentage: parseInt(e.target.value, 10) });
-    });
-  }
-  const homeVacuumStart = document.getElementById("home-vacuum-start");
-  if (homeVacuumStart) homeVacuumStart.addEventListener("click", () => callService("button", "press", E.vacuumStart));
-  const homeVacuumStop = document.getElementById("home-vacuum-stop");
-  if (homeVacuumStop) homeVacuumStop.addEventListener("click", () => callService("button", "press", E.vacuumStop));
-  const homeVacuumSpot = document.getElementById("home-vacuum-spot");
-  if (homeVacuumSpot) homeVacuumSpot.addEventListener("click", () => callService("button", "press", E.vacuumSpot));
   document.getElementById("vacuum-spot").addEventListener("click", () => callService("button", "press", E.vacuumSpot));
+
+  document.querySelectorAll("#purifier-speed-presets .fan-preset").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const pct = parseInt(btn.dataset.pct, 10);
+      callService("fan", "set_percentage", E.purifier, { percentage: pct });
+    });
+  });
 
   document.getElementById("sonos-volume").addEventListener("change", (e) => {
     callService("media_player", "volume_set", E.sonos, { volume_level: e.target.value / 100 });

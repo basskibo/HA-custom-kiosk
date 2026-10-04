@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <title>Dom</title>
-  <script type="module" crossorigin src="./assets/index-B5ygsVsC.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DzpiQRhs.css">
+  <script type="module" crossorigin src="./assets/index.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index.css">
 </head>
 <body>
 <div id="connection-banner" class="banner hidden"></div>
@@ -19,43 +19,18 @@
 
   <!-- ================= HOME (pregled) ================= -->
   <section class="view active-view" id="sec-home">
-    <div class="bento">
+    <div class="bento bento-dashboard">
 
-      <!-- Sat + vreme (spojeno) -->
-      <section class="card card-hero span-2">
-        <div class="hero-top">
-          <div class="hero-clock">
-            <div class="clock-row">
-              <span class="clock" id="clock">--:--</span>
-              <span class="clock-sec" id="clock-sec">00</span>
-            </div>
-            <div class="date" id="date">—</div>
-            <div class="people-row" id="people-row"></div>
-          </div>
-          <div class="hero-divider"></div>
-          <div class="hero-weather">
-            <div class="weather-top">
-              <span class="weather-icon-wrap" id="weather-icon-wrap"><i data-lucide="cloud-sun"></i></span>
-              <div class="weather-main">
-                <div class="weather-temp" id="weather-temp">--°</div>
-                <div class="weather-desc" id="weather-desc">—</div>
-              </div>
-            </div>
-            <div class="weather-extra-row" id="weather-extra-row"></div>
+      <!-- Vreme -->
+      <section class="card card-weather">
+        <div class="weather-top">
+          <span class="weather-icon-wrap" id="weather-icon-wrap"><i data-lucide="cloud-sun"></i></span>
+          <div class="weather-main">
+            <div class="weather-desc" id="weather-desc">—</div>
+            <div class="weather-temp" id="weather-temp">--°</div>
           </div>
         </div>
         <div class="forecast" id="forecast"></div>
-      </section>
-
-      <!-- Sada se desava + Scene (spojeno) -->
-      <section class="card card-notif">
-        <div class="card-title"><i data-lucide="bell-ring"></i><span>Sada se dešava</span></div>
-        <div class="notif-list" id="notif-list">
-          <div class="notif-empty">Nema novih obaveštenja</div>
-        </div>
-        <div class="notif-scene-divider"></div>
-        <div class="scene-label">Scene</div>
-        <div class="scene-row" id="scene-row"></div>
       </section>
 
       <!-- Media -->
@@ -92,92 +67,119 @@
         </div>
       </section>
 
-      <!-- Čišćenje mini (sa kontrolama) -->
-      <section class="card card-mini card-cleaning">
+      <!-- Prečišćivač vazduha (puna kartica) -->
+      <section class="card card-purifier">
         <div class="card-header">
-          <div class="card-title"><i data-lucide="wind"></i><span>Čišćenje</span></div>
-          <button class="mini-link" data-goto="sec-ciscenje">Više <i data-lucide="chevron-right"></i></button>
+          <div class="card-title"><i data-lucide="wind"></i><span>Prečišćivač vazduha</span></div>
+          <button class="purifier-switch" id="purifier-toggle" role="switch" aria-checked="false"><span class="purifier-switch-knob"></span></button>
         </div>
-        <div class="clean-sub-label">Prečišćivač</div>
-        <div class="quick-row">
-          <button class="quick-btn" id="home-purifier-toggle"><i data-lucide="power"></i><span>Uključi/isključi</span></button>
-        </div>
-        <input type="range" id="home-purifier-speed" min="0" max="100" />
-        <div class="mini-row">
-          <div class="mini-stat">
-            <span class="mini-label">PM2.5</span>
-            <span class="mini-value" id="home-pm25">—</span>
+        <div class="purifier-body">
+          <div class="aqi-gauge" id="purifier-gauge">
+            <svg viewBox="0 0 120 120">
+              <circle class="aqi-track" cx="60" cy="60" r="52"></circle>
+              <circle class="aqi-fill" id="purifier-gauge-fill" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <div class="aqi-gauge-center">
+              <span class="aqi-value" id="pm25-value">—</span>
+              <span class="aqi-unit">µg/m³</span>
+            </div>
           </div>
-          <div class="mini-stat">
-            <span class="mini-label">Filter</span>
-            <span class="mini-value" id="home-filter">—</span>
+          <div class="purifier-stats">
+            <div class="purifier-stat-title" id="purifier-quality-label">Kvalitet vazduha</div>
+            <div class="purifier-stat-row"><i data-lucide="thermometer"></i><span id="temp-value">—</span></div>
+            <div class="purifier-stat-row"><i data-lucide="droplets"></i><span id="humidity-value">—</span></div>
+            <div class="purifier-stat-row"><i data-lucide="sparkles"></i><span>Filter <span id="filter-value">—</span></span></div>
           </div>
         </div>
-        <div class="clean-sub-label">Usisivač</div>
-        <div class="quick-row quick-row-labeled">
-          <button class="quick-icon-btn start" id="home-vacuum-start" title="Pokreni"><i data-lucide="play"></i><span>Pokreni</span></button>
-          <button class="quick-icon-btn stop" id="home-vacuum-stop" title="Zaustavi"><i data-lucide="square"></i><span>Stop</span></button>
-          <button class="quick-icon-btn" id="home-vacuum-spot" title="Tačka"><i data-lucide="map-pin"></i><span>Tačka</span></button>
+        <div class="fan-speed-row">
+          <span class="fan-speed-label">Brzina ventilatora</span>
+          <span class="fan-speed-value" id="purifier-speed-label">—</span>
         </div>
+        <div class="fan-speed-presets" id="purifier-speed-presets">
+          <button class="fan-preset" data-pct="0"><i data-lucide="power"></i></button>
+          <button class="fan-preset" data-pct="33"><i data-lucide="fan"></i></button>
+          <button class="fan-preset" data-pct="66"><i data-lucide="fan"></i></button>
+          <button class="fan-preset" data-pct="100"><i data-lucide="fan"></i></button>
+        </div>
+        <input type="range" id="purifier-speed" min="0" max="100" class="hidden" />
+        <button class="secondary-btn" id="purifier-mode">Promeni rezim</button>
       </section>
 
-      <!-- Kamera + Status (spojeno) -->
-      <section class="card card-camera-mini">
-        <div class="card-header">
-          <div class="card-title"><i data-lucide="camera"></i><span>Dnevna soba</span></div>
-          <button class="mini-link" data-goto="sec-kamera">Puni ekran <i data-lucide="chevron-right"></i></button>
+      <!-- Sada se desava + Scene -->
+      <section class="card card-notif">
+        <div class="notif-clock-row">
+          <span class="clock" id="clock">--:--</span>
+          <span class="date" id="date">—</span>
         </div>
-        <div class="camera-frame">
-          <img id="camera-feed-mini" alt="Kamera - Dnevna soba" />
-          <div class="camera-error hidden" id="camera-error-mini"></div>
+        <div class="people-row" id="people-row"></div>
+        <div class="notif-list" id="notif-list">
+          <div class="notif-empty">Nema novih obaveštenja</div>
         </div>
-        <div class="mini-row mini-row-status">
-          <div class="mini-stat">
-            <span class="mini-label">HA backup</span>
-            <span class="mini-value" id="home-backup-ha">—</span>
-          </div>
-          <div class="mini-stat">
-            <span class="mini-label">Internet</span>
-            <span class="mini-value" id="home-net-wan">—</span>
-          </div>
-        </div>
-        <button class="mini-link" data-goto="sec-status">Detalji status <i data-lucide="chevron-right"></i></button>
+        <div class="notif-scene-divider"></div>
+        <div class="scene-label">Scene</div>
+        <div class="scene-row" id="scene-row"></div>
       </section>
 
-    </div>
-  </section>
-
-  <!-- ================= ČIŠĆENJE ================= -->
-  <section class="view" id="sec-ciscenje">
-    <header class="view-header"><h1 class="view-title">Čišćenje</h1></header>
-    <div class="grid">
-      <section class="card">
-        <div class="card-title"><i data-lucide="wind"></i><span>Prečišćivač vazduha</span></div>
-        <div class="purifier-row">
-          <button class="toggle-btn" id="purifier-toggle">Uključi</button>
-          <input type="range" id="purifier-speed" min="0" max="100" />
-        </div>
-        <div class="stat-row">
-          <div class="stat"><span class="stat-label">PM2.5</span><span class="stat-value" id="pm25-value">—</span></div>
-          <div class="stat"><span class="stat-label">Temperatura</span><span class="stat-value" id="temp-value">—</span></div>
-          <div class="stat"><span class="stat-label">Vlažnost</span><span class="stat-value" id="humidity-value">—</span></div>
-          <div class="stat"><span class="stat-label">Filter</span><span class="stat-value" id="filter-value">—</span></div>
-        </div>
-        <button class="secondary-btn" id="purifier-mode">Promeni režim</button>
-      </section>
-
-      <section class="card">
+      <!-- Robot usisivač (puna kartica) -->
+      <section class="card card-vacuum">
         <div class="card-title"><i data-lucide="bot"></i><span>Robot usisivač</span></div>
-        <div class="vacuum-controls">
-          <button class="icon-btn start" id="vacuum-start"><i data-lucide="play"></i>Pokreni</button>
-          <button class="icon-btn stop" id="vacuum-stop"><i data-lucide="square"></i>Zaustavi</button>
-          <button class="icon-btn" id="vacuum-spot"><i data-lucide="map-pin"></i>Tačka</button>
-        </div>
         <div class="stat-row">
           <div class="stat"><span class="stat-label">Krpa za pranje</span><span class="stat-value" id="vacuum-mop">—</span></div>
           <div class="stat"><span class="stat-label">Mirovanje</span><span class="stat-value" id="vacuum-sleep">—</span></div>
         </div>
+        <div class="vacuum-controls">
+          <button class="icon-btn start" id="vacuum-start"><i data-lucide="play"></i>Usisaj</button>
+          <button class="icon-btn stop" id="vacuum-stop"><i data-lucide="square"></i>Stop</button>
+          <button class="icon-btn spot" id="vacuum-spot"><i data-lucide="map-pin"></i>Tačka</button>
+        </div>
       </section>
+
+      <!-- Kamera -->
+      <section class="card card-camera-mini">
+        <div class="camera-frame">
+          <img id="camera-feed-mini" alt="Kamera - Dnevna soba" />
+          <div class="camera-error hidden" id="camera-error-mini"></div>
+          <div class="camera-label-overlay">Dnevna soba</div>
+          <button class="camera-hd-badge" data-goto="sec-kamera">HD</button>
+        </div>
+      </section>
+
+      <!-- Status grid -->
+      <section class="card card-status-grid">
+        <div class="status-tile">
+          <i data-lucide="database-backup"></i>
+          <div><span class="status-tile-label">Server backup</span><span class="status-tile-value" id="home-backup-server">—</span></div>
+        </div>
+        <div class="status-tile">
+          <i data-lucide="cloud-cog"></i>
+          <div><span class="status-tile-label">HA backup</span><span class="status-tile-value" id="home-backup-ha">—</span></div>
+        </div>
+        <div class="status-tile">
+          <i data-lucide="arrow-down-to-line"></i>
+          <div><span class="status-tile-label">Download</span><span class="status-tile-value" id="home-net-down">—</span></div>
+        </div>
+        <div class="status-tile">
+          <i data-lucide="arrow-up-from-line"></i>
+          <div><span class="status-tile-label">Upload</span><span class="status-tile-value" id="home-net-up">—</span></div>
+        </div>
+        <div class="status-tile">
+          <i data-lucide="globe"></i>
+          <div><span class="status-tile-label">WAN</span><span class="status-tile-value" id="home-net-wan">—</span></div>
+        </div>
+        <div class="status-tile">
+          <i data-lucide="router"></i>
+          <div><span class="status-tile-label">Spoljni IP</span><span class="status-tile-value" id="home-net-ip">—</span></div>
+        </div>
+        <div class="status-tile">
+          <i data-lucide="gamepad-2"></i>
+          <div><span class="status-tile-label">Xbox</span><span class="status-tile-value" id="home-xbox-status">—</span></div>
+        </div>
+        <div class="status-tile">
+          <i data-lucide="joystick"></i>
+          <div><span class="status-tile-label">Xbox igra</span><span class="status-tile-value" id="home-xbox-game">—</span></div>
+        </div>
+      </section>
+
     </div>
   </section>
 
@@ -201,53 +203,12 @@
     </div>
   </section>
 
-  <!-- ================= MREŽA ================= -->
-  <section class="view" id="sec-mreza">
-    <header class="view-header"><h1 class="view-title">Mreža</h1></header>
-    <div class="grid">
-      <section class="card">
-        <div class="card-title"><i data-lucide="wifi"></i><span>Internet</span></div>
-        <div class="stat-row">
-          <div class="stat"><span class="stat-label">Download</span><span class="stat-value" id="net-down">—</span></div>
-          <div class="stat"><span class="stat-label">Upload</span><span class="stat-value" id="net-up">—</span></div>
-          <div class="stat"><span class="stat-label">WAN</span><span class="stat-value" id="net-wan">—</span></div>
-          <div class="stat"><span class="stat-label">IP</span><span class="stat-value" id="net-ip">—</span></div>
-        </div>
-      </section>
-    </div>
-  </section>
-
-  <!-- ================= STATUS ================= -->
-  <section class="view" id="sec-status">
-    <header class="view-header"><h1 class="view-title">Status</h1></header>
-    <div class="grid">
-      <section class="card">
-        <div class="card-title"><i data-lucide="gamepad-2"></i><span>Xbox</span></div>
-        <div class="stat-row">
-          <div class="stat"><span class="stat-label">Status</span><span class="stat-value" id="xbox-status">—</span></div>
-          <div class="stat"><span class="stat-label">Igra</span><span class="stat-value" id="xbox-game">—</span></div>
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="card-title"><i data-lucide="database-backup"></i><span>Backup</span></div>
-        <div class="stat-row">
-          <div class="stat"><span class="stat-label">Server backup</span><span class="stat-value" id="backup-server">—</span></div>
-          <div class="stat"><span class="stat-label">HA backup</span><span class="stat-value" id="backup-ha">—</span></div>
-        </div>
-      </section>
-    </div>
-  </section>
-
 </div>
 
 <nav class="bottom-nav-wrap">
   <div class="bottom-nav">
     <button class="nav-btn active" data-target="sec-home"><i data-lucide="home"></i><span>Home</span></button>
-    <button class="nav-btn" data-target="sec-ciscenje"><i data-lucide="wind"></i><span>Čišćenje</span></button>
     <button class="nav-btn" data-target="sec-kamera"><i data-lucide="camera"></i><span>Kamera</span></button>
-    <button class="nav-btn" data-target="sec-mreza"><i data-lucide="wifi"></i><span>Mreža</span></button>
-    <button class="nav-btn" data-target="sec-status"><i data-lucide="settings"></i><span>Status</span></button>
   </div>
 </nav>
 
