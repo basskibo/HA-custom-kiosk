@@ -68,15 +68,12 @@
       <!-- Prečišćivač vazduha (puna kartica) -->
       <section class="card card-purifier">
         <div class="card-header">
-          <div class="card-title"><i data-lucide="wind"></i><span>Prečišćivač vazduha</span></div>
+          <div class="card-title"><span class="icon-badge icon-badge-gold"><i data-lucide="wind"></i></span><span>Prečišćivač vazduha</span></div>
           <button class="purifier-switch" id="purifier-toggle" role="switch" aria-checked="false"><span class="purifier-switch-knob"></span></button>
         </div>
         <div class="purifier-body">
           <div class="aqi-gauge" id="purifier-gauge">
-            <svg viewBox="0 0 120 120">
-              <circle class="aqi-track" cx="60" cy="60" r="52"></circle>
-              <circle class="aqi-fill" id="purifier-gauge-fill" cx="60" cy="60" r="52"></circle>
-            </svg>
+            <div class="aqi-gauge-arc" id="purifier-gauge-fill"></div>
             <div class="aqi-gauge-center">
               <span class="aqi-value" id="pm25-value">—</span>
               <span class="aqi-unit">µg/m³</span>
@@ -121,7 +118,7 @@
 
       <!-- Robot usisivač (puna kartica) -->
       <section class="card card-vacuum">
-        <div class="card-title"><i data-lucide="bot"></i><span>Robot usisivač</span></div>
+        <div class="card-title"><span class="icon-badge icon-badge-blue"><i data-lucide="bot"></i></span><span>Robot usisivač</span></div>
         <div class="stat-row">
           <div class="stat"><span class="stat-label">Krpa za pranje</span><span class="stat-value" id="vacuum-mop">—</span></div>
           <div class="stat"><span class="stat-label">Mirovanje</span><span class="stat-value" id="vacuum-sleep">—</span></div>
@@ -146,35 +143,35 @@
       <!-- Status grid -->
       <section class="card card-status-grid">
         <div class="status-tile">
-          <i data-lucide="database-backup"></i>
+          <span class="icon-badge icon-badge-purple"><i data-lucide="database-backup"></i></span>
           <div><span class="status-tile-label">Server backup</span><span class="status-tile-value" id="home-backup-server">—</span></div>
         </div>
         <div class="status-tile">
-          <i data-lucide="cloud-cog"></i>
+          <span class="icon-badge icon-badge-purple"><i data-lucide="cloud-cog"></i></span>
           <div><span class="status-tile-label">HA backup</span><span class="status-tile-value" id="home-backup-ha">—</span></div>
         </div>
         <div class="status-tile">
-          <i data-lucide="arrow-down-to-line"></i>
+          <span class="icon-badge icon-badge-blue"><i data-lucide="arrow-down-to-line"></i></span>
           <div><span class="status-tile-label">Download</span><span class="status-tile-value" id="home-net-down">—</span></div>
         </div>
         <div class="status-tile">
-          <i data-lucide="arrow-up-from-line"></i>
+          <span class="icon-badge icon-badge-blue"><i data-lucide="arrow-up-from-line"></i></span>
           <div><span class="status-tile-label">Upload</span><span class="status-tile-value" id="home-net-up">—</span></div>
         </div>
         <div class="status-tile">
-          <i data-lucide="globe"></i>
+          <span class="icon-badge icon-badge-good"><i data-lucide="globe"></i></span>
           <div><span class="status-tile-label">WAN</span><span class="status-tile-value" id="home-net-wan">—</span></div>
         </div>
         <div class="status-tile">
-          <i data-lucide="router"></i>
+          <span class="icon-badge icon-badge-good"><i data-lucide="router"></i></span>
           <div><span class="status-tile-label">Spoljni IP</span><span class="status-tile-value" id="home-net-ip">—</span></div>
         </div>
         <div class="status-tile">
-          <i data-lucide="gamepad-2"></i>
+          <span class="icon-badge icon-badge-teal"><i data-lucide="gamepad-2"></i></span>
           <div><span class="status-tile-label">Xbox</span><span class="status-tile-value" id="home-xbox-status">—</span></div>
         </div>
         <div class="status-tile">
-          <i data-lucide="joystick"></i>
+          <span class="icon-badge icon-badge-teal"><i data-lucide="joystick"></i></span>
           <div><span class="status-tile-label">Xbox igra</span><span class="status-tile-value" id="home-xbox-game">—</span></div>
         </div>
       </section>

@@ -244,23 +244,19 @@ function applyState(entityId, state) {
   }
 }
 
-// ---------- AQI gauge (kružni indikator kvaliteta vazduha) ----------
-
-const AQI_CIRCUMFERENCE = 2 * Math.PI * 52;
+// ---------- AQI gauge (luk od 270°, stil HA "gauge" kartice) ----------
 
 function updateAqiGauge(pm25) {
-  const fillEl = document.getElementById("purifier-gauge-fill");
+  const gaugeEl = document.getElementById("purifier-gauge");
   const labelEl = document.getElementById("purifier-quality-label");
-  if (!fillEl) return;
+  if (!gaugeEl) return;
   if (isNaN(pm25)) {
-    fillEl.style.strokeDasharray = `0 ${AQI_CIRCUMFERENCE}`;
+    gaugeEl.style.setProperty("--pct", 0);
     return;
   }
-  // Vizuelna popuna prstena: manji PM2.5 = veća popuna (bolji vazduh).
-  const pct = Math.max(8, Math.min(100, 100 - pm25 * 1.8));
-  const offset = AQI_CIRCUMFERENCE * (1 - pct / 100);
-  fillEl.style.strokeDasharray = `${AQI_CIRCUMFERENCE} ${AQI_CIRCUMFERENCE}`;
-  fillEl.style.strokeDashoffset = offset;
+  // Vizuelna popuna luka: manji PM2.5 = veća popuna (bolji vazduh).
+  const pct = Math.max(6, Math.min(100, 100 - pm25 * 1.8));
+  gaugeEl.style.setProperty("--pct", pct);
 
   let quality = "Odličan";
   let color = "var(--good)";
@@ -274,7 +270,7 @@ function updateAqiGauge(pm25) {
     quality = "Dobar";
     color = "var(--good)";
   }
-  fillEl.style.stroke = color;
+  gaugeEl.style.setProperty("--fill", color);
   if (labelEl) labelEl.textContent = quality;
 }
 

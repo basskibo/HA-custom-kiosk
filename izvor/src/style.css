@@ -475,20 +475,45 @@ input[type="range"] { accent-color: var(--gold); }
 .purifier-switch.active { background: var(--gold); }
 .purifier-switch.active .purifier-switch-knob { transform: translateX(18px); }
 
-.purifier-body { display: flex; align-items: center; gap: 20px; margin: 6px 0 16px; }
-.aqi-gauge { position: relative; width: 112px; height: 112px; flex-shrink: 0; }
-.aqi-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.aqi-track { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 10; }
-.aqi-fill {
-  fill: none; stroke: var(--good); stroke-width: 10; stroke-linecap: round;
-  transition: stroke-dashoffset 0.4s ease, stroke 0.4s ease;
+.purifier-body { display: flex; align-items: center; gap: 22px; margin: 6px 0 16px; }
+
+/* Gauge u stilu HA "gauge" kartice: luk od 270°, otvoren na dnu
+   (konusni gradijent + maska da se napravi prsten), ne pun krug. */
+.aqi-gauge {
+  position: relative; width: 112px; height: 112px; flex-shrink: 0;
+  --pct: 0;
+  --fill: var(--good);
+}
+.aqi-gauge-arc {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(
+    from 225deg,
+    var(--fill) calc(var(--pct) * 2.7deg),
+    rgba(255, 255, 255, 0.08) calc(var(--pct) * 2.7deg) 270deg,
+    transparent 270deg 360deg
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 11px), #000 calc(100% - 11px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 11px), #000 calc(100% - 11px));
+  transition: background 0.4s ease;
 }
 .aqi-gauge-center {
   position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
+  align-items: center; justify-content: center; padding-top: 10px;
 }
 .aqi-value { font-size: 26px; font-weight: 800; line-height: 1; }
 .aqi-unit { font-size: 10px; color: var(--text-dim); margin-top: 3px; }
+
+/* ---------- Ikonica u obojenom krugu (HA stil) ---------- */
+.icon-badge {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+}
+.icon-badge svg { width: 15px; height: 15px; }
+.icon-badge-gold { background: var(--gold-soft); color: var(--gold); }
+.icon-badge-blue { background: var(--blue-soft); color: var(--blue); }
+.icon-badge-good { background: var(--good-soft); color: var(--good); }
+.icon-badge-purple { background: var(--purple-soft); color: var(--purple); }
+.icon-badge-teal { background: var(--teal-soft); color: var(--teal); }
 
 .purifier-stats { flex: 1; min-width: 0; }
 .purifier-stat-title { font-size: 12px; font-weight: 600; color: var(--text-dim); margin-bottom: 2px; }
