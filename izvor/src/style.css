@@ -365,7 +365,7 @@ body {
 
 .switch { position: relative; display: inline-block; width: 42px; height: 24px; flex-shrink: 0; }
 .switch input { opacity: 0; width: 0; height: 0; }
-.slider-ui { position: absolute; cursor: pointer; inset: 0; background: rgba(255,255,255,0.12); border-radius: 999px; transition: 0.15s; }
+.slider-ui { position: absolute; cursor: pointer; top: 0; right: 0; bottom: 0; left: 0; background: rgba(255,255,255,0.12); border-radius: 999px; transition: 0.15s; }
 .slider-ui::before { content: ""; position: absolute; height: 18px; width: 18px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.15s; }
 .switch input:checked + .slider-ui { background: var(--gold); }
 .switch input:checked + .slider-ui::before { transform: translateX(18px); }
@@ -409,19 +409,19 @@ body {
 .camera-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .camera-label-overlay {
   position: absolute; left: 10px; bottom: 10px;
-  background: rgba(10, 9, 18, 0.65); backdrop-filter: blur(8px);
+  background: rgba(10, 9, 18, 0.65); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   color: var(--text); font-size: 12px; font-weight: 700;
   padding: 5px 12px; border-radius: 999px;
 }
 .camera-hd-badge {
   position: absolute; right: 10px; bottom: 10px;
-  background: rgba(10, 9, 18, 0.65); backdrop-filter: blur(8px);
+  background: rgba(10, 9, 18, 0.65); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   color: var(--text-dim); font-size: 10px; font-weight: 800;
   border: none; padding: 4px 9px; border-radius: 999px; cursor: pointer;
   letter-spacing: 0.4px;
 }
 .camera-error {
-  position: absolute; inset: 0;
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0;
   display: flex; align-items: center; justify-content: center;
   text-align: center; padding: 14px;
   background: rgba(10, 9, 18, 0.85);
@@ -511,7 +511,7 @@ input[type="range"] { accent-color: var(--gold); }
   --fill: var(--good);
 }
 .aqi-gauge-arc {
-  position: absolute; inset: 0; border-radius: 50%;
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0; border-radius: 50%;
   background: conic-gradient(
     from 225deg,
     var(--fill) calc(var(--pct) * 2.7deg),
@@ -523,7 +523,7 @@ input[type="range"] { accent-color: var(--gold); }
   transition: background 0.4s ease;
 }
 .aqi-gauge-center {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center; padding-top: 10px;
 }
 .aqi-value { font-size: 26px; font-weight: 800; line-height: 1; }

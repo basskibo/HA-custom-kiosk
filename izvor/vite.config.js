@@ -4,6 +4,9 @@ export default defineConfig({
   base: "./",
   build: {
     outDir: "dist",
+    // iOS 12 Safari (iPad Air 1) ne zna ?. / ?? - transpajluj na stariju sintaksu
+    target: ["safari12", "es2017"],
+    cssTarget: "safari12",
     assetsDir: "assets",
     // Fiksna imena fajlova (bez hash-a) - tako svaki update prepiše iste
     // fajlove umesto da pravi nove (index-XXXXXX.js), što pojednostavljuje
