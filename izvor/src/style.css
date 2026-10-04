@@ -365,3 +365,25 @@ input[type="range"] { accent-color: var(--amber); }
 .status-tile > div { min-width: 0; }
 .status-tile-label { display: block; font-size: 12px; color: var(--text-dim); }
 .status-tile-value { display: block; font-size: 14px; font-weight: 700; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- Forsiran landscape (tablet u portretu) ----------
+   iOS ne dozvoljava zaključavanje orijentacije iz web stranice, pa se u
+   portretu cela stranica zarotira za 90° i popuni ekran kao landscape.
+   Telefoni (< 700px) ostaju kakvi jesu. */
+@media (orientation: portrait) and (min-width: 700px) {
+  html { height: 100%; overflow: hidden; }
+  body {
+    position: fixed; top: 0; left: 0;
+    width: 100vh; height: 100vw;
+    overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    -webkit-transform-origin: 0 0; transform-origin: 0 0;
+    -webkit-transform: translateX(100vw) rotate(90deg);
+    transform: translateX(100vw) rotate(90deg);
+  }
+  .app { min-height: 0; }
+  .cols { grid-template-columns: repeat(3, 1fr); }
+  .col:nth-child(3) { grid-column: auto; grid-template-columns: none; }
+  .col:nth-child(3) .card-hero,
+  .col:nth-child(3) .card-camera,
+  .col:nth-child(3) .status-grid { grid-column: auto; }
+}
