@@ -241,6 +241,14 @@ function withUnit(s, unit) {
   return isUnknown(s) ? "—" : `${s}${unit ? " " + unit : ""}`;
 }
 
+function formatSpeed(s, unit) {
+  if (isUnknown(s)) return "—";
+  const n = Number(s);
+  if (isNaN(n)) return withUnit(s, unit);
+  const text = (Math.round(n * 10) / 10).toFixed(1);
+  return unit ? text + " " + unit : text;
+}
+
 function pad2(n) {
   return n < 10 ? "0" + n : "" + n;
 }
@@ -389,10 +397,10 @@ function applyState(entityId, state) {
       break;
 
     case "netDown":
-      setText("home-net-down", withUnit(s, attr.unit_of_measurement));
+      setText("home-net-down", formatSpeed(s, attr.unit_of_measurement));
       break;
     case "netUp":
-      setText("home-net-up", withUnit(s, attr.unit_of_measurement));
+      setText("home-net-up", formatSpeed(s, attr.unit_of_measurement));
       break;
     case "netWan":
       setText("home-net-wan", s === "on" ? "Connected" : s === "off" ? "Disconnected" : "—");

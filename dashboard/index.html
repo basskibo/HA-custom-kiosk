@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <title>Home</title>
-  <link rel="stylesheet" href="./assets/style.css?v27">
+  <link rel="stylesheet" href="./assets/style.css?v28">
 </head>
 <body>
 <div id="connection-banner" class="banner hidden"></div>
@@ -224,16 +224,15 @@
         </div>
       </section>
 
-      <section class="card card-backup" data-screen="home house">
-        <span class="icon-badge icon-badge-gold icon-badge-lg"><i data-lucide="database-backup"></i></span>
-        <div><span class="status-tile-label">Server backup</span><span class="status-tile-value" id="home-backup-server">—</span></div>
-      </section>
-      <section class="card card-backup" data-screen="home house">
-        <span class="icon-badge icon-badge-gold icon-badge-lg"><i data-lucide="cloud-check"></i></span>
-        <div><span class="status-tile-label">HA backup</span><span class="status-tile-value" id="home-backup-ha">—</span></div>
-      </section>
-
       <div class="status-grid" data-screen="home house">
+        <section class="card status-tile">
+          <span class="icon-badge icon-badge-gold"><i data-lucide="database-backup"></i></span>
+          <div><span class="status-tile-label">Server backup</span><span class="status-tile-value" id="home-backup-server">—</span></div>
+        </section>
+        <section class="card status-tile">
+          <span class="icon-badge icon-badge-gold"><i data-lucide="cloud-check"></i></span>
+          <div><span class="status-tile-label">HA backup</span><span class="status-tile-value" id="home-backup-ha">—</span></div>
+        </section>
         <section class="card status-tile">
           <span class="icon-badge icon-badge-gold"><i data-lucide="arrow-down-to-line"></i></span>
           <div><span class="status-tile-label">Download</span><span class="status-tile-value" id="home-net-down">—</span></div>
@@ -290,6 +289,6 @@
 </div>
 
 <script src="./config.js"></script>
-<script src="./assets/index.js?v27"></script>
+<script src="./assets/index.js?v28"></script>
 </body>
 </html>
