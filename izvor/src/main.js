@@ -111,6 +111,8 @@ const DEFAULT_ENTITIES = {
   vacuumDnd: "switch.xiaomi_de_1173620033_ov81gl_no_disturb_p_11_1",
 
   cameraQuality: "input_select.kvalitet_kamere",
+  cameraHd: "camera.ipc_live_view_hd",
+  cameraSd: "camera.ipc_live_view_sd",
   cameraMotion: "switch.ipc_motion_detection",
   cameraAudio: "switch.ipc_audio_recording",
   ptzLeft: "button.ipc_ptz_left",
@@ -366,6 +368,11 @@ function applyState(entityId, state) {
 
     case "cameraQuality":
       setText("cam-quality-label", isUnknown(s) ? "—" : s);
+      showCamera();
+      break;
+    case "cameraHd":
+    case "cameraSd":
+      showCamera();
       break;
     case "cameraMotion":
       $("cam-motion").classList.toggle("on", s === "on");
@@ -1203,7 +1210,6 @@ function wireControls() {
     });
   });
 
-  // Kamera (samo kontrole - slika ne radi zbog CORS-a)
   on("cam-quality", () => callService("input_select", "select_next", E.cameraQuality));
   on("cam-motion", () => callService("switch", "toggle", E.cameraMotion));
   on("cam-audio", () => callService("switch", "toggle", E.cameraAudio));
@@ -1211,7 +1217,89 @@ function wireControls() {
   press("ptz-up", "ptzUp");
   press("ptz-down", "ptzDown");
   press("ptz-right", "ptzRight");
-  $("camera-open").setAttribute("href", `http://${CONFIG.haHost}/`);
+  bindCamera();
+}
+
+// Slika ide direktno u <img>, bez fetch-a, pa CORS ne važi.
+// Token je access_token same kamere, ne long-lived token.
+var cameraLive = "stream";
+var cameraSrc = "";
+var cameraSnapTimer = null;
+
+function cameraEntityId() {
+  const st = states[E.cameraQuality];
+  const q = st && st.state ? String(st.state).toLowerCase() : "";
+  if (q.indexOf("sd") !== -1) return E.cameraSd;
+  return E.cameraHd;
+}
+
+function cameraFeedUrl(id, live) {
+  const st = states[id];
+  const pic = st && st.attributes && st.attributes.entity_picture;
+  if (!pic) return "";
+  const path = live ? String(pic).replace("/api/camera_proxy/", "/api/camera_proxy_stream/") : pic;
+  const url = haUrl(path);
+  if (live) return url;
+  return url + (url.indexOf("?") >= 0 ? "&" : "?") + "_t=" + Date.now();
+}
+
+function stopSnaps() {
+  if (cameraSnapTimer) {
+    clearInterval(cameraSnapTimer);
+    cameraSnapTimer = null;
+  }
+}
+
+function pauseCamera() {
+  stopSnaps();
+  const img = $("camera-feed");
+  if (img && img.getAttribute("src")) img.removeAttribute("src");
+  cameraSrc = "";
+}
+
+function showCamera() {
+  if (document.body.getAttribute("data-view") !== "camera") return;
+  const img = $("camera-feed");
+  const ph = $("camera-fallback");
+  if (!img) return;
+  const src = cameraFeedUrl(cameraEntityId(), cameraLive === "stream");
+  if (!src) {
+    if (ph) ph.classList.remove("hidden");
+    return;
+  }
+  if (cameraLive === "stream" && cameraSrc === src && img.getAttribute("src")) return;
+  cameraSrc = src;
+  img.src = src;
+}
+
+function useSnapshots() {
+  if (cameraLive === "snap") return;
+  cameraLive = "snap";
+  cameraSrc = "";
+  stopSnaps();
+  const text = document.querySelector("#camera-fallback .camera-placeholder-text");
+  if (text) text.textContent = "Osvežavam sliku kamere...";
+  showCamera();
+  cameraSnapTimer = setInterval(showCamera, 1000);
+}
+
+function bindCamera() {
+  const img = $("camera-feed");
+  if (!img) return;
+  img.addEventListener("load", () => {
+    const ph = $("camera-fallback");
+    if (ph) ph.classList.add("hidden");
+  });
+  img.addEventListener("error", () => {
+    if (document.body.getAttribute("data-view") !== "camera") return;
+    if (!img.getAttribute("src")) return;
+    const ph = $("camera-fallback");
+    if (cameraLive === "stream") {
+      useSnapshots();
+      return;
+    }
+    if (ph) ph.classList.remove("hidden");
+  });
 }
 
 // ---------- Start ----------
@@ -1237,6 +1325,8 @@ function setView(name) {
   }
   const board = document.querySelector(".cols");
   if (board) board.setAttribute("data-cols", String(visibleCols || 1));
+  if (name === "camera") showCamera();
+  else pauseCamera();
 }
 
 renderPeople();

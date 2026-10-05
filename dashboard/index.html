@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <title>Dom</title>
-  <link rel="stylesheet" href="./assets/style.css?v19">
+  <link rel="stylesheet" href="./assets/style.css?v20">
 </head>
 <body>
 <div id="connection-banner" class="banner hidden"></div>
@@ -198,11 +198,11 @@
 
       <section class="card card-camera" data-screen="camera">
         <div class="camera-frame">
-          <div class="camera-placeholder">
+          <img id="camera-feed" class="camera-feed" alt="Dnevna soba">
+          <div class="camera-placeholder" id="camera-fallback">
             <i data-lucide="cctv"></i>
             <div class="camera-placeholder-title">Dnevna soba</div>
-            <div class="camera-placeholder-text">Prikaz uživo nije dostupan na ovoj stranici (CORS). Kontrole rade normalno.</div>
-            <a class="chip" id="camera-open" href="#" target="_blank" rel="noopener"><i data-lucide="external-link"></i>Otvori u Home Assistant-u</a>
+            <div class="camera-placeholder-text">Povezivanje sa kamerom...</div>
           </div>
           <div class="camera-glance">
             <button class="glance-btn" id="cam-quality" aria-label="Kvalitet"><i data-lucide="camera"></i><span id="cam-quality-label">—</span></button>
@@ -210,11 +210,11 @@
             <button class="glance-btn" id="cam-audio" aria-label="Snimanje zvuka"><i data-lucide="mic"></i></button>
           </div>
         </div>
-        <div class="amber-tiles amber-tiles-4">
-          <button class="amber-tile" id="ptz-left"><i data-lucide="arrow-left"></i><span>Levo</span></button>
-          <button class="amber-tile" id="ptz-up"><i data-lucide="arrow-up"></i><span>Gore</span></button>
-          <button class="amber-tile" id="ptz-down"><i data-lucide="arrow-down"></i><span>Dole</span></button>
-          <button class="amber-tile" id="ptz-right"><i data-lucide="arrow-right"></i><span>Desno</span></button>
+        <div class="ptz-bar">
+          <button class="ptz-btn" id="ptz-left" aria-label="Levo"><i data-lucide="arrow-left"></i><span>Levo</span></button>
+          <button class="ptz-btn" id="ptz-up" aria-label="Gore"><i data-lucide="arrow-up"></i><span>Gore</span></button>
+          <button class="ptz-btn" id="ptz-down" aria-label="Dole"><i data-lucide="arrow-down"></i><span>Dole</span></button>
+          <button class="ptz-btn" id="ptz-right" aria-label="Desno"><i data-lucide="arrow-right"></i><span>Desno</span></button>
         </div>
         <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="cctv"></i></span><span class="entity-row-name">Status</span><span class="entity-row-value" id="cam-status">—</span></div>
         <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="hard-drive"></i></span><span class="entity-row-name">Zauzeće memorije</span><span class="entity-row-value" id="cam-storage">—</span></div>
@@ -283,6 +283,6 @@
 </div>
 
 <script src="./config.js"></script>
-<script src="./assets/index.js?v19"></script>
+<script src="./assets/index.js?v20"></script>
 </body>
 </html>

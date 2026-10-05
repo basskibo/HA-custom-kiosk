@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 
 // Oznaka verzije - dodaje se kao ?v=... na JS/CSS da iOS "Add to Home Screen"
 // (koji agresivno kešira) ne drži stari bundle.
-const BUILD = "v19";
+const BUILD = "v20";
 
 // iOS 12 Safari (iPad Air 1) i njegov standalone (home screen) mod ne vole
 // <script type="module" crossorigin>. Bundle se pravi kao IIFE (obična skripta)

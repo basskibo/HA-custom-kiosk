@@ -468,13 +468,34 @@ input[type="range"] { accent-color: var(--amber); }
 /* ---------- Kamera ---------- */
 .camera-frame {
   position: relative; border-radius: 16px; overflow: hidden; background: #08080a;
-  min-height: 190px;
+  min-height: 168px;
+}
+.camera-feed {
+  display: block; width: 100%; height: 210px; object-fit: cover; background: #08080a;
 }
 .camera-placeholder {
+  position: absolute; left: 0; right: 0; top: 0; bottom: 0;
   display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column;
   -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center;
-  text-align: center; padding: 20px 16px 52px; min-height: 190px;
+  text-align: center; padding: 16px 16px 44px; background: #08080a;
 }
+.ptz-bar {
+  display: -webkit-flex; display: flex; margin-top: 8px;
+}
+.ptz-btn {
+  -webkit-flex: 1; flex: 1;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+  height: 34px; margin-right: 6px; padding: 0 4px;
+  border: none; border-radius: 12px; cursor: pointer;
+  background: rgba(245, 197, 66, 0.14); color: var(--amber);
+}
+.ptz-btn:last-child { margin-right: 0; }
+.ptz-btn svg { width: 15px; height: 15px; }
+.ptz-btn span { font-size: 12px; font-weight: 700; margin-left: 4px; }
+.ptz-btn:active, .ptz-btn.pressed { background: var(--amber); color: #1a1405; }
+.card-camera .entity-row { padding: 4px 0; }
 .camera-placeholder > svg { width: 34px; height: 34px; color: var(--text-dimmer); }
 .camera-placeholder-title { margin-top: 8px; font-weight: 700; font-size: 15px; }
 .camera-placeholder-text { margin: 4px 0 12px; font-size: 12px; color: var(--text-dim); line-height: 1.4; max-width: 260px; }
