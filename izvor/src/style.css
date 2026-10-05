@@ -501,12 +501,15 @@ input[type="range"] { accent-color: var(--amber); }
   text-align: center; padding: 16px 16px 44px; background: #08080a;
 }
 .ptz-pad {
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: ". up ." "left . right" ". down .";
   grid-gap: 6px; gap: 6px;
   margin-top: 8px;
 }
+.card-camera.controls-open .ptz-pad { display: grid; }
+.camera-detail { display: none; }
+body[data-view="camera"] .camera-detail { display: block; }
 .ptz-up { grid-area: up; }
 .ptz-left { grid-area: left; }
 .ptz-right { grid-area: right; }

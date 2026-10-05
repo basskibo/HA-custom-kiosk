@@ -206,6 +206,7 @@
           </div>
           <div class="camera-glance">
             <button class="glance-btn" id="cam-quality" aria-label="Quality"><i data-lucide="camera"></i><span id="cam-quality-label">—</span></button>
+            <button class="glance-btn" id="cam-controls" type="button" aria-label="Camera controls" aria-pressed="false"><i data-lucide="joystick"></i></button>
             <button class="glance-btn" id="cam-motion" aria-label="Motion detection"><i data-lucide="activity"></i></button>
             <button class="glance-btn" id="cam-audio" aria-label="Audio recording"><i data-lucide="mic"></i></button>
           </div>
@@ -216,8 +217,10 @@
           <button class="ptz-btn ptz-right" id="ptz-right" aria-label="Right"><i data-lucide="arrow-right"></i><span>Right</span></button>
           <button class="ptz-btn ptz-down" id="ptz-down" aria-label="Down"><i data-lucide="arrow-down"></i><span>Down</span></button>
         </div>
-        <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="cctv"></i></span><span class="entity-row-name">Status</span><span class="entity-row-value" id="cam-status">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="hard-drive"></i></span><span class="entity-row-name">Storage</span><span class="entity-row-value" id="cam-storage">—</span></div>
+        <div class="camera-detail">
+          <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="cctv"></i></span><span class="entity-row-name">Status</span><span class="entity-row-value" id="cam-status">—</span></div>
+          <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="hard-drive"></i></span><span class="entity-row-name">Storage</span><span class="entity-row-value" id="cam-storage">—</span></div>
+        </div>
       </section>
 
       <section class="card card-backup" data-screen="house">

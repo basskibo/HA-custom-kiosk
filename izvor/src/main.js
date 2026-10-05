@@ -1364,6 +1364,15 @@ function wireControls() {
   });
 
   on("cam-quality", () => callService("input_select", "select_next", E.cameraQuality));
+  on("cam-controls", () => {
+    const card = document.querySelector(".card-camera");
+    const btn = $("cam-controls");
+    if (!card || !btn) return;
+    const open = !card.classList.contains("controls-open");
+    card.classList.toggle("controls-open", open);
+    btn.classList.toggle("on", open);
+    btn.setAttribute("aria-pressed", open ? "true" : "false");
+  });
   on("cam-motion", () => callService("switch", "toggle", E.cameraMotion));
   on("cam-audio", () => callService("switch", "toggle", E.cameraAudio));
   press("ptz-left", "ptzLeft");
