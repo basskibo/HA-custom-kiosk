@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="sr">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="apple-mobile-web-app-title" content="Dom" />
+<meta name="apple-mobile-web-app-title" content="Home" />
 <meta name="theme-color" content="#0a0a0c" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<title>Dom</title>
-  <link rel="stylesheet" href="./assets/style.css?v23">
+<title>Home</title>
+  <link rel="stylesheet" href="./assets/style.css?v24">
 </head>
 <body>
 <div id="connection-banner" class="banner hidden"></div>
@@ -30,7 +30,7 @@
           </div>
           <div class="hero-temp">
             <div class="hero-temp-value" id="hero-temp">--°</div>
-            <div class="hero-temp-label">Soba</div>
+            <div class="hero-temp-label">Room</div>
           </div>
         </div>
         <div class="hero-people" id="people-row"></div>
@@ -41,11 +41,11 @@
         <div class="player-content">
           <div class="player-head">
             <span class="player-icon"><i data-lucide="speaker"></i></span>
-            <span class="player-name">Zvučnik</span>
-            <button class="player-power" id="sonos-library" type="button" aria-label="Izaberi šta svira"><i data-lucide="list-music"></i></button>
-            <button class="player-power" id="sonos-power" aria-label="Uključi/isključi"><i data-lucide="power"></i></button>
+            <span class="player-name">Speaker</span>
+            <button class="player-power" id="sonos-library" type="button" aria-label="Choose what to play"><i data-lucide="list-music"></i></button>
+            <button class="player-power" id="sonos-power" aria-label="Power"><i data-lucide="power"></i></button>
           </div>
-          <div class="player-title" id="sonos-title">Ništa ne svira</div>
+          <div class="player-title" id="sonos-title">Nothing playing</div>
           <div class="player-sub" id="sonos-sub">—</div>
           <div class="player-transport">
             <button class="round-btn" data-action="prev"><i data-lucide="skip-back"></i></button>
@@ -65,7 +65,7 @@
           <div class="player-head">
             <span class="player-icon"><i data-lucide="tv"></i></span>
             <span class="player-name">Yettel TV</span>
-            <button class="player-power" id="tv-power" aria-label="Uključi/isključi"><i data-lucide="power"></i></button>
+            <button class="player-power" id="tv-power" aria-label="Power"><i data-lucide="power"></i></button>
           </div>
           <div class="player-title" id="tv-title">—</div>
           <div class="player-sub" id="tv-sub">—</div>
@@ -74,8 +74,8 @@
 
       <section class="card" id="card-remote" data-screen="media klima">
         <div class="remote-head">
-          <div class="card-title">Daljinski</div>
-          <button class="remote-learn" id="remote-learn" type="button">Nauči</button>
+          <div class="card-title">Remote</div>
+          <button class="remote-learn" id="remote-learn" type="button">Learn</button>
         </div>
         <div class="remote-tabs" id="remote-tabs"></div>
         <div class="remote-pad" id="remote-pad"></div>
@@ -101,10 +101,10 @@
       </section>
 
       <section class="card card-purifier" data-screen="home klima">
-        <div class="card-title">Prečišćivač vazduha</div>
+        <div class="card-title">Air purifier</div>
         <div class="entity-row">
           <span class="icon-badge icon-badge-gold"><i data-lucide="air-vent"></i></span>
-          <span class="entity-row-name">Prečišćivač</span>
+          <span class="entity-row-name">Purifier</span>
           <button class="purifier-switch" id="purifier-toggle" role="switch" aria-checked="false"><span class="purifier-switch-knob"></span></button>
         </div>
 
@@ -120,7 +120,7 @@
             <div class="gauge-name">PM2.5</div>
           </div>
           <div class="purifier-stats">
-            <div class="purifier-stat-title">Kvalitet vazduha</div>
+            <div class="purifier-stat-title">Air quality</div>
             <div class="purifier-quality-value" id="purifier-quality-label">—</div>
             <div class="purifier-stat-row"><i data-lucide="thermometer"></i><span id="temp-value">—</span></div>
             <div class="purifier-stat-row"><i data-lucide="droplets"></i><span id="humidity-value">—</span></div>
@@ -130,7 +130,7 @@
 
         <div class="fan-speed-row">
           <span class="icon-badge icon-badge-gold"><i data-lucide="fan"></i></span>
-          <span class="entity-row-name">Brzina ventilatora</span>
+          <span class="entity-row-name">Fan speed</span>
           <span class="fan-speed-value" id="purifier-speed-label">—</span>
         </div>
         <div class="fan-speed-presets" id="purifier-speed-presets">
@@ -140,20 +140,20 @@
           <button class="fan-preset" data-pct="100"><i data-lucide="fan"></i></button>
         </div>
         <div class="chip-row">
-          <button class="chip" id="purifier-mode"><i data-lucide="wand-sparkles"></i>Promeni režim</button>
+          <button class="chip" id="purifier-mode"><i data-lucide="wand-sparkles"></i>Change mode</button>
         </div>
       </section>
 
       <section class="card card-vacuum" data-screen="home clean">
-        <div class="card-title">Robot usisivač</div>
+        <div class="card-title">Robot vacuum</div>
 
-        <div class="entity-row"><span class="icon-badge icon-badge-blue"><i data-lucide="droplets"></i></span><span class="entity-row-name">Krpa za pranje</span><span class="entity-row-value" id="vacuum-mop">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-blue"><i data-lucide="moon"></i></span><span class="entity-row-name">Mirovanje</span><span class="entity-row-value" id="vacuum-sleep">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-good"><i data-lucide="battery"></i></span><span class="entity-row-name">Baterija</span><span class="entity-row-value" id="vacuum-battery">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-good"><i data-lucide="plug-zap"></i></span><span class="entity-row-name">Punjenje</span><span class="entity-row-value" id="vacuum-charging">—</span></div>
+        <div class="entity-row"><span class="icon-badge icon-badge-blue"><i data-lucide="droplets"></i></span><span class="entity-row-name">Mop</span><span class="entity-row-value" id="vacuum-mop">—</span></div>
+        <div class="entity-row"><span class="icon-badge icon-badge-blue"><i data-lucide="moon"></i></span><span class="entity-row-name">Sleep</span><span class="entity-row-value" id="vacuum-sleep">—</span></div>
+        <div class="entity-row"><span class="icon-badge icon-badge-good"><i data-lucide="battery"></i></span><span class="entity-row-name">Battery</span><span class="entity-row-value" id="vacuum-battery">—</span></div>
+        <div class="entity-row"><span class="icon-badge icon-badge-good"><i data-lucide="plug-zap"></i></span><span class="entity-row-name">Charging</span><span class="entity-row-value" id="vacuum-charging">—</span></div>
         <div class="entity-row"><span class="icon-badge icon-badge-purple"><i data-lucide="funnel"></i></span><span class="entity-row-name">Filter</span><span class="entity-row-value" id="vacuum-filter">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-purple"><i data-lucide="fan"></i></span><span class="entity-row-name">Glavna četka</span><span class="entity-row-value" id="vacuum-brush">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-purple"><i data-lucide="square"></i></span><span class="entity-row-name">Krpa za brisanje</span><span class="entity-row-value" id="vacuum-moplife">—</span></div>
+        <div class="entity-row"><span class="icon-badge icon-badge-purple"><i data-lucide="fan"></i></span><span class="entity-row-name">Main brush</span><span class="entity-row-value" id="vacuum-brush">—</span></div>
+        <div class="entity-row"><span class="icon-badge icon-badge-purple"><i data-lucide="square"></i></span><span class="entity-row-name">Mop pad</span><span class="entity-row-value" id="vacuum-moplife">—</span></div>
 
         <div class="tile-block">
           <div class="entity-row">
@@ -162,33 +162,33 @@
             <span class="entity-row-value" id="vacuum-state">—</span>
           </div>
           <div class="vacuum-controls">
-            <button class="round-icon-btn" id="vacuum-startpause" aria-label="Start/Pauza"><span class="round-icon-circle"><i data-lucide="play"></i></span></button>
+            <button class="round-icon-btn" id="vacuum-startpause" aria-label="Start or pause"><span class="round-icon-circle"><i data-lucide="play"></i></span></button>
             <button class="round-icon-btn" id="vacuum-stop" aria-label="Stop"><span class="round-icon-circle"><i data-lucide="square"></i></span></button>
-            <button class="round-icon-btn" id="vacuum-spot" aria-label="Lokalno čišćenje"><span class="round-icon-circle"><i data-lucide="map-pin"></i></span></button>
-            <button class="round-icon-btn" id="vacuum-locate" aria-label="Pronađi"><span class="round-icon-circle"><i data-lucide="locate"></i></span></button>
-            <button class="round-icon-btn" id="vacuum-home" aria-label="Na dok"><span class="round-icon-circle"><i data-lucide="house"></i></span></button>
+            <button class="round-icon-btn" id="vacuum-spot" aria-label="Spot clean"><span class="round-icon-circle"><i data-lucide="map-pin"></i></span></button>
+            <button class="round-icon-btn" id="vacuum-locate" aria-label="Locate"><span class="round-icon-circle"><i data-lucide="locate"></i></span></button>
+            <button class="round-icon-btn" id="vacuum-home" aria-label="Return to dock"><span class="round-icon-circle"><i data-lucide="house"></i></span></button>
           </div>
         </div>
 
         <div class="select-tiles">
           <label class="select-tile">
-            <span class="select-tile-top"><span class="icon-badge icon-badge-gold"><i data-lucide="fan"></i></span><span class="select-tile-name">Jačina usisavanja</span></span>
+            <span class="select-tile-top"><span class="icon-badge icon-badge-gold"><i data-lucide="fan"></i></span><span class="select-tile-name">Suction</span></span>
             <select id="sel-suction"></select>
           </label>
           <label class="select-tile">
-            <span class="select-tile-top"><span class="icon-badge icon-badge-gold"><i data-lucide="bot"></i></span><span class="select-tile-name">Režim čišćenja</span></span>
+            <span class="select-tile-top"><span class="icon-badge icon-badge-gold"><i data-lucide="bot"></i></span><span class="select-tile-name">Clean mode</span></span>
             <select id="sel-clean"></select>
           </label>
           <label class="select-tile">
-            <span class="select-tile-top"><span class="icon-badge icon-badge-gold"><i data-lucide="droplets"></i></span><span class="select-tile-name">Nivo vode</span></span>
+            <span class="select-tile-top"><span class="icon-badge icon-badge-gold"><i data-lucide="droplets"></i></span><span class="select-tile-name">Water level</span></span>
             <select id="sel-water"></select>
           </label>
         </div>
 
         <div class="amber-tiles">
-          <button class="amber-tile" id="vacuum-mopwash"><i data-lucide="washing-machine"></i><span>Pranje krpe</span></button>
-          <button class="amber-tile" id="vacuum-dry"><i data-lucide="heater"></i><span>Sušenje</span></button>
-          <button class="amber-tile" id="vacuum-dnd"><i data-lucide="bell-off"></i><span>Ne uznemiravaj</span></button>
+          <button class="amber-tile" id="vacuum-mopwash"><i data-lucide="washing-machine"></i><span>Wash mop</span></button>
+          <button class="amber-tile" id="vacuum-dry"><i data-lucide="heater"></i><span>Dry</span></button>
+          <button class="amber-tile" id="vacuum-dnd"><i data-lucide="bell-off"></i><span>Do not disturb</span></button>
         </div>
       </section>
 
@@ -199,26 +199,26 @@
 
       <section class="card card-camera" data-screen="home camera">
         <div class="camera-frame">
-          <img id="camera-feed" class="camera-feed" alt="Dnevna soba">
+          <img id="camera-feed" class="camera-feed" alt="Living room">
           <div class="camera-placeholder" id="camera-fallback">
             <i data-lucide="cctv"></i>
-            <div class="camera-placeholder-title">Dnevna soba</div>
-            <div class="camera-placeholder-text">Povezivanje sa kamerom...</div>
+            <div class="camera-placeholder-title">Living room</div>
+            <div class="camera-placeholder-text">Connecting to the camera...</div>
           </div>
           <div class="camera-glance">
-            <button class="glance-btn" id="cam-quality" aria-label="Kvalitet"><i data-lucide="camera"></i><span id="cam-quality-label">—</span></button>
-            <button class="glance-btn" id="cam-motion" aria-label="Detekcija pokreta"><i data-lucide="activity"></i></button>
-            <button class="glance-btn" id="cam-audio" aria-label="Snimanje zvuka"><i data-lucide="mic"></i></button>
+            <button class="glance-btn" id="cam-quality" aria-label="Quality"><i data-lucide="camera"></i><span id="cam-quality-label">—</span></button>
+            <button class="glance-btn" id="cam-motion" aria-label="Motion detection"><i data-lucide="activity"></i></button>
+            <button class="glance-btn" id="cam-audio" aria-label="Audio recording"><i data-lucide="mic"></i></button>
           </div>
         </div>
         <div class="ptz-pad">
-          <button class="ptz-btn ptz-up" id="ptz-up" aria-label="Gore"><i data-lucide="arrow-up"></i><span>Gore</span></button>
-          <button class="ptz-btn ptz-left" id="ptz-left" aria-label="Levo"><i data-lucide="arrow-left"></i><span>Levo</span></button>
-          <button class="ptz-btn ptz-right" id="ptz-right" aria-label="Desno"><i data-lucide="arrow-right"></i><span>Desno</span></button>
-          <button class="ptz-btn ptz-down" id="ptz-down" aria-label="Dole"><i data-lucide="arrow-down"></i><span>Dole</span></button>
+          <button class="ptz-btn ptz-up" id="ptz-up" aria-label="Up"><i data-lucide="arrow-up"></i><span>Up</span></button>
+          <button class="ptz-btn ptz-left" id="ptz-left" aria-label="Left"><i data-lucide="arrow-left"></i><span>Left</span></button>
+          <button class="ptz-btn ptz-right" id="ptz-right" aria-label="Right"><i data-lucide="arrow-right"></i><span>Right</span></button>
+          <button class="ptz-btn ptz-down" id="ptz-down" aria-label="Down"><i data-lucide="arrow-down"></i><span>Down</span></button>
         </div>
         <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="cctv"></i></span><span class="entity-row-name">Status</span><span class="entity-row-value" id="cam-status">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="hard-drive"></i></span><span class="entity-row-name">Zauzeće memorije</span><span class="entity-row-value" id="cam-storage">—</span></div>
+        <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="hard-drive"></i></span><span class="entity-row-name">Storage</span><span class="entity-row-value" id="cam-storage">—</span></div>
       </section>
 
       <section class="card card-backup" data-screen="house">
@@ -245,7 +245,7 @@
         </section>
         <section class="card status-tile">
           <span class="icon-badge icon-badge-gold"><i data-lucide="router"></i></span>
-          <div><span class="status-tile-label">Spoljni IP</span><span class="status-tile-value" id="home-net-ip">—</span></div>
+          <div><span class="status-tile-label">External IP</span><span class="status-tile-value" id="home-net-ip">—</span></div>
         </section>
         <section class="card status-tile">
           <span class="icon-badge icon-badge-gold"><i data-lucide="gamepad-2"></i></span>
@@ -253,7 +253,7 @@
         </section>
         <section class="card status-tile">
           <span class="icon-badge icon-badge-gold"><i data-lucide="joystick"></i></span>
-          <div><span class="status-tile-label">Xbox igra</span><span class="status-tile-value" id="home-xbox-game">—</span></div>
+          <div><span class="status-tile-label">Xbox game</span><span class="status-tile-value" id="home-xbox-game">—</span></div>
         </section>
       </div>
 
@@ -262,28 +262,28 @@
 </div>
 
 <nav class="tabbar" id="tabbar">
-  <button type="button" data-tab="home" class="active"><i data-lucide="house"></i><span>Početna</span></button>
-  <button type="button" data-tab="media"><i data-lucide="speaker"></i><span>Mediji</span></button>
-  <button type="button" data-tab="klima"><i data-lucide="thermometer"></i><span>Klima</span></button>
-  <button type="button" data-tab="clean"><i data-lucide="bot"></i><span>Usisivač</span></button>
-  <button type="button" data-tab="camera"><i data-lucide="cctv"></i><span>Kamera</span></button>
-  <button type="button" data-tab="house"><i data-lucide="router"></i><span>Kuća</span></button>
+  <button type="button" data-tab="home" class="active"><i data-lucide="house"></i><span>Home</span></button>
+  <button type="button" data-tab="media"><i data-lucide="speaker"></i><span>Media</span></button>
+  <button type="button" data-tab="klima"><i data-lucide="thermometer"></i><span>Climate</span></button>
+  <button type="button" data-tab="clean"><i data-lucide="bot"></i><span>Vacuum</span></button>
+  <button type="button" data-tab="camera"><i data-lucide="cctv"></i><span>Camera</span></button>
+  <button type="button" data-tab="house"><i data-lucide="router"></i><span>House</span></button>
 </nav>
 
 <div id="sonos-picker" class="picker hidden">
   <div class="picker-backdrop" id="sonos-picker-backdrop"></div>
   <div class="picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sonos-picker-title">
     <div class="picker-head">
-      <button class="picker-icon-btn" id="sonos-picker-back" type="button" aria-label="Nazad"><i data-lucide="chevron-left"></i></button>
-      <div class="picker-title" id="sonos-picker-title">Biblioteka</div>
-      <button class="picker-icon-btn" id="sonos-picker-close" type="button" aria-label="Zatvori"><i data-lucide="x"></i></button>
+      <button class="picker-icon-btn" id="sonos-picker-back" type="button" aria-label="Back"><i data-lucide="chevron-left"></i></button>
+      <div class="picker-title" id="sonos-picker-title">Library</div>
+      <button class="picker-icon-btn" id="sonos-picker-close" type="button" aria-label="Close"><i data-lucide="x"></i></button>
     </div>
-    <input class="picker-search" id="sonos-picker-search" type="search" placeholder="Pretraži" autocomplete="off" />
+    <input class="picker-search" id="sonos-picker-search" type="search" placeholder="Search" autocomplete="off" />
     <div class="picker-list" id="sonos-picker-list"></div>
   </div>
 </div>
 
 <script src="./config.js"></script>
-<script src="./assets/index.js?v23"></script>
+<script src="./assets/index.js?v24"></script>
 </body>
 </html>

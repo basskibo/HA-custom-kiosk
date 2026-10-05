@@ -157,15 +157,15 @@ function connect() {
   ws = new WebSocket(`ws://${CONFIG.haHost}/api/websocket`);
   ws.onopen = () => console.log("[HA] websocket otvoren");
   ws.onclose = () => {
-    setBanner("Veza sa Home Assistant-om je prekinuta, pokušavam ponovo...");
+    setBanner("Connection to Home Assistant was lost. Retrying...");
     setTimeout(connect, 3000);
   };
-  ws.onerror = (e) => console.error("[HA] websocket greška", e);
+  ws.onerror = (e) => console.error("[HA] websocket error", e);
   ws.onmessage = (ev) => {
     try {
       handleMessage(JSON.parse(ev.data));
     } catch (e) {
-      console.error("[HA] loša poruka", e);
+      console.error("[HA] bad message", e);
     }
   };
 }
@@ -188,7 +188,7 @@ function handleMessage(msg) {
     send({ type: "get_states" });
     subscribeForecast();
   } else if (msg.type === "auth_invalid") {
-    setBanner("Neispravan token u config.js — generiši novi i zalepi ga tamo.");
+    setBanner("Invalid token in config.js. Create a new one and paste it there.");
   } else if (msg.type === "event" && msg.event && msg.event.event_type === "state_changed") {
     const data = msg.event.data;
     states[data.entity_id] = data.new_state;
@@ -245,7 +245,7 @@ function pad2(n) {
   return n < 10 ? "0" + n : "" + n;
 }
 
-const DAYS_FULL = ["Nedelja", "Ponedeljak", "Utorak", "Sreda", "Četvrtak", "Petak", "Subota"];
+const DAYS_FULL = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function haUrl(path) {
   if (!path) return null;
@@ -266,13 +266,13 @@ const SELECTS = [
 ];
 
 const VACUUM_STATES = {
-  cleaning: "Čisti",
-  docked: "Na docku",
-  idle: "Miruje",
-  paused: "Pauzirano",
-  returning: "Vraća se na dok",
-  error: "Greška",
-  unavailable: "Nedostupan",
+  cleaning: "Cleaning",
+  docked: "Docked",
+  idle: "Idle",
+  paused: "Paused",
+  returning: "Returning",
+  error: "Error",
+  unavailable: "Unavailable",
 };
 
 function applyState(entityId, state) {
@@ -338,10 +338,10 @@ function applyState(entityId, state) {
       icon();
       break;
     case "vacuumMop":
-      setText("vacuum-mop", s === "on" ? "Uključeno" : "Isključeno");
+      setText("vacuum-mop", s === "on" ? "On" : "Off");
       break;
     case "vacuumSleep":
-      setText("vacuum-sleep", s === "on" ? "Da" : "Ne");
+      setText("vacuum-sleep", s === "on" ? "Yes" : "No");
       break;
     case "vacuumBattery":
       setText("vacuum-battery", withUnit(s, "%"));
@@ -395,7 +395,7 @@ function applyState(entityId, state) {
       setText("home-net-up", withUnit(s, attr.unit_of_measurement));
       break;
     case "netWan":
-      setText("home-net-wan", s === "on" ? "Povezano" : s === "off" ? "Prekinuto" : "—");
+      setText("home-net-wan", s === "on" ? "Connected" : s === "off" ? "Disconnected" : "—");
       break;
     case "netIp":
       setText("home-net-ip", isUnknown(s) ? "—" : s);
@@ -440,8 +440,8 @@ function renderPlayer(prefix, s, attr) {
   card.classList.toggle("is-on", active);
   $(`${prefix}-power`).classList.toggle("active", active);
 
-  const stateText = s === "playing" ? "Svira" : s === "paused" ? "Pauzirano" : s === "idle" ? "Spreman" : s === "off" ? "Isključen" : s === "unavailable" ? "Nedostupan" : s;
-  setText(`${prefix}-title`, attr.media_title || (prefix === "sonos" ? "Ništa ne svira" : active ? "Aktivan" : "Isključen"));
+  const stateText = s === "playing" ? "Playing" : s === "paused" ? "Paused" : s === "idle" ? "Ready" : s === "off" ? "Off" : s === "unavailable" ? "Unavailable" : s;
+  setText(`${prefix}-title`, attr.media_title || (prefix === "sonos" ? "Nothing playing" : active ? "Active" : "Off"));
   setText(`${prefix}-sub`, attr.media_artist || attr.app_name || stateText);
 
   const pic = active ? haUrl(attr.entity_picture) : null;
@@ -462,10 +462,10 @@ function renderPlayer(prefix, s, attr) {
 
 const GAUGE_MAX = 100;
 const GAUGE_COLORS = [
-  { from: 0, color: "#4ade80", label: "Odličan" },
-  { from: 12, color: "#facc15", label: "Dobar" },
-  { from: 35, color: "#fb923c", label: "Umeren" },
-  { from: 55, color: "#f87171", label: "Loš" },
+  { from: 0, color: "#4ade80", label: "Excellent" },
+  { from: 12, color: "#facc15", label: "Good" },
+  { from: 35, color: "#fb923c", label: "Moderate" },
+  { from: 55, color: "#f87171", label: "Poor" },
 ];
 
 function qualityFor(v) {
@@ -498,21 +498,21 @@ function updateGauge(pm25) {
 // ---------- Vreme ----------
 
 const WEATHER_TEXT = {
-  "clear-night": "Vedra noć",
-  cloudy: "Oblačno",
-  fog: "Magla",
-  hail: "Grad",
-  lightning: "Grmljavina",
-  "lightning-rainy": "Grmljavina i kiša",
-  partlycloudy: "Delimično oblačno",
-  pouring: "Pljusak",
-  rainy: "Kiša",
-  snowy: "Sneg",
-  "snowy-rainy": "Susnežica",
-  sunny: "Sunčano",
-  windy: "Vetrovito",
-  "windy-variant": "Vetrovito",
-  exceptional: "Izuzetno",
+  "clear-night": "Clear night",
+  cloudy: "Cloudy",
+  fog: "Fog",
+  hail: "Hail",
+  lightning: "Lightning",
+  "lightning-rainy": "Thunderstorm",
+  partlycloudy: "Partly cloudy",
+  pouring: "Pouring",
+  rainy: "Rain",
+  snowy: "Snow",
+  "snowy-rainy": "Sleet",
+  sunny: "Sunny",
+  windy: "Windy",
+  "windy-variant": "Windy",
+  exceptional: "Exceptional",
 };
 
 function weatherText(state) {
@@ -547,22 +547,11 @@ function formatTemp(n, digits) {
   return (Math.round(v * 10) / 10).toFixed(1);
 }
 
-function precipText(f) {
-  if (f.precipitation_probability != null && f.precipitation_probability !== "") {
-    return Math.round(Number(f.precipitation_probability)) + "%";
-  }
-  if (f.precipitation == null || f.precipitation === "") return "";
-  const p = Number(f.precipitation);
-  if (isNaN(p) || p <= 0) return "0 mm";
-  if (p < 10) return (Math.round(p * 10) / 10).toFixed(1) + " mm";
-  return Math.round(p) + " mm";
-}
-
 function paintWeatherMeta(hour) {
   if (!hour) return;
   const parts = [];
-  if (hour.apparent_temperature != null) parts.push("Oseća se " + formatTemp(hour.apparent_temperature, 0) + "°");
-  if (hour.humidity != null) parts.push("vlažnost " + Math.round(Number(hour.humidity)) + "%");
+  if (hour.apparent_temperature != null) parts.push("Feels like " + formatTemp(hour.apparent_temperature, 0) + "°");
+  if (hour.humidity != null) parts.push("humidity " + Math.round(Number(hour.humidity)) + "%");
   setText("weather-meta", parts.join(" · "));
 }
 
@@ -585,10 +574,10 @@ function upcomingHours(forecast, count) {
 function subscribeForecast() {
   if (!E.weather) return;
   hourlySubId = send({ type: "weather/subscribe_forecast", entity_id: E.weather, forecast_type: "hourly" }, (msg) => {
-    if (!msg.success) console.warn("[weather] hourly nije podržan:", msg.error);
+    if (!msg.success) console.warn("[weather] hourly is not supported:", msg.error);
   });
   dailySubId = send({ type: "weather/subscribe_forecast", entity_id: E.weather, forecast_type: "daily" }, (msg) => {
-    if (!msg.success) console.warn("[weather] daily nije podržan:", msg.error);
+    if (!msg.success) console.warn("[weather] daily is not supported:", msg.error);
   });
 }
 
@@ -622,9 +611,8 @@ function renderHourly(forecast) {
     const label = isNaN(d.getTime()) ? "" : pad2(d.getHours()) + ":00";
     html += '<div class="forecast-hour">'
       + '<div class="forecast-hour-time">' + label + "</div>"
-      + '<div class="forecast-hour-temp">' + formatTemp(f.temperature, 1) + "°</div>"
       + '<div class="forecast-hour-icon"><i data-lucide="' + weatherIconName(f.condition) + '"></i></div>'
-      + '<div class="forecast-hour-precip">' + precipText(f) + "</div>"
+      + '<div class="forecast-hour-temp">' + formatTemp(f.temperature, 1) + "°</div>"
       + "</div>";
   }
   el.innerHTML = html;
@@ -632,7 +620,7 @@ function renderHourly(forecast) {
 }
 
 function formatBackupTime(iso) {
-  if (isUnknown(iso)) return "nema podataka";
+  if (isUnknown(iso)) return "no data";
   const d = new Date(iso);
   if (isNaN(d.getTime())) return iso;
   return `${pad2(d.getDate())}.${pad2(d.getMonth() + 1)}. ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
@@ -663,16 +651,16 @@ function renderPeople() {
     if (states[p.entity]) updatePerson(i, states[p.entity]);
     else {
       row.querySelector(".hero-person-name").textContent = p.name;
-      row.querySelector(".hero-person-where").textContent = "Nema lokacije";
+      row.querySelector(".hero-person-where").textContent = "No location";
     }
   });
 }
 
 function presenceWhere(state) {
   const s = state.state;
-  if (s === "home") return "Kod kuće";
-  if (s === "not_home") return "Odsutan";
-  if (s === "unknown" || s === "unavailable" || !s) return "Nema lokacije";
+  if (s === "home") return "Home";
+  if (s === "not_home") return "Away";
+  if (s === "unknown" || s === "unavailable" || !s) return "No location";
   return s;
 }
 
@@ -725,7 +713,7 @@ function hideBanner() {
 
 // ---------- Sonos: izbor šta svira (biblioteka / favoriti) ----------
 
-let pickerLevel = { mode: "favorites", id: "", type: "", title: "Sonos favoriti" };
+let pickerLevel = { mode: "favorites", id: "", type: "", title: "Sonos favorites" };
 const pickerStack = [];
 let pickerItems = [];
 let pickerVisible = [];
@@ -747,7 +735,7 @@ function pickerMessage(text) {
 }
 
 function syncPickerChrome() {
-  setText("sonos-picker-title", pickerLevel.title || "Sonos favoriti");
+  setText("sonos-picker-title", pickerLevel.title || "Sonos favorites");
   $("sonos-picker-back").classList.toggle("is-slot", pickerStack.length === 0);
 }
 
@@ -782,10 +770,10 @@ function sonosChildren(msg) {
 function renderSourceFallback() {
   const st = states[E.sonos];
   const sources = st && st.attributes && st.attributes.source_list;
-  pickerLevel = { mode: "sources", id: "", type: "", title: "Sonos favoriti" };
+  pickerLevel = { mode: "sources", id: "", type: "", title: "Sonos favorites" };
   syncPickerChrome();
   if (!sources || !sources.length) {
-    pickerMessage("Sonos nema sačuvane favorite.");
+    pickerMessage("Sonos has no saved favorites.");
     return;
   }
   pickerItems = sources.map(function (name) {
@@ -797,16 +785,16 @@ function renderSourceFallback() {
 function loadFlatFavorites() {
   const req = ++pickerReq;
   pickerLoading = true;
-  pickerLevel = { mode: "favorites", id: "", type: "favorites", title: "Sonos favoriti" };
+  pickerLevel = { mode: "favorites", id: "", type: "favorites", title: "Sonos favorites" };
   syncPickerChrome();
-  pickerMessage("Učitavam Sonos favorite...");
+  pickerMessage("Loading Sonos favorites...");
   const sent = browseSonos("", "favorites", function (msg) {
     if (req !== pickerReq) return;
     const folders = sonosChildren(msg);
     if (!msg.success || !folders.length) {
       pickerLoading = false;
       if (libraryAvailable) {
-        pickerLevel = { mode: "browse", id: "", type: "library", title: "Muzička biblioteka" };
+        pickerLevel = { mode: "browse", id: "", type: "library", title: "Music library" };
         loadPickerLevel();
       } else {
         renderSourceFallback();
@@ -831,7 +819,7 @@ function loadFlatFavorites() {
       if (left > 0 || req !== pickerReq) return;
       pickerLoading = false;
       playable.sort(function (a, b) {
-        return (a.title || "").localeCompare(b.title || "", "sr");
+        return (a.title || "").localeCompare(b.title || "", "en");
       });
       pickerItems = playable;
       renderPickerList();
@@ -849,7 +837,7 @@ function loadFlatFavorites() {
   });
   if (sent == null) {
     pickerLoading = false;
-    pickerMessage("Nema veze sa Home Assistant-om.");
+    pickerMessage("No connection to Home Assistant.");
   }
 }
 
@@ -857,7 +845,7 @@ function loadPickerLevel() {
   const req = ++pickerReq;
   pickerLoading = true;
   syncPickerChrome();
-  pickerMessage("Učitavam...");
+  pickerMessage("Loading...");
   const sent = browseSonos(
     pickerLevel.id != null ? pickerLevel.id : null,
     pickerLevel.type != null ? pickerLevel.type : null,
@@ -865,12 +853,12 @@ function loadPickerLevel() {
       if (req !== pickerReq) return;
       pickerLoading = false;
       if (!msg.success || !msg.result) {
-        pickerMessage("Ne mogu da učitam ovaj folder.");
+        pickerMessage("Could not load this folder.");
         return;
       }
       const children = sonosChildren(msg);
       if (!children.length) {
-        pickerMessage("Nema ništa ovde");
+        pickerMessage("Nothing here");
         return;
       }
       pickerItems = children;
@@ -879,20 +867,20 @@ function loadPickerLevel() {
   );
   if (sent == null) {
     pickerLoading = false;
-    pickerMessage("Nema veze sa Home Assistant-om.");
+    pickerMessage("No connection to Home Assistant.");
   }
 }
 
 function openPicker() {
   pickerStack.length = 0;
   libraryAvailable = false;
-  pickerLevel = { mode: "favorites", id: "", type: "favorites", title: "Sonos favoriti" };
+  pickerLevel = { mode: "favorites", id: "", type: "favorites", title: "Sonos favorites" };
   $("sonos-picker-search").value = "";
   $("sonos-picker").classList.remove("hidden");
   const req = ++pickerReq;
   pickerLoading = true;
   syncPickerChrome();
-  pickerMessage("Učitavam Sonos...");
+  pickerMessage("Loading Sonos...");
   const sent = browseSonos(null, null, function (msg) {
     if (req !== pickerReq) return;
     const children = sonosChildren(msg);
@@ -913,7 +901,7 @@ function openPicker() {
       return;
     }
     if (libraryAvailable) {
-      pickerLevel = { mode: "browse", id: "", type: "library", title: "Muzička biblioteka" };
+      pickerLevel = { mode: "browse", id: "", type: "library", title: "Music library" };
       loadPickerLevel();
       return;
     }
@@ -922,13 +910,13 @@ function openPicker() {
   });
   if (sent == null) {
     pickerLoading = false;
-    pickerMessage("Nema veze sa Home Assistant-om.");
+    pickerMessage("No connection to Home Assistant.");
   }
 }
 
 function openLibrary() {
-  pickerStack.push({ mode: "favorites", id: "", type: "favorites", title: "Sonos favoriti" });
-  pickerLevel = { mode: "browse", id: "", type: "library", title: "Muzička biblioteka" };
+  pickerStack.push({ mode: "favorites", id: "", type: "favorites", title: "Sonos favorites" });
+  pickerLevel = { mode: "browse", id: "", type: "library", title: "Music library" };
   $("sonos-picker-search").value = "";
   loadPickerLevel();
 }
@@ -969,8 +957,8 @@ function playSonosItem(item) {
   } else {
     return;
   }
-  setText("sonos-title", item.title || "Puštam");
-  setText("sonos-sub", "Puštam...");
+  setText("sonos-title", item.title || "Playing");
+  setText("sonos-sub", "Playing...");
   closePicker();
 }
 
@@ -998,7 +986,7 @@ function buildPickerRow(item, index) {
   main.appendChild(pickerArt(item));
   const title = document.createElement("span");
   title.className = "picker-row-title";
-  title.textContent = item.title || "Bez naslova";
+  title.textContent = item.title || "Untitled";
   main.appendChild(title);
   row.appendChild(main);
 
@@ -1019,13 +1007,13 @@ function renderPickerList() {
   pickerVisible = pickerItems.filter(function (it) {
     return !raw || (it.title || "").toLowerCase().indexOf(raw) !== -1;
   });
-  if (pickerLevel.mode === "favorites" && libraryAvailable && (!raw || "muzička biblioteka".indexOf(raw) !== -1)) {
-    pickerVisible = [{ title: "Muzička biblioteka", library: true, can_expand: true, can_play: false }].concat(pickerVisible);
+  if (pickerLevel.mode === "favorites" && libraryAvailable && (!raw || "music library".indexOf(raw) !== -1)) {
+    pickerVisible = [{ title: "Music library", library: true, can_expand: true, can_play: false }].concat(pickerVisible);
   }
   const list = $("sonos-picker-list");
   list.innerHTML = "";
   if (!pickerVisible.length) {
-    pickerMessage(pickerItems.length ? "Nema rezultata" : "Nema ništa ovde");
+    pickerMessage(pickerItems.length ? "No results" : "Nothing here");
     return;
   }
   for (let i = 0; i < pickerVisible.length; i++) {
@@ -1068,24 +1056,24 @@ const DEFAULT_REMOTES = {
       title: "TV",
       device: "tv",
       buttons: [
-        { label: "Napajanje", command: "power", icon: "power", wide: true },
-        { label: "Jače", command: "volume_up", icon: "plus" },
-        { label: "Tiše", command: "volume_down", icon: "minus" },
-        { label: "Bez zvuka", command: "mute", icon: "volume-2" },
-        { label: "Kanal +", command: "channel_up", icon: "arrow-up" },
-        { label: "Kanal −", command: "channel_down", icon: "arrow-down" },
-        { label: "Izvor", command: "source", icon: "tv" },
+        { label: "Power", command: "power", icon: "power", wide: true },
+        { label: "Louder", command: "volume_up", icon: "plus" },
+        { label: "Quieter", command: "volume_down", icon: "minus" },
+        { label: "Mute", command: "mute", icon: "volume-2" },
+        { label: "Channel +", command: "channel_up", icon: "arrow-up" },
+        { label: "Channel −", command: "channel_down", icon: "arrow-down" },
+        { label: "Source", command: "source", icon: "tv" },
       ],
     },
     {
       id: "klima",
-      title: "Klima",
+      title: "AC",
       device: "klima",
       buttons: [
-        { label: "Uključi", action: "setpoint", icon: "power" },
-        { label: "Isključi", command: "iskljuci", icon: "power" },
-        { label: "Režim", command: "mode", icon: "wind" },
-        { label: "Ventilator", command: "fan", icon: "fan" },
+        { label: "On", action: "setpoint", icon: "power" },
+        { label: "Off", command: "iskljuci", icon: "power" },
+        { label: "Mode", command: "mode", icon: "wind" },
+        { label: "Fan", command: "fan", icon: "fan" },
       ],
       climate: { min: 16, max: 30, step: 1, value: 24, prefix: "ukljuci_" },
     },
@@ -1103,9 +1091,9 @@ function remoteStatus(text) {
 
 function remoteErrorText(msg) {
   const err = msg && msg.error;
-  const text = err ? String(err.message || err) : "nije uspelo";
+  const text = err ? String(err.message || err) : "failed";
   if (text.indexOf("not found") !== -1) {
-    return "Ova komanda još nije naučena. Uključi Nauči, uperi pravi daljinski u Broadlink i pritisni isto dugme.";
+    return "This command is not learned yet. Turn on Learn, point the real remote at the Broadlink, and press the same button.";
   }
   return text.slice(0, 160);
 }
@@ -1155,20 +1143,20 @@ function paintClimateRoom() {
   if (!el) return;
   const st = states[E.temp];
   const s = st && st.state;
-  el.textContent = isUnknown(s) ? "Soba —" : "Soba " + Math.round(parseFloat(s)) + "°";
+  el.textContent = isUnknown(s) ? "Room —" : "Room " + Math.round(parseFloat(s)) + "°";
 }
 
 function fireRemote(device, command, label, learnHint) {
   const entity = REMOTES.entity || DEFAULT_REMOTES.entity;
   const data = { device: device.device, command: [command] };
   if (remoteLearning) {
-    remoteStatus(learnHint || ("Čekam „" + label + "“ — pritisni to dugme na pravom daljinskom, ka Broadlinku."));
+    remoteStatus(learnHint || ("Waiting for “" + label + "”. Press that button on the real remote, aimed at the Broadlink."));
     callService("remote", "learn_command", entity, Object.assign({ command_type: "ir" }, data), function (msg) {
       if (msg && msg.success) {
         remoteLearning = false;
         const learnBtn = $("remote-learn");
         if (learnBtn) learnBtn.classList.remove("active");
-        remoteStatus("Naučeno: " + label + ". Sad dugme šalje komandu.");
+        remoteStatus("Learned: " + label + ". The button now sends that command.");
       } else {
         remoteStatus(remoteErrorText(msg));
       }
@@ -1176,7 +1164,7 @@ function fireRemote(device, command, label, learnHint) {
     return;
   }
   callService("remote", "send_command", entity, data, function (msg) {
-    if (msg && msg.success) remoteStatus("Poslato: " + label);
+    if (msg && msg.success) remoteStatus("Sent: " + label);
     else remoteStatus(remoteErrorText(msg));
   });
 }
@@ -1190,7 +1178,7 @@ function stepClimate(device, delta) {
   const current = readSetpoint(device);
   const next = current + delta;
   if (next < cfg.min || next > cfg.max) {
-    remoteStatus(next < cfg.min ? "Najniže je " + cfg.min + "°." : "Najviše je " + cfg.max + "°.");
+    remoteStatus(next < cfg.min ? "Lowest is " + cfg.min + "°." : "Highest is " + cfg.max + "°.");
     return;
   }
   writeSetpoint(device, next);
@@ -1199,7 +1187,7 @@ function stepClimate(device, delta) {
     device,
     setpointCommand(device, next),
     next + "°",
-    "Čekam " + next + "° — na pravom daljinskom podesi " + next + "° i pritisni, ka Broadlinku."
+    "Waiting for " + next + "°. Set the real remote to " + next + "° and press it, aimed at the Broadlink."
   );
 }
 
@@ -1211,7 +1199,7 @@ function appendClimate(pad, device) {
   const down = document.createElement("button");
   down.type = "button";
   down.className = "remote-key remote-step";
-  down.setAttribute("aria-label", "Smanji temperaturu");
+  down.setAttribute("aria-label", "Lower temperature");
   down.innerHTML = '<i data-lucide="minus"></i>';
   down.addEventListener("click", function () {
     flash(down);
@@ -1221,13 +1209,13 @@ function appendClimate(pad, device) {
   const mid = document.createElement("div");
   mid.className = "remote-climate-mid";
   mid.innerHTML = '<div class="remote-climate-value" id="klima-set"></div>'
-    + '<div class="remote-climate-label">Podešeno</div>'
+    + '<div class="remote-climate-label">Set</div>'
     + '<div class="remote-climate-room" id="klima-room"></div>';
 
   const up = document.createElement("button");
   up.type = "button";
   up.className = "remote-key remote-step";
-  up.setAttribute("aria-label", "Povećaj temperaturu");
+  up.setAttribute("aria-label", "Raise temperature");
   up.innerHTML = '<i data-lucide="plus"></i>';
   up.addEventListener("click", function () {
     flash(up);
@@ -1283,7 +1271,7 @@ function renderRemote() {
         const n = readSetpoint(device);
         command = setpointCommand(device, n);
         name = n + "°";
-        learnHint = "Čekam " + n + "° — na pravom daljinskom podesi " + n + "° i pritisni, ka Broadlinku.";
+        learnHint = "Waiting for " + n + "°. Set the real remote to " + n + "° and press it, aimed at the Broadlink.";
       }
       fireRemote(device, command, name, learnHint);
     });
@@ -1348,7 +1336,7 @@ function wireControls() {
     const learnBtn = $("remote-learn");
     if (learnBtn) learnBtn.classList.toggle("active", remoteLearning);
     remoteStatus(remoteLearning
-      ? "Režim učenja. Pritisni dugme ovde, pa isto dugme na pravom daljinskom."
+      ? "Learn mode. Press a button here, then the same button on the real remote."
       : "");
   });
   on("sonos-picker-close", closePicker);
@@ -1448,7 +1436,7 @@ function useSnapshots() {
   cameraSrc = "";
   stopSnaps();
   const text = document.querySelector("#camera-fallback .camera-placeholder-text");
-  if (text) text.textContent = "Osvežavam sliku kamere...";
+  if (text) text.textContent = "Refreshing the camera picture...";
   showCamera();
   cameraSnapTimer = setInterval(showCamera, 1000);
 }
