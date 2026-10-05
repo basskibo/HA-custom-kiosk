@@ -479,12 +479,16 @@ input[type="range"] { accent-color: var(--amber); }
   -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 .tabbar button {
-  -webkit-flex: 1; flex: 1; border: none; background: transparent; color: var(--text-dim);
-  border-radius: 16px; padding: 6px 2px 7px; cursor: pointer; min-width: 0;
+  -webkit-flex: 1; flex: 1;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+  border: none; background: transparent; color: var(--text-dim);
+  border-radius: 16px; padding: 8px 4px; cursor: pointer; min-width: 0;
 }
-.tabbar button.active { background: var(--amber-soft); color: var(--amber); }
-.tabbar svg { width: 18px; height: 18px; display: block; margin: 0 auto 3px; }
-.tabbar span { display: block; font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tabbar button.active { background: transparent; color: var(--amber); }
+.tabbar svg { width: 16px; height: 16px; display: block; margin: 0; -webkit-flex-shrink: 0; flex-shrink: 0; }
+.tabbar span { display: block; margin-left: 6px; font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ---------- Kamera ---------- */
 .camera-frame {
