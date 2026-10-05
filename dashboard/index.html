@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <title>Dom</title>
-  <link rel="stylesheet" href="./assets/style.css?v18">
+  <link rel="stylesheet" href="./assets/style.css?v19">
 </head>
 <body>
 <div id="connection-banner" class="banner hidden"></div>
@@ -22,19 +22,21 @@
     <!-- ================= KOLONA 1: vreme + media ================= -->
     <div class="col">
 
-      <section class="card card-weather">
-        <div class="weather-top">
-          <span class="weather-icon-wrap" id="weather-icon-wrap"><i data-lucide="cloud-sun"></i></span>
-          <div class="weather-main">
-            <div class="weather-temp" id="weather-temp">--°</div>
-            <div class="weather-desc" id="weather-desc">—</div>
+      <section class="card card-hero" data-screen="home">
+        <div class="hero-top">
+          <div class="hero-clock-wrap">
+            <div class="hero-clock" id="clock">--:--</div>
+            <div class="hero-date" id="date">—</div>
           </div>
-          <div class="weather-hilo" id="weather-hilo"></div>
+          <div class="hero-temp">
+            <div class="hero-temp-value" id="hero-temp">--°</div>
+            <div class="hero-temp-label">Soba</div>
+          </div>
         </div>
-        <div class="forecast" id="forecast"></div>
+        <div class="hero-people" id="people-row"></div>
       </section>
 
-      <section class="card card-player" id="card-sonos">
+      <section class="card card-player" id="card-sonos" data-screen="home media">
         <div class="player-bg" id="sonos-bg"></div>
         <div class="player-content">
           <div class="player-head">
@@ -57,7 +59,7 @@
         </div>
       </section>
 
-      <section class="card card-player" id="card-tv">
+      <section class="card card-player" id="card-tv" data-screen="media">
         <div class="player-bg" id="tv-bg"></div>
         <div class="player-content">
           <div class="player-head">
@@ -70,7 +72,7 @@
         </div>
       </section>
 
-      <section class="card" id="card-remote">
+      <section class="card" id="card-remote" data-screen="media klima">
         <div class="remote-head">
           <div class="card-title">Daljinski</div>
           <button class="remote-learn" id="remote-learn" type="button">Nauči</button>
@@ -85,7 +87,19 @@
     <!-- ================= KOLONA 2: prečišćivač + usisivač ================= -->
     <div class="col">
 
-      <section class="card card-purifier">
+      <section class="card card-weather" data-screen="home">
+        <div class="weather-top">
+          <span class="weather-icon-wrap" id="weather-icon-wrap"><i data-lucide="cloud-sun"></i></span>
+          <div class="weather-main">
+            <div class="weather-temp" id="weather-temp">--°</div>
+            <div class="weather-desc" id="weather-desc">—</div>
+          </div>
+          <div class="weather-hilo" id="weather-hilo"></div>
+        </div>
+        <div class="forecast" id="forecast"></div>
+      </section>
+
+      <section class="card card-purifier" data-screen="home klima">
         <div class="card-title">Prečišćivač vazduha</div>
         <div class="entity-row">
           <span class="icon-badge icon-badge-gold"><i data-lucide="air-vent"></i></span>
@@ -129,7 +143,7 @@
         </div>
       </section>
 
-      <section class="card card-vacuum">
+      <section class="card card-vacuum" data-screen="home clean">
         <div class="card-title">Robot usisivač</div>
 
         <div class="entity-row"><span class="icon-badge icon-badge-blue"><i data-lucide="droplets"></i></span><span class="entity-row-name">Krpa za pranje</span><span class="entity-row-value" id="vacuum-mop">—</span></div>
@@ -182,13 +196,7 @@
     <!-- ================= KOLONA 3: sat + kamera + status ================= -->
     <div class="col">
 
-      <section class="card card-hero">
-        <div class="hero-clock" id="clock">--:--</div>
-        <div class="hero-date" id="date">—</div>
-        <div class="hero-people" id="people-row"></div>
-      </section>
-
-      <section class="card card-camera">
+      <section class="card card-camera" data-screen="camera">
         <div class="camera-frame">
           <div class="camera-placeholder">
             <i data-lucide="cctv"></i>
@@ -212,16 +220,16 @@
         <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="hard-drive"></i></span><span class="entity-row-name">Zauzeće memorije</span><span class="entity-row-value" id="cam-storage">—</span></div>
       </section>
 
-      <section class="card card-backup">
+      <section class="card card-backup" data-screen="house">
         <span class="icon-badge icon-badge-gold icon-badge-lg"><i data-lucide="database-backup"></i></span>
         <div><span class="status-tile-label">Server backup</span><span class="status-tile-value" id="home-backup-server">—</span></div>
       </section>
-      <section class="card card-backup">
+      <section class="card card-backup" data-screen="house">
         <span class="icon-badge icon-badge-gold icon-badge-lg"><i data-lucide="cloud-check"></i></span>
         <div><span class="status-tile-label">HA backup</span><span class="status-tile-value" id="home-backup-ha">—</span></div>
       </section>
 
-      <div class="status-grid">
+      <div class="status-grid" data-screen="house">
         <section class="card status-tile">
           <span class="icon-badge icon-badge-gold"><i data-lucide="arrow-down-to-line"></i></span>
           <div><span class="status-tile-label">Download</span><span class="status-tile-value" id="home-net-down">—</span></div>
@@ -252,6 +260,15 @@
   </div>
 </div>
 
+<nav class="tabbar" id="tabbar">
+  <button type="button" data-tab="home" class="active"><i data-lucide="house"></i><span>Početna</span></button>
+  <button type="button" data-tab="media"><i data-lucide="speaker"></i><span>Mediji</span></button>
+  <button type="button" data-tab="klima"><i data-lucide="thermometer"></i><span>Klima</span></button>
+  <button type="button" data-tab="clean"><i data-lucide="bot"></i><span>Usisivač</span></button>
+  <button type="button" data-tab="camera"><i data-lucide="cctv"></i><span>Kamera</span></button>
+  <button type="button" data-tab="house"><i data-lucide="router"></i><span>Kuća</span></button>
+</nav>
+
 <div id="sonos-picker" class="picker hidden">
   <div class="picker-backdrop" id="sonos-picker-backdrop"></div>
   <div class="picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sonos-picker-title">
@@ -266,6 +283,6 @@
 </div>
 
 <script src="./config.js"></script>
-<script src="./assets/index.js?v18"></script>
+<script src="./assets/index.js?v19"></script>
 </body>
 </html>

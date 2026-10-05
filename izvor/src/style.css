@@ -66,6 +66,7 @@ button { -webkit-appearance: none; appearance: none; }
   grid-gap: var(--gap);
   gap: var(--gap);
   padding: var(--gap);
+  padding-bottom: 88px;
   align-items: start;
 }
 .col {
@@ -419,16 +420,50 @@ input[type="range"] { accent-color: var(--amber); }
 .amber-tile.on { background: var(--amber); border-color: var(--amber); color: #1a1405; }
 .amber-tile.on svg { color: #1a1405; }
 
-/* ---------- Hero (sat) ---------- */
+/* ---------- Hero (sat + temperatura + prisustvo) ---------- */
 .card-hero {
   background: -webkit-linear-gradient(top left, #6e4a3b 0%, #3b2a25 100%);
   background: linear-gradient(135deg, #6e4a3b 0%, #3b2a25 100%);
   padding: 20px 22px;
 }
+.hero-top { display: -webkit-flex; display: flex; -webkit-align-items: flex-start; align-items: flex-start; }
+.hero-clock-wrap { -webkit-flex: 1; flex: 1; min-width: 0; }
 .hero-clock { font-size: 58px; font-weight: 700; line-height: 1; letter-spacing: -1px; }
 .hero-date { margin-top: 6px; color: #d9c3b5; font-size: 15px; }
-.hero-people { margin-top: 12px; }
-.hero-person { font-size: 13px; color: #d9c3b5; margin-top: 2px; }
+.hero-temp { text-align: right; margin-left: 12px; }
+.hero-temp-value { font-size: 32px; font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
+.hero-temp-label { margin-top: 4px; color: #d9c3b5; font-size: 12px; font-weight: 600; }
+.hero-people { display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; margin-top: 16px; }
+.hero-person { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; margin-right: 16px; margin-bottom: 8px; }
+.hero-avatar {
+  width: 44px; height: 44px; border-radius: 50%; margin-right: 10px; -webkit-flex-shrink: 0; flex-shrink: 0;
+  background-color: rgba(0, 0, 0, 0.28); background-position: center; background-size: cover;
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+  font-weight: 800; font-size: 16px; color: #f5c542;
+}
+.hero-person-name { display: block; font-weight: 800; font-size: 15px; color: #fff; line-height: 1.15; }
+.hero-person-where { display: block; margin-top: 2px; font-size: 12px; color: #f0e2d6; }
+.hero-person-when { display: block; margin-top: 1px; font-size: 11px; color: #d9c3b5; }
+
+.screen-off { display: none !important; }
+.col-off { display: none !important; }
+.cols[data-cols="1"] { grid-template-columns: 1fr; }
+.cols[data-cols="2"] { grid-template-columns: 1fr 1fr; }
+
+.tabbar {
+  position: fixed; left: 12px; right: 12px; bottom: 10px; z-index: 40;
+  display: -webkit-flex; display: flex;
+  background: #1b1c22; border-radius: 22px; padding: 6px;
+  -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.tabbar button {
+  -webkit-flex: 1; flex: 1; border: none; background: transparent; color: var(--text-dim);
+  border-radius: 16px; padding: 6px 2px 7px; cursor: pointer; min-width: 0;
+}
+.tabbar button.active { background: var(--amber-soft); color: var(--amber); }
+.tabbar svg { width: 18px; height: 18px; display: block; margin: 0 auto 3px; }
+.tabbar span { display: block; font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ---------- Kamera ---------- */
 .camera-frame {
@@ -485,6 +520,8 @@ input[type="range"] { accent-color: var(--amber); }
   }
   .app { min-height: 0; }
   .cols { grid-template-columns: repeat(3, 1fr); }
+  .cols[data-cols="1"] { grid-template-columns: 1fr; }
+  .cols[data-cols="2"] { grid-template-columns: 1fr 1fr; }
   .col:nth-child(3) { grid-column: auto; grid-template-columns: none; }
   .col:nth-child(3) .card-hero,
   .col:nth-child(3) .card-camera,

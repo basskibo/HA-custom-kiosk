@@ -319,6 +319,7 @@ function applyState(entityId, state) {
       break;
     case "temp":
       setText("temp-value", withUnit(s, "°C"));
+      setText("hero-temp", isUnknown(s) ? "--°" : Math.round(parseFloat(s)) + "°");
       break;
     case "humidity":
       setText("humidity-value", withUnit(s, "%"));
@@ -594,11 +595,43 @@ const personIndex = {};
 function renderPeople() {
   const el = $("people-row");
   const people = CONFIG.people || [];
-  el.innerHTML = people.map((p, i) => `<div class="hero-person" id="person-${i}">${p.name}</div>`).join("");
+  el.innerHTML = "";
   people.forEach((p, i) => {
     personIndex[p.entity] = i;
+    const row = document.createElement("div");
+    row.className = "hero-person";
+    row.id = "person-" + i;
+    const avatar = document.createElement("span");
+    avatar.className = "hero-avatar";
+    avatar.id = "person-avatar-" + i;
+    avatar.textContent = (p.name || "?").charAt(0);
+    const text = document.createElement("span");
+    text.innerHTML = '<span class="hero-person-name"></span><span class="hero-person-where"></span><span class="hero-person-when"></span>';
+    row.appendChild(avatar);
+    row.appendChild(text);
+    el.appendChild(row);
     if (states[p.entity]) updatePerson(i, states[p.entity]);
+    else {
+      row.querySelector(".hero-person-name").textContent = p.name;
+      row.querySelector(".hero-person-where").textContent = "Nema lokacije";
+    }
   });
+}
+
+function presenceWhere(state) {
+  const s = state.state;
+  if (s === "home") return "Kod kuće";
+  if (s === "not_home") return "Odsutan";
+  if (s === "unknown" || s === "unavailable" || !s) return "Nema lokacije";
+  return s;
+}
+
+function presenceWhen(state) {
+  const raw = state.last_updated || state.last_changed;
+  if (!raw) return "";
+  const d = new Date(raw);
+  if (isNaN(d.getTime())) return "";
+  return d.getDate() + "." + (d.getMonth() + 1) + ". " + pad2(d.getHours()) + ":" + pad2(d.getMinutes());
 }
 
 function updatePerson(i, state) {
@@ -606,8 +639,19 @@ function updatePerson(i, state) {
   const el = $(`person-${i}`);
   if (!el || !p) return;
   const name = (state.attributes && state.attributes.friendly_name) || p.name;
-  const where = state.state === "home" ? "Kod kuće" : state.state === "not_home" ? "Odsutan" : state.state;
-  el.textContent = `${name} · ${where}`;
+  const first = name.split(" ")[0] || name;
+  el.querySelector(".hero-person-name").textContent = first;
+  el.querySelector(".hero-person-where").textContent = presenceWhere(state);
+  el.querySelector(".hero-person-when").textContent = presenceWhen(state);
+  const avatar = $("person-avatar-" + i);
+  const pic = state.attributes && state.attributes.entity_picture;
+  if (avatar && pic) {
+    avatar.style.backgroundImage = 'url("' + haUrl(pic) + '")';
+    avatar.textContent = "";
+  } else if (avatar) {
+    avatar.style.backgroundImage = "none";
+    avatar.textContent = first.charAt(0);
+  }
 }
 
 // ---------- Sat ----------
@@ -1172,9 +1216,39 @@ function wireControls() {
 
 // ---------- Start ----------
 
+function setView(name) {
+  document.body.setAttribute("data-view", name);
+  const tabs = document.querySelectorAll("#tabbar button");
+  for (let i = 0; i < tabs.length; i++) {
+    tabs[i].classList.toggle("active", tabs[i].getAttribute("data-tab") === name);
+  }
+  const blocks = document.querySelectorAll("[data-screen]");
+  for (let i = 0; i < blocks.length; i++) {
+    const screens = blocks[i].getAttribute("data-screen").split(" ");
+    blocks[i].classList.toggle("screen-off", screens.indexOf(name) === -1);
+  }
+  const cols = document.querySelectorAll(".col");
+  let visibleCols = 0;
+  for (let i = 0; i < cols.length; i++) {
+    const left = cols[i].querySelectorAll("[data-screen]:not(.screen-off)");
+    const on = left.length > 0;
+    cols[i].classList.toggle("col-off", !on);
+    if (on) visibleCols++;
+  }
+  const board = document.querySelector(".cols");
+  if (board) board.setAttribute("data-cols", String(visibleCols || 1));
+}
+
 renderPeople();
 renderRemote();
 wireControls();
+const tabButtons = document.querySelectorAll("#tabbar button");
+for (let i = 0; i < tabButtons.length; i++) {
+  tabButtons[i].addEventListener("click", function () {
+    setView(tabButtons[i].getAttribute("data-tab"));
+  });
+}
+setView("home");
 icon();
 tickClock();
 setInterval(tickClock, 1000);
