@@ -560,7 +560,6 @@ function paintWeatherMeta(hour) {
   if (!hour) return;
   const parts = [];
   if (hour.apparent_temperature != null) parts.push("Feels like " + formatTemp(hour.apparent_temperature, 0) + "°");
-  if (hour.humidity != null) parts.push("humidity " + Math.round(Number(hour.humidity)) + "%");
   setText("weather-meta", parts.join(" · "));
 }
 
