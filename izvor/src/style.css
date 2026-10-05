@@ -340,12 +340,12 @@ input[type="range"] { accent-color: var(--amber); }
 .purifier-switch.active { background: var(--amber); }
 .purifier-switch.active .purifier-switch-knob { -webkit-transform: translateX(18px); transform: translateX(18px); }
 
-.purifier-body { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; margin: 8px 0 12px; }
-.purifier-body > * + * { margin-left: 18px; }
+.purifier-body { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; margin: 8px 0 12px; min-width: 0; }
+.purifier-body > * + * { margin-left: 12px; }
 
-/* Gauge: polukrug kao HA "gauge" kartica */
-.gauge { position: relative; width: 140px; height: 112px; -webkit-flex-shrink: 0; flex-shrink: 0; }
-.gauge-svg { width: 140px; height: 78px; display: block; overflow: visible; }
+/* Gauge: polukrug kao HA "gauge" kartica. Širina se skuplja da tekst pored njega ne ispadne iz kartice. */
+.gauge { position: relative; width: 38%; max-width: 140px; min-width: 96px; height: 112px; -webkit-flex-shrink: 1; flex-shrink: 1; }
+.gauge-svg { width: 100%; height: 78px; display: block; overflow: visible; }
 .gauge-track, .gauge-fill { fill: none; stroke-width: 10; }
 .gauge-track { stroke: rgba(255, 255, 255, 0.10); }
 .gauge-fill { stroke: var(--good); stroke-dasharray: 0 200; -webkit-transition: stroke-dasharray 0.5s ease, stroke 0.5s; transition: stroke-dasharray 0.5s ease, stroke 0.5s; }
@@ -361,7 +361,7 @@ input[type="range"] { accent-color: var(--amber); }
 
 .purifier-stats { -webkit-flex: 1; flex: 1; min-width: 0; }
 .purifier-stat-title { font-size: 12px; color: var(--text-dim); }
-.purifier-quality-value { font-size: 28px; font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+.purifier-quality-value { font-size: 24px; font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
 .purifier-stat-row { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; font-size: 14px; margin-bottom: 6px; }
 .purifier-stat-row > * + * { margin-left: 8px; }
 .purifier-stat-row svg { width: 18px; height: 18px; color: var(--amber); -webkit-flex-shrink: 0; flex-shrink: 0; }
@@ -521,7 +521,7 @@ body[data-view="home"] .card-vacuum:not(.details-open) .tile-block {
   display: block; width: 100%; height: 210px; object-fit: cover; background: #08080a;
 }
 @media (min-width: 1100px) {
-  .cols[data-cols="3"] { grid-template-columns: 1fr 1fr 1.55fr; }
+  .cols[data-cols="3"] { grid-template-columns: 1fr 1fr 1fr; }
   .camera-frame { height: 0; padding-bottom: 56.25%; min-height: 0; }
   .camera-feed {
     position: absolute; left: 0; top: 0; right: 0; bottom: 0;
