@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <title>Dom</title>
-  <link rel="stylesheet" href="./assets/style.css?v17">
+  <link rel="stylesheet" href="./assets/style.css?v18">
 </head>
 <body>
 <div id="connection-banner" class="banner hidden"></div>
@@ -40,6 +40,7 @@
           <div class="player-head">
             <span class="player-icon"><i data-lucide="speaker"></i></span>
             <span class="player-name">Zvučnik</span>
+            <button class="player-power" id="sonos-library" type="button" aria-label="Izaberi šta svira"><i data-lucide="list-music"></i></button>
             <button class="player-power" id="sonos-power" aria-label="Uključi/isključi"><i data-lucide="power"></i></button>
           </div>
           <div class="player-title" id="sonos-title">Ništa ne svira</div>
@@ -53,10 +54,6 @@
             <i data-lucide="volume-2"></i>
             <input type="range" id="sonos-volume" min="0" max="100" />
           </div>
-          <button class="player-library" id="sonos-library" type="button">
-            <i data-lucide="list-music"></i>
-            <span>Izaberi šta svira</span>
-          </button>
         </div>
       </section>
 
@@ -74,9 +71,13 @@
       </section>
 
       <section class="card" id="card-remote">
-        <div class="card-title">Daljinski</div>
+        <div class="remote-head">
+          <div class="card-title">Daljinski</div>
+          <button class="remote-learn" id="remote-learn" type="button">Nauči</button>
+        </div>
         <div class="remote-tabs" id="remote-tabs"></div>
         <div class="remote-pad" id="remote-pad"></div>
+        <div class="remote-status" id="remote-status"></div>
       </section>
 
     </div>
@@ -265,6 +266,6 @@
 </div>
 
 <script src="./config.js"></script>
-<script src="./assets/index.js?v17"></script>
+<script src="./assets/index.js?v18"></script>
 </body>
 </html>

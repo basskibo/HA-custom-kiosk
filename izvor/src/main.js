@@ -209,14 +209,14 @@ function handleMessage(msg) {
   }
 }
 
-function callService(domain, service, entityId, extra) {
+function callService(domain, service, entityId, extra, cb) {
   if (!entityId) return;
   send({
     type: "call_service",
     domain,
     service,
     service_data: Object.assign({ entity_id: entityId }, extra || {}),
-  });
+  }, cb);
 }
 
 // ---------- Pomoćne ----------
@@ -1002,6 +1002,21 @@ const DEFAULT_REMOTES = {
 
 const REMOTES = (CONFIG.remotes && CONFIG.remotes.devices) ? CONFIG.remotes : DEFAULT_REMOTES;
 let remoteIndex = 0;
+let remoteLearning = false;
+
+function remoteStatus(text) {
+  const el = $("remote-status");
+  if (el) el.textContent = text || "";
+}
+
+function remoteErrorText(msg) {
+  const err = msg && msg.error;
+  const text = err ? String(err.message || err) : "nije uspelo";
+  if (text.indexOf("not found") !== -1) {
+    return "Ova komanda još nije naučena. Uključi Nauči, uperi pravi daljinski u Broadlink i pritisni isto dugme.";
+  }
+  return text.slice(0, 160);
+}
 
 function remoteIconName(name) {
   return /^[a-z0-9-]+$/.test(name || "") ? name : "power";
@@ -1040,9 +1055,25 @@ function renderRemote() {
     el.addEventListener("click", function () {
       flash(el);
       const entity = REMOTES.entity || DEFAULT_REMOTES.entity;
-      callService("remote", "send_command", entity, {
-        device: device.device,
-        command: btn.command,
+      const data = { device: device.device, command: [btn.command] };
+      const name = btn.label || btn.command;
+      if (remoteLearning) {
+        remoteStatus("Čekam „" + name + "“ — pritisni to dugme na pravom daljinskom, ka Broadlinku.");
+        callService("remote", "learn_command", entity, Object.assign({ command_type: "ir" }, data), function (msg) {
+          if (msg && msg.success) {
+            remoteLearning = false;
+            const learnBtn = $("remote-learn");
+            if (learnBtn) learnBtn.classList.remove("active");
+            remoteStatus("Naučeno: " + name + ". Sad dugme šalje komandu.");
+          } else {
+            remoteStatus(remoteErrorText(msg));
+          }
+        });
+        return;
+      }
+      callService("remote", "send_command", entity, data, function (msg) {
+        if (msg && msg.success) remoteStatus("Poslato: " + name);
+        else remoteStatus(remoteErrorText(msg));
       });
     });
     pad.appendChild(el);
@@ -1096,6 +1127,14 @@ function wireControls() {
     });
   }
   on("sonos-library", openPicker);
+  on("remote-learn", () => {
+    remoteLearning = !remoteLearning;
+    const learnBtn = $("remote-learn");
+    if (learnBtn) learnBtn.classList.toggle("active", remoteLearning);
+    remoteStatus(remoteLearning
+      ? "Režim učenja. Pritisni dugme ovde, pa isto dugme na pravom daljinskom."
+      : "");
+  });
   on("sonos-picker-close", closePicker);
   on("sonos-picker-backdrop", closePicker);
   on("sonos-picker-back", pickerBack);
