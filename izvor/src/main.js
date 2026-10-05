@@ -143,8 +143,8 @@ Object.keys(E).forEach((key) => {
 
 let ws = null;
 let msgId = 1;
-let forecastSubId = null;
-let currentForecastType = "daily";
+let hourlySubId = null;
+let dailySubId = null;
 const pending = {};
 
 function icon() {
@@ -193,8 +193,9 @@ function handleMessage(msg) {
     const data = msg.event.data;
     states[data.entity_id] = data.new_state;
     applyState(data.entity_id, data.new_state);
-  } else if (msg.type === "event" && msg.id === forecastSubId && msg.event && msg.event.forecast) {
-    renderForecast(msg.event.forecast);
+  } else if (msg.type === "event" && msg.event && msg.event.forecast) {
+    if (msg.id === hourlySubId) renderHourly(msg.event.forecast);
+    else if (msg.id === dailySubId) renderDailyHiLo(msg.event.forecast);
   } else if (msg.type === "result") {
     if (pending[msg.id]) {
       const cb = pending[msg.id];
@@ -245,7 +246,6 @@ function pad2(n) {
 }
 
 const DAYS_FULL = ["Nedelja", "Ponedeljak", "Utorak", "Sreda", "Četvrtak", "Petak", "Subota"];
-const DAYS_SHORT = ["Ned", "Pon", "Uto", "Sre", "Čet", "Pet", "Sub"];
 
 function haUrl(path) {
   if (!path) return null;
@@ -288,7 +288,7 @@ function applyState(entityId, state) {
 
   switch (key) {
     case "weather":
-      setText("weather-temp", (attr.temperature != null ? Math.round(attr.temperature) : "--") + "°");
+      setText("weather-temp", (attr.temperature != null ? formatTemp(attr.temperature, 1) : "--") + "°");
       setText("weather-desc", weatherText(s));
       $("weather-icon-wrap").innerHTML = `<i data-lucide="${weatherIconName(s)}"></i>`;
       icon();
@@ -540,52 +540,94 @@ function weatherIconName(state) {
   return map[state] || "cloud-sun";
 }
 
+function formatTemp(n, digits) {
+  const v = Number(n);
+  if (n == null || n === "" || isNaN(v)) return "--";
+  if (digits === 0) return String(Math.round(v));
+  return (Math.round(v * 10) / 10).toFixed(1);
+}
+
+function precipText(f) {
+  if (f.precipitation_probability != null && f.precipitation_probability !== "") {
+    return Math.round(Number(f.precipitation_probability)) + "%";
+  }
+  if (f.precipitation == null || f.precipitation === "") return "";
+  const p = Number(f.precipitation);
+  if (isNaN(p) || p <= 0) return "0 mm";
+  if (p < 10) return (Math.round(p * 10) / 10).toFixed(1) + " mm";
+  return Math.round(p) + " mm";
+}
+
+function paintWeatherMeta(hour) {
+  if (!hour) return;
+  const parts = [];
+  if (hour.apparent_temperature != null) parts.push("Oseća se " + formatTemp(hour.apparent_temperature, 0) + "°");
+  if (hour.humidity != null) parts.push("vlažnost " + Math.round(Number(hour.humidity)) + "%");
+  setText("weather-meta", parts.join(" · "));
+}
+
+function upcomingHours(forecast, count) {
+  const cutoff = Date.now() - 50 * 60 * 1000;
+  const out = [];
+  for (let i = 0; i < forecast.length; i++) {
+    const d = new Date(forecast[i].datetime);
+    if (isNaN(d.getTime()) || d.getTime() < cutoff) continue;
+    out.push(forecast[i]);
+    if (out.length >= count) break;
+  }
+  if (!out.length) {
+    for (let i = 0; i < forecast.length && out.length < count; i++) out.push(forecast[i]);
+  }
+  return out;
+}
+
 // Prognoza ide kroz WebSocket (weather/subscribe_forecast) - ne traži CORS.
-function subscribeForecastType(type) {
-  currentForecastType = type;
-  return send({ type: "weather/subscribe_forecast", entity_id: E.weather, forecast_type: type }, (msg) => {
-    if (!msg.success) {
-      console.warn(`[weather] subscribe_forecast (${type}) nije podržan:`, msg.error);
-      if (type === "daily") forecastSubId = subscribeForecastType("hourly");
-    }
+function subscribeForecast() {
+  if (!E.weather) return;
+  hourlySubId = send({ type: "weather/subscribe_forecast", entity_id: E.weather, forecast_type: "hourly" }, (msg) => {
+    if (!msg.success) console.warn("[weather] hourly nije podržan:", msg.error);
+  });
+  dailySubId = send({ type: "weather/subscribe_forecast", entity_id: E.weather, forecast_type: "daily" }, (msg) => {
+    if (!msg.success) console.warn("[weather] daily nije podržan:", msg.error);
   });
 }
 
-function subscribeForecast() {
-  if (!E.weather) return;
-  forecastSubId = subscribeForecastType("daily");
+function renderDailyHiLo(forecast) {
+  if (!forecast || !forecast.length) return;
+  const today = new Date().toDateString();
+  let day = null;
+  for (let i = 0; i < forecast.length; i++) {
+    const d = new Date(forecast[i].datetime);
+    if (!isNaN(d.getTime()) && d.toDateString() === today) {
+      day = forecast[i];
+      break;
+    }
+  }
+  if (!day) day = forecast[0];
+  const hi = day.temperature != null ? Math.round(Number(day.temperature)) + "°" : "";
+  const lo = day.templow != null ? Math.round(Number(day.templow)) + "°" : "";
+  if (hi && lo) setText("weather-hilo", hi + " / " + lo);
+  else if (hi) setText("weather-hilo", hi);
 }
 
-function renderForecast(forecast) {
+function renderHourly(forecast) {
   const el = $("forecast");
   if (!el || !forecast || !forecast.length) return;
-  const hourly = currentForecastType === "hourly";
-  const today = new Date();
-
-  const first = forecast[0];
-  if (first && first.temperature != null) {
-    const lo = first.templow != null ? ` / ${Math.round(first.templow)}°` : "";
-    setText("weather-hilo", `${Math.round(first.temperature)}°${lo}`);
+  const hours = upcomingHours(forecast, 6);
+  paintWeatherMeta(hours[0]);
+  let html = "";
+  for (let i = 0; i < hours.length; i++) {
+    const f = hours[i];
+    const d = new Date(f.datetime);
+    const label = isNaN(d.getTime()) ? "" : pad2(d.getHours()) + ":00";
+    html += '<div class="forecast-hour">'
+      + '<div class="forecast-hour-time">' + label + "</div>"
+      + '<div class="forecast-hour-temp">' + formatTemp(f.temperature, 1) + "°</div>"
+      + '<div class="forecast-hour-icon"><i data-lucide="' + weatherIconName(f.condition) + '"></i></div>'
+      + '<div class="forecast-hour-precip">' + precipText(f) + "</div>"
+      + "</div>";
   }
-
-  el.innerHTML = forecast
-    .slice(0, 5)
-    .map((f) => {
-      const d = new Date(f.datetime);
-      let label;
-      if (hourly) label = `${pad2(d.getHours())}:00`;
-      else if (d.toDateString() === today.toDateString()) label = "Danas";
-      else label = DAYS_SHORT[d.getDay()];
-      const temp = f.temperature != null ? Math.round(f.temperature) + "°" : "--";
-      const low = f.templow != null ? Math.round(f.templow) + "°" : "";
-      return `<div class="forecast-row">
-        <span class="forecast-label">${label}</span>
-        <span class="forecast-icon"><i data-lucide="${weatherIconName(f.condition)}"></i></span>
-        <span class="forecast-low">${low}</span>
-        <span class="forecast-temp">${temp}</span>
-      </div>`;
-    })
-    .join("");
+  el.innerHTML = html;
   icon();
 }
 
