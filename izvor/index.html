@@ -196,7 +196,7 @@
     <!-- ================= KOLONA 3: sat + kamera + status ================= -->
     <div class="col">
 
-      <section class="card card-camera" data-screen="camera">
+      <section class="card card-camera" data-screen="home camera">
         <div class="camera-frame">
           <img id="camera-feed" class="camera-feed" alt="Dnevna soba">
           <div class="camera-placeholder" id="camera-fallback">
@@ -210,11 +210,11 @@
             <button class="glance-btn" id="cam-audio" aria-label="Snimanje zvuka"><i data-lucide="mic"></i></button>
           </div>
         </div>
-        <div class="ptz-bar">
-          <button class="ptz-btn" id="ptz-left" aria-label="Levo"><i data-lucide="arrow-left"></i><span>Levo</span></button>
-          <button class="ptz-btn" id="ptz-up" aria-label="Gore"><i data-lucide="arrow-up"></i><span>Gore</span></button>
-          <button class="ptz-btn" id="ptz-down" aria-label="Dole"><i data-lucide="arrow-down"></i><span>Dole</span></button>
-          <button class="ptz-btn" id="ptz-right" aria-label="Desno"><i data-lucide="arrow-right"></i><span>Desno</span></button>
+        <div class="ptz-pad">
+          <button class="ptz-btn ptz-up" id="ptz-up" aria-label="Gore"><i data-lucide="arrow-up"></i><span>Gore</span></button>
+          <button class="ptz-btn ptz-left" id="ptz-left" aria-label="Levo"><i data-lucide="arrow-left"></i><span>Levo</span></button>
+          <button class="ptz-btn ptz-right" id="ptz-right" aria-label="Desno"><i data-lucide="arrow-right"></i><span>Desno</span></button>
+          <button class="ptz-btn ptz-down" id="ptz-down" aria-label="Dole"><i data-lucide="arrow-down"></i><span>Dole</span></button>
         </div>
         <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="cctv"></i></span><span class="entity-row-name">Status</span><span class="entity-row-value" id="cam-status">—</span></div>
         <div class="entity-row"><span class="icon-badge icon-badge-teal"><i data-lucide="hard-drive"></i></span><span class="entity-row-name">Zauzeće memorije</span><span class="entity-row-value" id="cam-storage">—</span></div>

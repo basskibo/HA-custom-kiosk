@@ -1422,8 +1422,13 @@ function pauseCamera() {
   cameraSrc = "";
 }
 
+function cameraOnScreen() {
+  const card = document.querySelector(".card-camera");
+  return !!(card && !card.classList.contains("screen-off"));
+}
+
 function showCamera() {
-  if (document.body.getAttribute("data-view") !== "camera") return;
+  if (!cameraOnScreen()) return;
   const img = $("camera-feed");
   const ph = $("camera-fallback");
   if (!img) return;
@@ -1456,7 +1461,7 @@ function bindCamera() {
     if (ph) ph.classList.add("hidden");
   });
   img.addEventListener("error", () => {
-    if (document.body.getAttribute("data-view") !== "camera") return;
+    if (!cameraOnScreen()) return;
     if (!img.getAttribute("src")) return;
     const ph = $("camera-fallback");
     if (cameraLive === "stream") {
@@ -1490,7 +1495,7 @@ function setView(name) {
   }
   const board = document.querySelector(".cols");
   if (board) board.setAttribute("data-cols", String(visibleCols || 1));
-  if (name === "camera") showCamera();
+  if (cameraOnScreen()) showCamera();
   else pauseCamera();
 }
 
