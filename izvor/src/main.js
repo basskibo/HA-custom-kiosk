@@ -35,10 +35,14 @@ import {
   Heater,
   House,
   Joystick,
+  ChevronLeft,
+  ChevronRight,
+  ListMusic,
   Locate,
   MapPin,
   Mic,
   Moon,
+  Music,
   Pause,
   PlugZap,
   Play,
@@ -58,16 +62,18 @@ import {
   WandSparkles,
   WashingMachine,
   Wind,
+  X,
 } from "lucide";
 
 // Samo ikonice koje stvarno koristimo (manji bundle = brže na starom iPad-u).
 const ICONS = {
   Activity, AirVent, ArrowDown, ArrowDownToLine, ArrowLeft, ArrowRight, ArrowUp, ArrowUpFromLine,
   Battery, BatteryCharging, BellOff, Bot, Camera, Cctv, Cloud, CloudCheck, CloudFog, CloudHail,
-  CloudLightning, CloudRain, CloudRainWind, CloudSnow, CloudSun, DatabaseBackup, Droplets,
-  ExternalLink, Fan, Funnel, Gamepad2, Globe, HardDrive, Heater, House, Joystick, Locate, MapPin,
-  Mic, Moon, Pause, PlugZap, Play, Power, Router, SkipBack, SkipForward, Snowflake, Sparkles,
-  Speaker, Square, Sun, Thermometer, TriangleAlert, Tv, Volume2, WandSparkles, WashingMachine, Wind,
+  ChevronLeft, ChevronRight, CloudLightning, CloudRain, CloudRainWind, CloudSnow, CloudSun,
+  DatabaseBackup, Droplets, ExternalLink, Fan, Funnel, Gamepad2, Globe, HardDrive, Heater, House,
+  Joystick, ListMusic, Locate, MapPin, Mic, Moon, Music, Pause, PlugZap, Play, Power, Router,
+  SkipBack, SkipForward, Snowflake, Sparkles, Speaker, Square, Sun, Thermometer, TriangleAlert, Tv,
+  Volume2, WandSparkles, WashingMachine, Wind, X,
 };
 
 const CONFIG = window.CONFIG;
@@ -621,6 +627,208 @@ function hideBanner() {
   $("connection-banner").classList.add("hidden");
 }
 
+// ---------- Sonos: izbor šta svira (biblioteka / favoriti) ----------
+
+let pickerLevel = { id: "", type: "", title: "Biblioteka" };
+const pickerStack = [];
+let pickerItems = [];
+let pickerVisible = [];
+let pickerReq = 0;
+let pickerLoading = false;
+
+function itemPlayable(item) {
+  return !!(item.can_play || item.source || (item.media_content_id && !item.can_expand));
+}
+
+function pickerMessage(text) {
+  const list = $("sonos-picker-list");
+  list.innerHTML = "";
+  const el = document.createElement("div");
+  el.className = "picker-empty";
+  el.textContent = text;
+  list.appendChild(el);
+}
+
+function syncPickerChrome() {
+  setText("sonos-picker-title", pickerLevel.title || "Biblioteka");
+  $("sonos-picker-back").classList.toggle("is-slot", pickerStack.length === 0);
+}
+
+function closePicker() {
+  pickerReq++;
+  $("sonos-picker").classList.add("hidden");
+}
+
+function browseSonos(mediaContentId, mediaContentType, cb) {
+  const payload = {
+    type: "media_player/browse_media",
+    entity_id: E.sonos,
+  };
+  if (mediaContentId) payload.media_content_id = mediaContentId;
+  if (mediaContentType) payload.media_content_type = mediaContentType;
+  return send(payload, cb);
+}
+
+function renderSourceFallback() {
+  const st = states[E.sonos];
+  const sources = st && st.attributes && st.attributes.source_list;
+  if (!sources || !sources.length) {
+    pickerMessage("Sonos nema omiljene ni biblioteku.");
+    return;
+  }
+  pickerItems = sources.map(function (name) {
+    return { title: name, source: name, can_play: true, can_expand: false };
+  });
+  renderPickerList();
+}
+
+function loadPickerLevel() {
+  const req = ++pickerReq;
+  pickerLoading = true;
+  syncPickerChrome();
+  pickerMessage("Učitavam...");
+  const sent = browseSonos(pickerLevel.id, pickerLevel.type, function (msg) {
+    if (req !== pickerReq) return;
+    pickerLoading = false;
+    if (!msg.success || !msg.result) {
+      if (pickerStack.length === 0) renderSourceFallback();
+      else pickerMessage("Ne mogu da učitam ovaj folder.");
+      return;
+    }
+    const children = msg.result.children || [];
+    if (!children.length && pickerStack.length === 0) {
+      renderSourceFallback();
+      return;
+    }
+    pickerItems = children;
+    renderPickerList();
+  });
+  if (sent == null) {
+    pickerLoading = false;
+    pickerMessage("Nema veze sa Home Assistant-om.");
+  }
+}
+
+function openPicker() {
+  pickerStack.length = 0;
+  pickerLevel = { id: "", type: "", title: "Biblioteka" };
+  $("sonos-picker-search").value = "";
+  $("sonos-picker").classList.remove("hidden");
+  loadPickerLevel();
+}
+
+function openPickerFolder(item) {
+  pickerStack.push(pickerLevel);
+  pickerLevel = {
+    id: item.media_content_id || "",
+    type: item.media_content_type || "",
+    title: item.title || "Biblioteka",
+  };
+  $("sonos-picker-search").value = "";
+  loadPickerLevel();
+}
+
+function pickerBack() {
+  const prev = pickerStack.pop();
+  if (!prev) return;
+  pickerLevel = prev;
+  $("sonos-picker-search").value = "";
+  loadPickerLevel();
+}
+
+function playSonosItem(item) {
+  if (item.source) {
+    callService("media_player", "select_source", E.sonos, { source: item.source });
+  } else if (item.media_content_id) {
+    callService("media_player", "play_media", E.sonos, {
+      media_content_id: item.media_content_id,
+      media_content_type: item.media_content_type || "music",
+    });
+  } else {
+    return;
+  }
+  setText("sonos-title", item.title || "Puštam");
+  setText("sonos-sub", "Puštam...");
+  closePicker();
+}
+
+function pickerArt(item) {
+  const art = document.createElement("span");
+  art.className = "picker-art";
+  const thumb = item.thumbnail ? haUrl(item.thumbnail) : "";
+  if (thumb) {
+    art.style.backgroundImage = 'url("' + String(thumb).replace(/"/g, "") + '")';
+  } else {
+    const iconName = item.can_expand ? "list-music" : "music";
+    art.innerHTML = '<i data-lucide="' + iconName + '"></i>';
+  }
+  return art;
+}
+
+function buildPickerRow(item, index) {
+  const row = document.createElement("div");
+  row.className = "picker-row";
+  row.setAttribute("data-idx", String(index));
+
+  const main = document.createElement("button");
+  main.type = "button";
+  main.className = "picker-main";
+  main.appendChild(pickerArt(item));
+  const title = document.createElement("span");
+  title.className = "picker-row-title";
+  title.textContent = item.title || "Bez naslova";
+  main.appendChild(title);
+  row.appendChild(main);
+
+  const playable = itemPlayable(item);
+  const side = document.createElement("button");
+  side.type = "button";
+  side.className = "picker-side" + (playable ? "" : " ghost");
+  if (playable) side.classList.add("picker-play");
+  side.innerHTML = '<i data-lucide="' + (item.can_expand && !playable ? "chevron-right" : "play") + '"></i>';
+  side.setAttribute("aria-label", playable ? "Pusti" : "Otvori");
+  row.appendChild(side);
+  return row;
+}
+
+function renderPickerList() {
+  if (pickerLoading) return;
+  const raw = ($("sonos-picker-search").value || "").trim().toLowerCase();
+  pickerVisible = pickerItems.filter(function (it) {
+    return !raw || (it.title || "").toLowerCase().indexOf(raw) !== -1;
+  });
+  const list = $("sonos-picker-list");
+  list.innerHTML = "";
+  if (!pickerVisible.length) {
+    pickerMessage(pickerItems.length ? "Nema rezultata" : "Nema ništa ovde");
+    return;
+  }
+  for (let i = 0; i < pickerVisible.length; i++) {
+    list.appendChild(buildPickerRow(pickerVisible[i], i));
+  }
+  icon();
+}
+
+function onPickerClick(ev) {
+  let node = ev.target;
+  let playBtn = null;
+  let row = null;
+  const list = $("sonos-picker-list");
+  while (node && node !== list) {
+    if (node.classList && node.classList.contains("picker-play")) playBtn = node;
+    if (node.classList && node.classList.contains("picker-row")) row = node;
+    node = node.parentNode;
+  }
+  if (!row) return;
+  const item = pickerVisible[parseInt(row.getAttribute("data-idx"), 10)];
+  if (!item) return;
+  if (playBtn || (!item.can_expand && itemPlayable(item))) {
+    playSonosItem(item);
+    return;
+  }
+  if (item.can_expand) openPickerFolder(item);
+}
+
 // ---------- Kontrole ----------
 
 function on(id, fn) {
@@ -666,6 +874,12 @@ function wireControls() {
       if (action === "prev") callService("media_player", "media_previous_track", E.sonos);
     });
   }
+  on("sonos-library", openPicker);
+  on("sonos-picker-close", closePicker);
+  on("sonos-picker-backdrop", closePicker);
+  on("sonos-picker-back", pickerBack);
+  $("sonos-picker-search").addEventListener("input", renderPickerList);
+  $("sonos-picker-list").addEventListener("click", onPickerClick);
 
   // Usisivač
   on("vacuum-startpause", () => {

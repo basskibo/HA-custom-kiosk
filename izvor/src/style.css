@@ -201,6 +201,93 @@ button { -webkit-appearance: none; appearance: none; }
 .player-volume input[type="range"] { -webkit-flex: 1; flex: 1; min-width: 0; }
 input[type="range"] { accent-color: var(--amber); }
 
+.player-library {
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+  width: 100%; margin-top: 14px; height: 42px; border: none; border-radius: 999px;
+  background: var(--amber); color: #1a1405; font-weight: 700; font-size: 14px; cursor: pointer;
+}
+.player-library > * + * { margin-left: 8px; }
+.player-library svg { width: 16px; height: 16px; }
+.player-library:active { -webkit-transform: scale(0.98); transform: scale(0.98); }
+
+/* ---------- Sonos biblioteka ---------- */
+.picker {
+  position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1100;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+}
+.picker-backdrop { position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: rgba(0, 0, 0, 0.62); }
+.picker-sheet {
+  position: relative; width: 460px; max-width: calc(100% - 32px); height: 78%;
+  background: #1b1c22; border-radius: 24px;
+  display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column;
+  overflow: hidden;
+  -webkit-box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+.picker-head {
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  padding: 12px 10px 6px; -webkit-flex-shrink: 0; flex-shrink: 0;
+}
+.picker-title {
+  -webkit-flex: 1; flex: 1; min-width: 0; text-align: center;
+  font-weight: 700; font-size: 16px; padding: 0 8px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.picker-icon-btn {
+  width: 40px; height: 40px; border-radius: 50%; border: none; padding: 0;
+  background: var(--card-soft); color: var(--text);
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center; cursor: pointer;
+  -webkit-flex-shrink: 0; flex-shrink: 0;
+}
+.picker-icon-btn svg { width: 20px; height: 20px; }
+.picker-icon-btn.is-slot { visibility: hidden; }
+.picker-search {
+  margin: 6px 16px 8px; height: 42px; border: none; border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07); color: var(--text);
+  padding: 0 14px; font-size: 16px; -webkit-flex-shrink: 0; flex-shrink: 0;
+}
+.picker-search::-webkit-input-placeholder { color: var(--text-dimmer); }
+.picker-search::placeholder { color: var(--text-dimmer); }
+.picker-list {
+  -webkit-flex: 1; flex: 1; min-height: 0; overflow-y: auto;
+  -webkit-overflow-scrolling: touch; padding: 4px 8px 14px;
+}
+.picker-empty { padding: 28px 16px; text-align: center; color: var(--text-dim); font-size: 14px; }
+.picker-row {
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  width: 100%; border-radius: 14px; padding: 6px;
+}
+.picker-row:active { background: rgba(255, 255, 255, 0.06); }
+.picker-main {
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  -webkit-flex: 1; flex: 1; min-width: 0; background: none; border: none; padding: 0;
+  color: inherit; text-align: left; cursor: pointer;
+}
+.picker-main > * + * { margin-left: 12px; }
+.picker-art {
+  width: 44px; height: 44px; border-radius: 10px; -webkit-flex-shrink: 0; flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.06); background-position: center; background-size: cover;
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center; color: var(--amber);
+}
+.picker-art svg { width: 18px; height: 18px; }
+.picker-row-title {
+  -webkit-flex: 1; flex: 1; min-width: 0; font-weight: 600; font-size: 15px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.picker-side {
+  width: 40px; height: 40px; margin-left: 8px; border: none; border-radius: 50%; padding: 0;
+  background: var(--amber); color: #1a1405;
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center; cursor: pointer;
+  -webkit-flex-shrink: 0; flex-shrink: 0;
+}
+.picker-side svg { width: 16px; height: 16px; }
+.picker-side.ghost { background: transparent; color: var(--text-dim); }
+
 /* ---------- Prečišćivač ---------- */
 .purifier-switch {
   position: relative; width: 44px; height: 26px; -webkit-flex-shrink: 0; flex-shrink: 0;

@@ -52,6 +52,10 @@
             <i data-lucide="volume-2"></i>
             <input type="range" id="sonos-volume" min="0" max="100" />
           </div>
+          <button class="player-library" id="sonos-library" type="button">
+            <i data-lucide="list-music"></i>
+            <span>Izaberi šta svira</span>
+          </button>
         </div>
       </section>
 
@@ -237,6 +241,19 @@
       </div>
 
     </div>
+  </div>
+</div>
+
+<div id="sonos-picker" class="picker hidden">
+  <div class="picker-backdrop" id="sonos-picker-backdrop"></div>
+  <div class="picker-sheet" role="dialog" aria-modal="true" aria-labelledby="sonos-picker-title">
+    <div class="picker-head">
+      <button class="picker-icon-btn" id="sonos-picker-back" type="button" aria-label="Nazad"><i data-lucide="chevron-left"></i></button>
+      <div class="picker-title" id="sonos-picker-title">Biblioteka</div>
+      <button class="picker-icon-btn" id="sonos-picker-close" type="button" aria-label="Zatvori"><i data-lucide="x"></i></button>
+    </div>
+    <input class="picker-search" id="sonos-picker-search" type="search" placeholder="Pretraži" autocomplete="off" />
+    <div class="picker-list" id="sonos-picker-list"></div>
   </div>
 </div>
 
