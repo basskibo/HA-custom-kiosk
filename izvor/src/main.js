@@ -41,11 +41,13 @@ import {
   Locate,
   MapPin,
   Mic,
+  Minus,
   Moon,
   Music,
   Pause,
   PlugZap,
   Play,
+  Plus,
   Power,
   Router,
   SkipBack,
@@ -71,7 +73,7 @@ const ICONS = {
   Battery, BatteryCharging, BellOff, Bot, Camera, Cctv, Cloud, CloudCheck, CloudFog, CloudHail,
   ChevronLeft, ChevronRight, CloudLightning, CloudRain, CloudRainWind, CloudSnow, CloudSun,
   DatabaseBackup, Droplets, ExternalLink, Fan, Funnel, Gamepad2, Globe, HardDrive, Heater, House,
-  Joystick, ListMusic, Locate, MapPin, Mic, Moon, Music, Pause, PlugZap, Play, Power, Router,
+  Joystick, ListMusic, Locate, MapPin, Mic, Minus, Moon, Music, Pause, PlugZap, Play, Plus, Power, Router,
   SkipBack, SkipForward, Snowflake, Sparkles, Speaker, Square, Sun, Thermometer, TriangleAlert, Tv,
   Volume2, WandSparkles, WashingMachine, Wind, X,
 };
@@ -962,6 +964,92 @@ function onPickerClick(ev) {
   if (item.can_expand) openPickerFolder(item);
 }
 
+// ---------- Broadlink daljinski (TV + klima) ----------
+
+const DEFAULT_REMOTES = {
+  entity: "remote.universal_remote",
+  devices: [
+    {
+      id: "tv",
+      title: "TV",
+      device: "tv",
+      buttons: [
+        { label: "Napajanje", command: "power", icon: "power", wide: true },
+        { label: "Jače", command: "volume_up", icon: "plus" },
+        { label: "Tiše", command: "volume_down", icon: "minus" },
+        { label: "Bez zvuka", command: "mute", icon: "volume-2" },
+        { label: "Kanal +", command: "channel_up", icon: "arrow-up" },
+        { label: "Kanal −", command: "channel_down", icon: "arrow-down" },
+        { label: "Izvor", command: "source", icon: "tv" },
+      ],
+    },
+    {
+      id: "klima",
+      title: "Klima",
+      device: "klima",
+      buttons: [
+        { label: "Isključi", command: "iskljuci", icon: "power", wide: true },
+        { label: "20°", command: "ukljuci_20", icon: "thermometer" },
+        { label: "22°", command: "ukljuci_22", icon: "thermometer" },
+        { label: "24°", command: "ukljuci_24", icon: "thermometer" },
+        { label: "26°", command: "ukljuci_26", icon: "thermometer" },
+        { label: "Režim", command: "mode", icon: "wind" },
+        { label: "Ventilator", command: "fan", icon: "fan" },
+      ],
+    },
+  ],
+};
+
+const REMOTES = (CONFIG.remotes && CONFIG.remotes.devices) ? CONFIG.remotes : DEFAULT_REMOTES;
+let remoteIndex = 0;
+
+function remoteIconName(name) {
+  return /^[a-z0-9-]+$/.test(name || "") ? name : "power";
+}
+
+function renderRemote() {
+  const tabs = $("remote-tabs");
+  const pad = $("remote-pad");
+  const device = REMOTES.devices[remoteIndex];
+  if (!tabs || !pad || !device) return;
+
+  tabs.innerHTML = "";
+  for (let i = 0; i < REMOTES.devices.length; i++) {
+    const tab = document.createElement("button");
+    tab.type = "button";
+    tab.className = "remote-tab" + (i === remoteIndex ? " active" : "");
+    tab.textContent = REMOTES.devices[i].title;
+    tab.addEventListener("click", function () {
+      remoteIndex = i;
+      renderRemote();
+    });
+    tabs.appendChild(tab);
+  }
+
+  pad.innerHTML = "";
+  const buttons = device.buttons || [];
+  for (let i = 0; i < buttons.length; i++) {
+    const btn = buttons[i];
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "remote-key" + (btn.wide ? " wide" : "");
+    el.innerHTML = '<i data-lucide="' + remoteIconName(btn.icon) + '"></i>';
+    const label = document.createElement("span");
+    label.textContent = btn.label || btn.command;
+    el.appendChild(label);
+    el.addEventListener("click", function () {
+      flash(el);
+      const entity = REMOTES.entity || DEFAULT_REMOTES.entity;
+      callService("remote", "send_command", entity, {
+        device: device.device,
+        command: btn.command,
+      });
+    });
+    pad.appendChild(el);
+  }
+  icon();
+}
+
 // ---------- Kontrole ----------
 
 function on(id, fn) {
@@ -1046,6 +1134,7 @@ function wireControls() {
 // ---------- Start ----------
 
 renderPeople();
+renderRemote();
 wireControls();
 icon();
 tickClock();

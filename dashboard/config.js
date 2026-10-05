@@ -22,6 +22,19 @@ window.CONFIG = {
   //   entities: { weather: "weather.forecast_home" },
   entities: {},
 
+  // Broadlink daljinski (remote.universal_remote). Dugmad šalju
+  // remote.send_command. Imena device/command moraju biti ista kao
+  // naučene komande u HA. Ako su kod tebe drugačija, zameni ovde
+  // i samo osveži stranicu — ne mora novi build.
+  // remotes: {
+  //   entity: "remote.universal_remote",
+  //   devices: [
+  //     { id: "tv", title: "TV", device: "tv", buttons: [
+  //       { label: "Napajanje", command: "power", icon: "power", wide: true },
+  //     ]},
+  //   ],
+  // },
+
   // LJUDI (kartica sa satom: "Ime · Kod kuće/Odsutan").
   // Radi samo ako person entitet ima pracenje lokacije (HA Companion app).
   people: [
