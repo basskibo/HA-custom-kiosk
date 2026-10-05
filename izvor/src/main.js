@@ -629,12 +629,13 @@ function hideBanner() {
 
 // ---------- Sonos: izbor šta svira (biblioteka / favoriti) ----------
 
-let pickerLevel = { id: "", type: "", title: "Biblioteka" };
+let pickerLevel = { mode: "favorites", id: "", type: "", title: "Sonos favoriti" };
 const pickerStack = [];
 let pickerItems = [];
 let pickerVisible = [];
 let pickerReq = 0;
 let pickerLoading = false;
+let libraryAvailable = false;
 
 function itemPlayable(item) {
   return !!(item.can_play || item.source || (item.media_content_id && !item.can_expand));
@@ -650,7 +651,7 @@ function pickerMessage(text) {
 }
 
 function syncPickerChrome() {
-  setText("sonos-picker-title", pickerLevel.title || "Biblioteka");
+  setText("sonos-picker-title", pickerLevel.title || "Sonos favoriti");
   $("sonos-picker-back").classList.toggle("is-slot", pickerStack.length === 0);
 }
 
@@ -664,16 +665,31 @@ function browseSonos(mediaContentId, mediaContentType, cb) {
     type: "media_player/browse_media",
     entity_id: E.sonos,
   };
-  if (mediaContentId) payload.media_content_id = mediaContentId;
-  if (mediaContentType) payload.media_content_type = mediaContentType;
+  // Prazan id se mora poslati: bez njega HA vrati ceo media browser
+  // (kamere, TTS, DLNA), a ne Sonos favorite.
+  if (mediaContentId != null) payload.media_content_id = mediaContentId;
+  if (mediaContentType != null) payload.media_content_type = mediaContentType;
   return send(payload, cb);
+}
+
+function sonosChildren(msg) {
+  const children = (msg && msg.success && msg.result && msg.result.children) || [];
+  const kept = [];
+  for (let i = 0; i < children.length; i++) {
+    const id = children[i].media_content_id || "";
+    if (id.indexOf("media-source://") === 0) continue;
+    kept.push(children[i]);
+  }
+  return kept;
 }
 
 function renderSourceFallback() {
   const st = states[E.sonos];
   const sources = st && st.attributes && st.attributes.source_list;
+  pickerLevel = { mode: "sources", id: "", type: "", title: "Sonos favoriti" };
+  syncPickerChrome();
   if (!sources || !sources.length) {
-    pickerMessage("Sonos nema omiljene ni biblioteku.");
+    pickerMessage("Sonos nema sačuvane favorite.");
     return;
   }
   pickerItems = sources.map(function (name) {
@@ -682,27 +698,89 @@ function renderSourceFallback() {
   renderPickerList();
 }
 
+function loadFlatFavorites() {
+  const req = ++pickerReq;
+  pickerLoading = true;
+  pickerLevel = { mode: "favorites", id: "", type: "favorites", title: "Sonos favoriti" };
+  syncPickerChrome();
+  pickerMessage("Učitavam Sonos favorite...");
+  const sent = browseSonos("", "favorites", function (msg) {
+    if (req !== pickerReq) return;
+    const folders = sonosChildren(msg);
+    if (!msg.success || !folders.length) {
+      pickerLoading = false;
+      if (libraryAvailable) {
+        pickerLevel = { mode: "browse", id: "", type: "library", title: "Muzička biblioteka" };
+        loadPickerLevel();
+      } else {
+        renderSourceFallback();
+      }
+      return;
+    }
+    const playable = [];
+    const expandable = [];
+    for (let i = 0; i < folders.length; i++) {
+      if (folders[i].can_expand) expandable.push(folders[i]);
+      else playable.push(folders[i]);
+    }
+    if (!expandable.length) {
+      pickerLoading = false;
+      pickerItems = playable;
+      renderPickerList();
+      return;
+    }
+    let left = expandable.length;
+    function finished() {
+      left--;
+      if (left > 0 || req !== pickerReq) return;
+      pickerLoading = false;
+      playable.sort(function (a, b) {
+        return (a.title || "").localeCompare(b.title || "", "sr");
+      });
+      pickerItems = playable;
+      renderPickerList();
+    }
+    for (let i = 0; i < expandable.length; i++) {
+      const folder = expandable[i];
+      const sentSub = browseSonos(folder.media_content_id || "", folder.media_content_type || "favorites_folder", function (sub) {
+        if (req !== pickerReq) return;
+        const kids = sonosChildren(sub);
+        for (let k = 0; k < kids.length; k++) playable.push(kids[k]);
+        finished();
+      });
+      if (sentSub == null) finished();
+    }
+  });
+  if (sent == null) {
+    pickerLoading = false;
+    pickerMessage("Nema veze sa Home Assistant-om.");
+  }
+}
+
 function loadPickerLevel() {
   const req = ++pickerReq;
   pickerLoading = true;
   syncPickerChrome();
   pickerMessage("Učitavam...");
-  const sent = browseSonos(pickerLevel.id, pickerLevel.type, function (msg) {
-    if (req !== pickerReq) return;
-    pickerLoading = false;
-    if (!msg.success || !msg.result) {
-      if (pickerStack.length === 0) renderSourceFallback();
-      else pickerMessage("Ne mogu da učitam ovaj folder.");
-      return;
+  const sent = browseSonos(
+    pickerLevel.id != null ? pickerLevel.id : null,
+    pickerLevel.type != null ? pickerLevel.type : null,
+    function (msg) {
+      if (req !== pickerReq) return;
+      pickerLoading = false;
+      if (!msg.success || !msg.result) {
+        pickerMessage("Ne mogu da učitam ovaj folder.");
+        return;
+      }
+      const children = sonosChildren(msg);
+      if (!children.length) {
+        pickerMessage("Nema ništa ovde");
+        return;
+      }
+      pickerItems = children;
+      renderPickerList();
     }
-    const children = msg.result.children || [];
-    if (!children.length && pickerStack.length === 0) {
-      renderSourceFallback();
-      return;
-    }
-    pickerItems = children;
-    renderPickerList();
-  });
+  );
   if (sent == null) {
     pickerLoading = false;
     pickerMessage("Nema veze sa Home Assistant-om.");
@@ -711,18 +789,65 @@ function loadPickerLevel() {
 
 function openPicker() {
   pickerStack.length = 0;
-  pickerLevel = { id: "", type: "", title: "Biblioteka" };
+  libraryAvailable = false;
+  pickerLevel = { mode: "favorites", id: "", type: "favorites", title: "Sonos favoriti" };
   $("sonos-picker-search").value = "";
   $("sonos-picker").classList.remove("hidden");
+  const req = ++pickerReq;
+  pickerLoading = true;
+  syncPickerChrome();
+  pickerMessage("Učitavam Sonos...");
+  const sent = browseSonos(null, null, function (msg) {
+    if (req !== pickerReq) return;
+    const children = sonosChildren(msg);
+    for (let i = 0; i < children.length; i++) {
+      if (children[i].media_content_type === "library") libraryAvailable = true;
+    }
+    let hasFav = false;
+    for (let i = 0; i < children.length; i++) {
+      if (children[i].media_content_type === "favorites") hasFav = true;
+    }
+    if (!msg.success) {
+      pickerLoading = false;
+      renderSourceFallback();
+      return;
+    }
+    if (hasFav) {
+      loadFlatFavorites();
+      return;
+    }
+    if (libraryAvailable) {
+      pickerLevel = { mode: "browse", id: "", type: "library", title: "Muzička biblioteka" };
+      loadPickerLevel();
+      return;
+    }
+    pickerLoading = false;
+    renderSourceFallback();
+  });
+  if (sent == null) {
+    pickerLoading = false;
+    pickerMessage("Nema veze sa Home Assistant-om.");
+  }
+}
+
+function openLibrary() {
+  pickerStack.push({ mode: "favorites", id: "", type: "favorites", title: "Sonos favoriti" });
+  pickerLevel = { mode: "browse", id: "", type: "library", title: "Muzička biblioteka" };
+  $("sonos-picker-search").value = "";
   loadPickerLevel();
 }
 
 function openPickerFolder(item) {
+  if (item.library) {
+    openLibrary();
+    return;
+  }
   pickerStack.push(pickerLevel);
   pickerLevel = {
-    id: item.media_content_id || "",
+    mode: "browse",
+    id: item.media_content_id != null ? item.media_content_id : "",
     type: item.media_content_type || "",
-    title: item.title || "Biblioteka",
+    title: item.title || "Sonos",
   };
   $("sonos-picker-search").value = "";
   loadPickerLevel();
@@ -733,7 +858,8 @@ function pickerBack() {
   if (!prev) return;
   pickerLevel = prev;
   $("sonos-picker-search").value = "";
-  loadPickerLevel();
+  if (prev.mode === "favorites") loadFlatFavorites();
+  else loadPickerLevel();
 }
 
 function playSonosItem(item) {
@@ -797,6 +923,9 @@ function renderPickerList() {
   pickerVisible = pickerItems.filter(function (it) {
     return !raw || (it.title || "").toLowerCase().indexOf(raw) !== -1;
   });
+  if (pickerLevel.mode === "favorites" && libraryAvailable && (!raw || "muzička biblioteka".indexOf(raw) !== -1)) {
+    pickerVisible = [{ title: "Muzička biblioteka", library: true, can_expand: true, can_play: false }].concat(pickerVisible);
+  }
   const list = $("sonos-picker-list");
   list.innerHTML = "";
   if (!pickerVisible.length) {
@@ -822,6 +951,10 @@ function onPickerClick(ev) {
   if (!row) return;
   const item = pickerVisible[parseInt(row.getAttribute("data-idx"), 10)];
   if (!item) return;
+  if (item.library) {
+    openLibrary();
+    return;
+  }
   if (playBtn || (!item.can_expand && itemPlayable(item))) {
     playSonosItem(item);
     return;
