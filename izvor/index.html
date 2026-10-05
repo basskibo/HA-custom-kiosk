@@ -58,6 +58,16 @@
         </div>
       </section>
 
+      <section class="card" id="card-remote" data-screen="home media klima">
+        <div class="remote-head">
+          <div class="card-title">Remote</div>
+          <button class="remote-learn" id="remote-learn" type="button">Learn</button>
+        </div>
+        <div class="remote-tabs" id="remote-tabs"></div>
+        <div class="remote-pad" id="remote-pad"></div>
+        <div class="remote-status" id="remote-status"></div>
+      </section>
+
       <section class="card card-player" id="card-tv" data-screen="media">
         <div class="player-bg" id="tv-bg"></div>
         <div class="player-content">
@@ -69,16 +79,6 @@
           <div class="player-title" id="tv-title">—</div>
           <div class="player-sub" id="tv-sub">—</div>
         </div>
-      </section>
-
-      <section class="card" id="card-remote" data-screen="media klima">
-        <div class="remote-head">
-          <div class="card-title">Remote</div>
-          <button class="remote-learn" id="remote-learn" type="button">Learn</button>
-        </div>
-        <div class="remote-tabs" id="remote-tabs"></div>
-        <div class="remote-pad" id="remote-pad"></div>
-        <div class="remote-status" id="remote-status"></div>
       </section>
 
     </div>
@@ -223,16 +223,16 @@
         </div>
       </section>
 
-      <section class="card card-backup" data-screen="house">
+      <section class="card card-backup" data-screen="home house">
         <span class="icon-badge icon-badge-gold icon-badge-lg"><i data-lucide="database-backup"></i></span>
         <div><span class="status-tile-label">Server backup</span><span class="status-tile-value" id="home-backup-server">—</span></div>
       </section>
-      <section class="card card-backup" data-screen="house">
+      <section class="card card-backup" data-screen="home house">
         <span class="icon-badge icon-badge-gold icon-badge-lg"><i data-lucide="cloud-check"></i></span>
         <div><span class="status-tile-label">HA backup</span><span class="status-tile-value" id="home-backup-ha">—</span></div>
       </section>
 
-      <div class="status-grid" data-screen="house">
+      <div class="status-grid" data-screen="home house">
         <section class="card status-tile">
           <span class="icon-badge icon-badge-gold"><i data-lucide="arrow-down-to-line"></i></span>
           <div><span class="status-tile-label">Download</span><span class="status-tile-value" id="home-net-down">—</span></div>
@@ -249,6 +249,9 @@
           <span class="icon-badge icon-badge-gold"><i data-lucide="router"></i></span>
           <div><span class="status-tile-label">External IP</span><span class="status-tile-value" id="home-net-ip">—</span></div>
         </section>
+      </div>
+
+      <div class="status-grid" data-screen="house">
         <section class="card status-tile">
           <span class="icon-badge icon-badge-gold"><i data-lucide="gamepad-2"></i></span>
           <div><span class="status-tile-label">Xbox</span><span class="status-tile-value" id="home-xbox-status">—</span></div>
