@@ -34,6 +34,7 @@ import {
   HardDrive,
   Heater,
   House,
+  Info,
   Joystick,
   ChevronLeft,
   ChevronRight,
@@ -73,7 +74,7 @@ const ICONS = {
   Battery, BatteryCharging, BellOff, Bot, Camera, Cctv, Cloud, CloudCheck, CloudFog, CloudHail,
   ChevronLeft, ChevronRight, CloudLightning, CloudRain, CloudRainWind, CloudSnow, CloudSun,
   DatabaseBackup, Droplets, ExternalLink, Fan, Funnel, Gamepad2, Globe, HardDrive, Heater, House,
-  Joystick, ListMusic, Locate, MapPin, Mic, Minus, Moon, Music, Pause, PlugZap, Play, Plus, Power, Router,
+  Info, Joystick, ListMusic, Locate, MapPin, Mic, Minus, Moon, Music, Pause, PlugZap, Play, Plus, Power, Router,
   SkipBack, SkipForward, Snowflake, Sparkles, Speaker, Square, Sun, Thermometer, TriangleAlert, Tv,
   Volume2, WandSparkles, WashingMachine, Wind, X,
 };
@@ -1354,6 +1355,15 @@ function wireControls() {
   $("sonos-picker-list").addEventListener("click", onPickerClick);
 
   // Usisivač
+  on("vacuum-info", () => {
+    const card = document.querySelector(".card-vacuum");
+    const btn = $("vacuum-info");
+    if (!card || !btn) return;
+    const open = !card.classList.contains("details-open");
+    card.classList.toggle("details-open", open);
+    btn.classList.toggle("on", open);
+    btn.setAttribute("aria-pressed", open ? "true" : "false");
+  });
   on("vacuum-startpause", () => {
     const cleaning = states[E.vacuum] && states[E.vacuum].state === "cleaning";
     callService("vacuum", cleaning ? "pause" : "start", E.vacuum);

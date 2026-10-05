@@ -144,15 +144,18 @@
       </section>
 
       <section class="card card-vacuum" data-screen="home clean">
-        <div class="card-title">Robot vacuum</div>
+        <div class="vacuum-head">
+          <div class="card-title">Robot vacuum</div>
+          <button class="vacuum-info" id="vacuum-info" type="button" aria-label="More info" aria-pressed="false"><i data-lucide="info"></i></button>
+        </div>
 
-        <div class="entity-row"><span class="icon-badge icon-badge-blue"><i data-lucide="droplets"></i></span><span class="entity-row-name">Mop</span><span class="entity-row-value" id="vacuum-mop">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-blue"><i data-lucide="moon"></i></span><span class="entity-row-name">Sleep</span><span class="entity-row-value" id="vacuum-sleep">—</span></div>
+        <div class="entity-row vacuum-extra"><span class="icon-badge icon-badge-blue"><i data-lucide="droplets"></i></span><span class="entity-row-name">Mop</span><span class="entity-row-value" id="vacuum-mop">—</span></div>
+        <div class="entity-row vacuum-extra"><span class="icon-badge icon-badge-blue"><i data-lucide="moon"></i></span><span class="entity-row-name">Sleep</span><span class="entity-row-value" id="vacuum-sleep">—</span></div>
         <div class="entity-row"><span class="icon-badge icon-badge-good"><i data-lucide="battery"></i></span><span class="entity-row-name">Battery</span><span class="entity-row-value" id="vacuum-battery">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-good"><i data-lucide="plug-zap"></i></span><span class="entity-row-name">Charging</span><span class="entity-row-value" id="vacuum-charging">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-purple"><i data-lucide="funnel"></i></span><span class="entity-row-name">Filter</span><span class="entity-row-value" id="vacuum-filter">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-purple"><i data-lucide="fan"></i></span><span class="entity-row-name">Main brush</span><span class="entity-row-value" id="vacuum-brush">—</span></div>
-        <div class="entity-row"><span class="icon-badge icon-badge-purple"><i data-lucide="square"></i></span><span class="entity-row-name">Mop pad</span><span class="entity-row-value" id="vacuum-moplife">—</span></div>
+        <div class="entity-row vacuum-extra"><span class="icon-badge icon-badge-good"><i data-lucide="plug-zap"></i></span><span class="entity-row-name">Charging</span><span class="entity-row-value" id="vacuum-charging">—</span></div>
+        <div class="entity-row vacuum-extra"><span class="icon-badge icon-badge-purple"><i data-lucide="funnel"></i></span><span class="entity-row-name">Filter</span><span class="entity-row-value" id="vacuum-filter">—</span></div>
+        <div class="entity-row vacuum-extra"><span class="icon-badge icon-badge-purple"><i data-lucide="fan"></i></span><span class="entity-row-name">Main brush</span><span class="entity-row-value" id="vacuum-brush">—</span></div>
+        <div class="entity-row vacuum-extra"><span class="icon-badge icon-badge-purple"><i data-lucide="square"></i></span><span class="entity-row-name">Mop pad</span><span class="entity-row-value" id="vacuum-moplife">—</span></div>
 
         <div class="tile-block">
           <div class="entity-row">
@@ -169,7 +172,7 @@
           </div>
         </div>
 
-        <div class="select-tiles">
+        <div class="select-tiles vacuum-extra">
           <label class="select-tile">
             <span class="select-tile-top"><span class="icon-badge icon-badge-gold"><i data-lucide="fan"></i></span><span class="select-tile-name">Suction</span></span>
             <select id="sel-suction"></select>
@@ -184,7 +187,7 @@
           </label>
         </div>
 
-        <div class="amber-tiles">
+        <div class="amber-tiles vacuum-extra">
           <button class="amber-tile" id="vacuum-mopwash"><i data-lucide="washing-machine"></i><span>Wash mop</span></button>
           <button class="amber-tile" id="vacuum-dry"><i data-lucide="heater"></i><span>Dry</span></button>
           <button class="amber-tile" id="vacuum-dnd"><i data-lucide="bell-off"></i><span>Do not disturb</span></button>

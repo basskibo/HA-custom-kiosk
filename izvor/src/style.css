@@ -392,7 +392,29 @@ input[type="range"] { accent-color: var(--amber); }
 .chip:active { -webkit-transform: scale(0.96); transform: scale(0.96); }
 
 /* ---------- Usisivač ---------- */
+.vacuum-head { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; }
+.vacuum-head .card-title { -webkit-flex: 1; flex: 1; margin-bottom: 0; }
+.vacuum-info {
+  width: 32px; height: 32px; border: none; border-radius: 50%; cursor: pointer;
+  display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+  background: var(--card-soft); color: var(--text-dim);
+}
+.vacuum-info svg { width: 16px; height: 16px; }
+.vacuum-info.on { background: var(--amber-soft); color: var(--amber); }
+body[data-view="clean"] .vacuum-info { display: none; }
+body[data-view="home"] .card-vacuum:not(.details-open) .vacuum-extra { display: none; }
+body[data-view="home"] .card-vacuum {
+  display: -webkit-flex; display: flex;
+  -webkit-flex-direction: column; flex-direction: column;
+}
+body[data-view="home"] .card-vacuum .tile-block { -webkit-order: 1; order: 1; }
+body[data-view="home"] .card-vacuum > .entity-row { -webkit-order: 2; order: 2; }
+body[data-view="home"] .card-vacuum .vacuum-extra { -webkit-order: 3; order: 3; }
 .tile-block { margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
+body[data-view="home"] .card-vacuum:not(.details-open) .tile-block {
+  margin-top: 8px; padding-top: 0; border-top: none;
+}
 .vacuum-controls { display: -webkit-flex; display: flex; -webkit-justify-content: space-between; justify-content: space-between; margin-top: 4px; }
 .round-icon-btn {
   -webkit-flex: 1; flex: 1; display: -webkit-flex; display: flex; -webkit-justify-content: center; justify-content: center;
