@@ -24,7 +24,8 @@ window.CONFIG = {
 
   // Broadlink daljinski (remote.universal_remote). Dugmad šalju
   // remote.send_command. Imena device/command moraju biti ista kao
-  // naučene komande u HA. Ako su kod tebe drugačija, zameni ovde
+  // naučene komande u HA. Klima je +/− od 16° do 30°; komanda za 24°
+  // je ukljuci_24. Ako su kod tebe drugačija, zameni ovde
   // i samo osveži stranicu — ne mora novi build.
   // remotes: {
   //   entity: "remote.universal_remote",

@@ -322,6 +322,7 @@ function applyState(entityId, state) {
     case "temp":
       setText("temp-value", withUnit(s, "°C"));
       setText("hero-temp", isUnknown(s) ? "--°" : Math.round(parseFloat(s)) + "°");
+      paintClimateRoom();
       break;
     case "humidity":
       setText("humidity-value", withUnit(s, "%"));
@@ -1039,14 +1040,12 @@ const DEFAULT_REMOTES = {
       title: "Klima",
       device: "klima",
       buttons: [
-        { label: "Isključi", command: "iskljuci", icon: "power", wide: true },
-        { label: "20°", command: "ukljuci_20", icon: "thermometer" },
-        { label: "22°", command: "ukljuci_22", icon: "thermometer" },
-        { label: "24°", command: "ukljuci_24", icon: "thermometer" },
-        { label: "26°", command: "ukljuci_26", icon: "thermometer" },
+        { label: "Uključi", action: "setpoint", icon: "power" },
+        { label: "Isključi", command: "iskljuci", icon: "power" },
         { label: "Režim", command: "mode", icon: "wind" },
         { label: "Ventilator", command: "fan", icon: "fan" },
       ],
+      climate: { min: 16, max: 30, step: 1, value: 24, prefix: "ukljuci_" },
     },
   ],
 };
@@ -1073,6 +1072,134 @@ function remoteIconName(name) {
   return /^[a-z0-9-]+$/.test(name || "") ? name : "power";
 }
 
+function climateRange(device) {
+  const c = device.climate || {};
+  return {
+    min: c.min != null ? c.min : 16,
+    max: c.max != null ? c.max : 30,
+    step: c.step || 1,
+    value: c.value != null ? c.value : 24,
+    prefix: c.prefix || "ukljuci_",
+  };
+}
+
+function climateStorageKey(device) {
+  return "klima-set-" + (device.id || device.device || "klima");
+}
+
+function readSetpoint(device) {
+  const cfg = climateRange(device);
+  let n = cfg.value;
+  try {
+    const saved = localStorage.getItem(climateStorageKey(device));
+    if (saved != null && saved !== "") n = parseInt(saved, 10);
+  } catch (e) { /* privatni režim */ }
+  if (isNaN(n)) n = cfg.value;
+  if (n < cfg.min) n = cfg.min;
+  if (n > cfg.max) n = cfg.max;
+  return n;
+}
+
+function writeSetpoint(device, n) {
+  try { localStorage.setItem(climateStorageKey(device), String(n)); } catch (e) { /* ignore */ }
+}
+
+function paintSetpoint(n) {
+  setText("klima-set", n + "°");
+}
+
+function paintClimateRoom() {
+  const el = $("klima-room");
+  if (!el) return;
+  const st = states[E.temp];
+  const s = st && st.state;
+  el.textContent = isUnknown(s) ? "Soba —" : "Soba " + Math.round(parseFloat(s)) + "°";
+}
+
+function fireRemote(device, command, label, learnHint) {
+  const entity = REMOTES.entity || DEFAULT_REMOTES.entity;
+  const data = { device: device.device, command: [command] };
+  if (remoteLearning) {
+    remoteStatus(learnHint || ("Čekam „" + label + "“ — pritisni to dugme na pravom daljinskom, ka Broadlinku."));
+    callService("remote", "learn_command", entity, Object.assign({ command_type: "ir" }, data), function (msg) {
+      if (msg && msg.success) {
+        remoteLearning = false;
+        const learnBtn = $("remote-learn");
+        if (learnBtn) learnBtn.classList.remove("active");
+        remoteStatus("Naučeno: " + label + ". Sad dugme šalje komandu.");
+      } else {
+        remoteStatus(remoteErrorText(msg));
+      }
+    });
+    return;
+  }
+  callService("remote", "send_command", entity, data, function (msg) {
+    if (msg && msg.success) remoteStatus("Poslato: " + label);
+    else remoteStatus(remoteErrorText(msg));
+  });
+}
+
+function setpointCommand(device, n) {
+  return climateRange(device).prefix + n;
+}
+
+function stepClimate(device, delta) {
+  const cfg = climateRange(device);
+  const current = readSetpoint(device);
+  const next = current + delta;
+  if (next < cfg.min || next > cfg.max) {
+    remoteStatus(next < cfg.min ? "Najniže je " + cfg.min + "°." : "Najviše je " + cfg.max + "°.");
+    return;
+  }
+  writeSetpoint(device, next);
+  paintSetpoint(next);
+  fireRemote(
+    device,
+    setpointCommand(device, next),
+    next + "°",
+    "Čekam " + next + "° — na pravom daljinskom podesi " + next + "° i pritisni, ka Broadlinku."
+  );
+}
+
+function appendClimate(pad, device) {
+  const current = readSetpoint(device);
+  const wrap = document.createElement("div");
+  wrap.className = "remote-climate";
+
+  const down = document.createElement("button");
+  down.type = "button";
+  down.className = "remote-key remote-step";
+  down.setAttribute("aria-label", "Smanji temperaturu");
+  down.innerHTML = '<i data-lucide="minus"></i>';
+  down.addEventListener("click", function () {
+    flash(down);
+    stepClimate(device, -climateRange(device).step);
+  });
+
+  const mid = document.createElement("div");
+  mid.className = "remote-climate-mid";
+  mid.innerHTML = '<div class="remote-climate-value" id="klima-set"></div>'
+    + '<div class="remote-climate-label">Podešeno</div>'
+    + '<div class="remote-climate-room" id="klima-room"></div>';
+
+  const up = document.createElement("button");
+  up.type = "button";
+  up.className = "remote-key remote-step";
+  up.setAttribute("aria-label", "Povećaj temperaturu");
+  up.innerHTML = '<i data-lucide="plus"></i>';
+  up.addEventListener("click", function () {
+    flash(up);
+    stepClimate(device, climateRange(device).step);
+  });
+
+  wrap.appendChild(down);
+  wrap.appendChild(mid);
+  wrap.appendChild(up);
+  pad.appendChild(wrap);
+  paintSetpoint(current);
+  paintClimateRoom();
+}
+
 function renderRemote() {
   const tabs = $("remote-tabs");
   const pad = $("remote-pad");
@@ -1093,7 +1220,9 @@ function renderRemote() {
   }
 
   pad.innerHTML = "";
+  pad.className = device.climate ? "remote-pad remote-pad-split" : "remote-pad";
   const buttons = device.buttons || [];
+  let climatePlaced = !device.climate;
   for (let i = 0; i < buttons.length; i++) {
     const btn = buttons[i];
     const el = document.createElement("button");
@@ -1105,30 +1234,24 @@ function renderRemote() {
     el.appendChild(label);
     el.addEventListener("click", function () {
       flash(el);
-      const entity = REMOTES.entity || DEFAULT_REMOTES.entity;
-      const data = { device: device.device, command: [btn.command] };
-      const name = btn.label || btn.command;
-      if (remoteLearning) {
-        remoteStatus("Čekam „" + name + "“ — pritisni to dugme na pravom daljinskom, ka Broadlinku.");
-        callService("remote", "learn_command", entity, Object.assign({ command_type: "ir" }, data), function (msg) {
-          if (msg && msg.success) {
-            remoteLearning = false;
-            const learnBtn = $("remote-learn");
-            if (learnBtn) learnBtn.classList.remove("active");
-            remoteStatus("Naučeno: " + name + ". Sad dugme šalje komandu.");
-          } else {
-            remoteStatus(remoteErrorText(msg));
-          }
-        });
-        return;
+      let command = btn.command;
+      let name = btn.label || btn.command;
+      let learnHint = null;
+      if (btn.action === "setpoint" && device.climate) {
+        const n = readSetpoint(device);
+        command = setpointCommand(device, n);
+        name = n + "°";
+        learnHint = "Čekam " + n + "° — na pravom daljinskom podesi " + n + "° i pritisni, ka Broadlinku.";
       }
-      callService("remote", "send_command", entity, data, function (msg) {
-        if (msg && msg.success) remoteStatus("Poslato: " + name);
-        else remoteStatus(remoteErrorText(msg));
-      });
+      fireRemote(device, command, name, learnHint);
     });
     pad.appendChild(el);
+    if (device.climate && i === 1) {
+      appendClimate(pad, device);
+      climatePlaced = true;
+    }
   }
+  if (!climatePlaced) appendClimate(pad, device);
   icon();
 }
 
