@@ -1,0 +1,2872 @@
+[
+  {
+    "id": "binary_sensor.iphone_camera_motion",
+    "name": "iPhone Camera Motion",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "binary_sensor.iphone_focus",
+    "name": "iPhone Focus",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "binary_sensor.iphone_kiosk_mode",
+    "name": "iPhone Kiosk Mode",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "binary_sensor.iphone_kiosk_screensaver",
+    "name": "iPhone Kiosk Screensaver",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "binary_sensor.solokitten73264",
+    "name": "",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.solokitten73264_in_game",
+    "name": "In game",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.solokitten73264_subscribed_to_xbox_game_pass",
+    "name": "Subscribed to Xbox Game Pass",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.sun_solar_rising",
+    "name": "Solar rising",
+    "area": "",
+    "integration": "sun",
+    "enabled": false
+  },
+  {
+    "id": "binary_sensor.upnp_igd_wan_status",
+    "name": "WAN status",
+    "area": "",
+    "integration": "upnp",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.xiaomi_de_1173620033_ov81gl_auto_water_change_installed_p_2_62",
+    "name": " Robot Cleaner Auto Water Change Installed",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.xiaomi_de_1173620033_ov81gl_current_no_disturb_p_11_3",
+    "name": " No Disturb Current No Disturb",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.xiaomi_de_1173620033_ov81gl_current_physical_control_lock_p_5_2",
+    "name": " Physical Control Locked Current Physical Control Lock",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.xiaomi_de_1173620033_ov81gl_location_status_p_2_26",
+    "name": " Robot Cleaner Location Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.xiaomi_de_1173620033_ov81gl_mop_status_p_2_11",
+    "name": " Robot Cleaner Mop Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.xiaomi_de_1173620033_ov81gl_sleep_status_p_2_25",
+    "name": " Robot Cleaner Sleep Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "binary_sensor.zhimi_de_436875919_mb3a_buttom_door_p_15_5",
+    "name": "* Others Buttom Door",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.ipc_ptz_down",
+    "name": "PTZ down",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "button.ipc_ptz_left",
+    "name": "PTZ left",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "button.ipc_ptz_right",
+    "name": "PTZ right",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "button.ipc_ptz_up",
+    "name": "PTZ up",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "button.living_room_living_room_cancel_announcement",
+    "name": "Cancel announcement",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": false
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_auto_room_partition_a_10_5",
+    "name": " Vacuum Map Auto Room Partition",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_back_mop_wash_a_2_36",
+    "name": " Robot Cleaner Back Mop Wash",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_cancel_water_self_check_a_2_46",
+    "name": " Robot Cleaner Cancel Water Self Check",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_clear_map_a_10_1",
+    "name": " Vacuum Map Clear Map",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_continue_build_map_a_2_33",
+    "name": " Robot Cleaner Resume",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_empty_base_station_water_tank_a_2_57",
+    "name": " Robot Cleaner Empty Base Station Water Tank",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_empty_host_water_tank_a_2_58",
+    "name": " Robot Cleaner Empty Host Water Tank",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_enter_remote_a_2_28",
+    "name": " Robot Cleaner Enter Remote",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_exit_remote_a_2_29",
+    "name": " Robot Cleaner Exit remote control",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_get_download_status_a_15_2",
+    "name": " Voice Management Get Download Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_get_system_info_a_2_30",
+    "name": " Robot Cleaner Get System Info",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_imu_calibration_a_16_1",
+    "name": "* IMU IMU ",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_pause_build_map_a_2_35",
+    "name": " Robot Cleaner Pause",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_reset_brush_life_a_12_1",
+    "name": " Brush Cleaner Reset Brush Life",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_reset_brush_life_a_13_1",
+    "name": " Brush Cleaner Reset Brush Life",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_reset_detergent_management_level_a_18_1",
+    "name": " Detergent Management Reset Detergent Management Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_reset_dust_bag_life_a_19_1",
+    "name": " Dust Bag Reset Dust Bag Life",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_reset_filter_life_a_14_1",
+    "name": " Filter Reset Filter Life",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_reset_mop_life_a_9_1",
+    "name": " Mop Reset Mop Life",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_save_map_a_10_4",
+    "name": " Vacuum Map Save Map",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_spot_cleaning_a_2_59",
+    "name": " Robot Cleaner Spot Cleaning",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_base_station_cleaning_a_2_49",
+    "name": " Robot Cleaner Start Base Station Cleaning",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_build_map_a_2_17",
+    "name": " Robot Cleaner Start to quickly create a map",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_call_clean_a_2_22",
+    "name": " Robot Cleaner Start Call Clean",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_custom_sweep_a_2_9",
+    "name": " Robot Cleaner Start Custom Sweep",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_cut_hair_a_2_43",
+    "name": " Robot Cleaner Start Cut Hair",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_dry_a_2_20",
+    "name": " Robot Cleaner Start Dry",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_dust_arrest_a_2_18",
+    "name": " Robot Cleaner Start Dust Arrest",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_eject_a_2_21",
+    "name": " Robot Cleaner Start Eject",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_mop_a_2_5",
+    "name": " Robot Cleaner Start Mop",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_mop_wash_a_2_19",
+    "name": " Robot Cleaner Start Mop Wash",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_only_sweep_a_2_4",
+    "name": " Robot Cleaner Start Only Sweep",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_self_cleaning_of_the_station_a_2_63",
+    "name": " Robot Cleaner Start Self Cleaning Of The Station",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_sweep_before_mopping_a_2_50",
+    "name": " Robot Cleaner Start Sweep Before Mopping",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_sweep_mop_a_2_6",
+    "name": " Robot Cleaner Start Sweep Mop",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_start_water_self_check_a_2_45",
+    "name": " Robot Cleaner Start Water Self Check",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_stop_build_map_and_gocharge_a_2_34",
+    "name": " Robot Cleaner Stop Build Map And Gocharge",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_stop_cut_hair_a_2_44",
+    "name": " Robot Cleaner Stop Cut Hair",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_stop_dry_a_2_32",
+    "name": " Robot Cleaner Stop Dry",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_stop_mop_wash_a_2_31",
+    "name": " Robot Cleaner Stop Mop Wash",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_stop_self_cleaning_of_the_station_a_2_64",
+    "name": " Robot Cleaner Stop Self Cleaning Of The Station",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_stop_working_a_2_51",
+    "name": " Robot Cleaner Stop Working",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_try_listen_a_2_27",
+    "name": " Robot Cleaner Try Listen",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.xiaomi_de_1173620033_ov81gl_update_properties_data_a_10_7",
+    "name": " Vacuum Map Update Properties Data",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.zhimi_de_436875919_mb3a_toggle_a_8_1",
+    "name": " Button Toggle",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "button.zhimi_de_436875919_mb3a_toggle_mode_a_8_2",
+    "name": "* Button Toggle Mode",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "camera.ipc_live_view_hd",
+    "name": "Live view HD",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "camera.ipc_live_view_sd",
+    "name": "Live view SD",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "device_tracker.iphone",
+    "name": "iPhone",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": true
+  },
+  {
+    "id": "device_tracker.iphone_apple_watch",
+    "name": "iPhone Apple Watch",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": true
+  },
+  {
+    "id": "event.backup_automatic_backup",
+    "name": "Automatic backup",
+    "area": "",
+    "integration": "backup",
+    "enabled": true
+  },
+  {
+    "id": "event.xiaomi_de_1173620033_ov81gl_build_map_complete_e_2_1",
+    "name": " Robot Cleaner Build Map Complete",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "event.xiaomi_de_1173620033_ov81gl_sweep_complete_e_2_2",
+    "name": " Robot Cleaner Sweep Complete",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "event.zhimi_de_436875919_mb3a_cild_lock_trigger_e_8_1",
+    "name": "* Button Child Lock Trigger",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "event.zhimi_de_436875919_mb3a_filter_door_opened_e_9_2",
+    "name": "* Filter Time Filter Door Opened",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "event.zhimi_de_436875919_mb3a_filter_eof_e_9_1",
+    "name": "* Filter Time Filter Eof",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "event.zhimi_de_436875919_mb3a_statusreport_e_15_1",
+    "name": "* Others Status Report",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "fan.zhimi_de_436875919_mb3a_s_2_air_purifier",
+    "name": " Air Purifier",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "image.solokitten73264_avatar",
+    "name": "Avatar",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "image.solokitten73264_gamerpic",
+    "name": "Gamerpic",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "image.solokitten73264_now_playing",
+    "name": "Now playing",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "infrared.universal_remote_ir_emitter",
+    "name": "IR emitter",
+    "area": "Living Room",
+    "integration": "broadlink",
+    "enabled": true
+  },
+  {
+    "id": "input_select.kvalitet_kamere",
+    "name": "Kvalitet kamere",
+    "area": "",
+    "integration": "input_select",
+    "enabled": true
+  },
+  {
+    "id": "media_player.living_room_living_room",
+    "name": "",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "media_player.yettel_tv_box",
+    "name": "",
+    "area": "Living Room",
+    "integration": "cast",
+    "enabled": true
+  },
+  {
+    "id": "media_player.yettel_tv_box_2",
+    "name": "",
+    "area": "Living Room",
+    "integration": "androidtv_remote",
+    "enabled": true
+  },
+  {
+    "id": "notify.iphone",
+    "name": "",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_add_order_clean_a_2_23",
+    "name": " Robot Cleaner Add Order Clean",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_add_user_sweep_setting_a_2_38",
+    "name": " Robot Cleaner Add User Sweep Setting",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_close_abnormal_card_a_2_48",
+    "name": " Robot Cleaner Close Abnormal Card",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_common_object_clean_a_2_62",
+    "name": " Robot Cleaner Common Object Clean",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_del_user_sweep_setting_a_2_39",
+    "name": " Robot Cleaner Del User Sweep Setting",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_delete_map_a_10_2",
+    "name": " Vacuum Map Delete Map",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_delete_order_clean_a_2_25",
+    "name": " Robot Cleaner Delete Order Clean",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_download_voice_a_15_1",
+    "name": " Voice Management Download Voice",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_final_cleaning_a_2_53",
+    "name": " Robot Cleaner Final Cleaning",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_get_ai_picture_obj_a_2_61",
+    "name": " Robot Cleaner Get Ai Picture Obj",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_get_history_obj_a_20_1",
+    "name": "* custom get-history-obj",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_get_order_clean_a_20_5",
+    "name": "* custom get-order-clean",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_get_room_configs_a_2_11",
+    "name": " Robot Cleaner Get Room Configs",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_get_user_define_a_20_2",
+    "name": "* custom get-user-define",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_get_vacuum_route_a_2_47",
+    "name": " Robot Cleaner Get Vacuum Route",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_get_zone_configs_a_2_10",
+    "name": " Robot Cleaner Get Zone Configs",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_merge_rooms_a_2_15",
+    "name": " Robot Cleaner Merge Rooms",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_modify_order_clean_a_2_24",
+    "name": " Robot Cleaner Modify Order Clean",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_modify_user_sweep_setting_a_2_40",
+    "name": " Robot Cleaner Modify User Sweep Setting",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_remote_control_a_2_26",
+    "name": " Robot Cleaner Remote controlling",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_request_ai_picture_a_17_1",
+    "name": "* AI icon request AI icon",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_restore_map_a_10_8",
+    "name": " Vacuum Map Restore Map",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_set_map_a_10_3",
+    "name": " Vacuum Map Set Map",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_set_map_name_a_10_6",
+    "name": " Vacuum Map Set Map Name",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_set_room_clean_configs_a_2_13",
+    "name": " Robot Cleaner Set Room Clean Configs",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_set_stop_upload_map_a_20_3",
+    "name": "* custom set-stop-upload-map",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_set_zone_a_2_12",
+    "name": " Robot Cleaner Set Zone",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_skip_cleaning_a_2_52",
+    "name": " Robot Cleaner Skip Cleaning",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_split_room_a_2_14",
+    "name": " Robot Cleaner Split Room",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_start_furniture_cleaning_a_2_56",
+    "name": " Robot Cleaner Start Furniture Cleaning",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_start_user_define_sweep_a_2_42",
+    "name": " Robot Cleaner Start User Define Sweep",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_start_vacuum_room_sweep_a_2_16",
+    "name": " Robot Cleaner Start Vacuum Room Sweep",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_start_zone_sweep_a_2_37",
+    "name": " Robot Cleaner Start Zone Sweep",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_switch_order_clean_a_20_6",
+    "name": "* custom switch-order-clean",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_temporary_cleaning_room_a_2_54",
+    "name": " Robot Cleaner Temporary Cleaning Room",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_temporary_cleaning_zone_a_2_55",
+    "name": " Robot Cleaner Temporary Cleaning Zone",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "notify.xiaomi_de_1173620033_ov81gl_user_define_sweep_set_a_2_41",
+    "name": " Robot Cleaner User Define Sweep Set",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.living_room_living_room_balance",
+    "name": "Balance",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "number.living_room_living_room_bass",
+    "name": "Bass",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "number.living_room_living_room_treble",
+    "name": "Treble",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "number.xiaomi_de_1173620033_ov81gl_enable_time_period_p_11_2",
+    "name": " No Disturb Enable Time Period",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.xiaomi_de_1173620033_ov81gl_map_complete_dialog_p_2_27",
+    "name": " Robot Cleaner Map Complete Dialog",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.xiaomi_de_1173620033_ov81gl_volume_p_4_2",
+    "name": " Alarm Volume",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_app_extra_p_15_1",
+    "name": "* Others App Extra",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_aqi_goodh_p_13_6",
+    "name": "* Aqi Aqi Goodh",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_aqi_updata_heartbeat_p_13_9",
+    "name": "* Aqi Aqi Updata Heartbeat",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_favorite_fan_level_p_10_10",
+    "name": "* Motor Speed Favorite Fan Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_filter_hour_debug_p_9_2",
+    "name": "* Filter Time Filter Hour Debug",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_filter_max_time_p_9_1",
+    "name": "* Filter Time Filter Max Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_motor_favorite_p_10_7",
+    "name": "* Motor Speed Motor Favorite",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_motor_high_p_10_2",
+    "name": "* Motor Speed Motor High",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_motor_low_p_10_5",
+    "name": "* Motor Speed Motor Low",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_motor_med_p_10_3",
+    "name": "* Motor Speed Motor Med",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "number.zhimi_de_436875919_mb3a_motor_silent_p_10_6",
+    "name": "* Motor Speed Motor Silent",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "person.bojan_jagetic",
+    "name": "Bojan Jagetic",
+    "area": "",
+    "integration": "person",
+    "enabled": true
+  },
+  {
+    "id": "person.teodora_jagetic",
+    "name": "Teodora Jagetic",
+    "area": "",
+    "integration": "person",
+    "enabled": true
+  },
+  {
+    "id": "person.uros_jagetic",
+    "name": "Uroš Jagetic",
+    "area": "",
+    "integration": "person",
+    "enabled": true
+  },
+  {
+    "id": "remote.universal_remote",
+    "name": "",
+    "area": "Living Room",
+    "integration": "broadlink",
+    "enabled": true
+  },
+  {
+    "id": "remote.yettel_tv_box",
+    "name": "",
+    "area": "Living Room",
+    "integration": "androidtv_remote",
+    "enabled": true
+  },
+  {
+    "id": "scene.new_scene",
+    "name": "New scene",
+    "area": "",
+    "integration": "homeassistant",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_auto_dust_arrest_power_level_p_2_82",
+    "name": " Robot Cleaner Auto Dust Arrest Power Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_carpet_cleaning_method_p_2_73",
+    "name": " Robot Cleaner Carpet Cleaning Method",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_clean_times_p_2_8",
+    "name": " Robot Cleaner Times",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_detergent_self_delivery_level_p_18_3",
+    "name": " Detergent Management Detergent Self Delivery Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_drying_time_p_2_31",
+    "name": " Robot Cleaner Drying duration",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_dust_arrest_frequency_p_2_33",
+    "name": " Robot Cleaner Dust Arrest Frequency",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_edge_sweep_frequency_p_2_68",
+    "name": " Robot Cleaner Edge Sweep Frequency",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_frequency_cut_hair_config_p_2_64",
+    "name": " Robot Cleaner Frequency Cut Hair Config",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_frequency_mop_wash_no_tank_p_2_61",
+    "name": " Robot Cleaner Frequency Mop Wash No Tank",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_map_switch_method_p_10_10",
+    "name": " Vacuum Map Map Switch Method",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_mode_p_2_9",
+    "name": " Robot Cleaner Suction",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_mop_water_output_level_no_tank_p_2_60",
+    "name": " Robot Cleaner Mop Water Output Level No Tank",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_mop_water_output_level_p_2_10",
+    "name": " Robot Cleaner Water output for mopping",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_obstacle_avoidance_strategy_p_2_75",
+    "name": " Robot Cleaner Obstacle Avoidance Strategy",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_sweep_mop_type_p_2_4",
+    "name": " Robot Cleaner Mode",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_sweep_route_p_2_74",
+    "name": " Robot Cleaner Sweep Route",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_sweep_type_p_2_5",
+    "name": " Robot Cleaner Sweep Type",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_wash_mop_water_temperature_p_2_84",
+    "name": " Robot Cleaner Wash Mop Water Temperature",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_water_output_for_washing_mop_p_2_30",
+    "name": " Robot Cleaner Water Output For Washing Mop",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.xiaomi_de_1173620033_ov81gl_worry_free_clean_mode_p_2_83",
+    "name": " Robot Cleaner Worry Free Clean Mode",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.zhimi_de_436875919_mb3a_brightness_p_6_1",
+    "name": " Indicator Light Screen brightness",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.zhimi_de_436875919_mb3a_country_code_p_15_11",
+    "name": "* Others National Code",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "select.zhimi_de_436875919_mb3a_temperature_unit_p_15_12",
+    "name": "* Others temperature-unit",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.backup_backup_manager_state",
+    "name": "Backup Manager state",
+    "area": "",
+    "integration": "backup",
+    "enabled": true
+  },
+  {
+    "id": "sensor.backup_last_attempted_automatic_backup",
+    "name": "Last attempted automatic backup",
+    "area": "",
+    "integration": "backup",
+    "enabled": true
+  },
+  {
+    "id": "sensor.backup_last_successful_automatic_backup",
+    "name": "Last successful automatic backup",
+    "area": "",
+    "integration": "backup",
+    "enabled": true
+  },
+  {
+    "id": "sensor.backup_next_scheduled_automatic_backup",
+    "name": "Next scheduled automatic backup",
+    "area": "",
+    "integration": "backup",
+    "enabled": true
+  },
+  {
+    "id": "sensor.ipc_status",
+    "name": "Status",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "sensor.ipc_storage_used",
+    "name": "Storage used",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "sensor.iphone_activity",
+    "name": "iPhone Activity",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_app_version",
+    "name": "iPhone App Version",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_apple_watch_battery_level",
+    "name": "iPhone Apple Watch Battery Level",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_apple_watch_battery_state",
+    "name": "iPhone Apple Watch Battery State",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_audio_output",
+    "name": "iPhone Audio Output",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_average_active_pace",
+    "name": "iPhone Average Active Pace",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_battery_level",
+    "name": "iPhone Battery Level",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_battery_state",
+    "name": "iPhone Battery State",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_bssid",
+    "name": "iPhone BSSID",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_camera_stream",
+    "name": "iPhone Camera Stream",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_connection_type",
+    "name": "iPhone Connection Type",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_current_cadence",
+    "name": "iPhone Current Cadence",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_current_pace",
+    "name": "iPhone Current Pace",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_distance",
+    "name": "iPhone Distance",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_floors_ascended",
+    "name": "iPhone Floors Ascended",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_floors_descended",
+    "name": "iPhone Floors Descended",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_kiosk_brightness",
+    "name": "iPhone Kiosk Brightness",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_kiosk_volume",
+    "name": "iPhone Kiosk Volume",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_last_update_trigger",
+    "name": "iPhone Last Update Trigger",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_location_permission",
+    "name": "iPhone Location permission",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_pressure",
+    "name": "iPhone Pressure",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_sim_1",
+    "name": "iPhone SIM 1",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_sim_2",
+    "name": "iPhone SIM 2",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_ssid",
+    "name": "iPhone SSID",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_steps",
+    "name": "iPhone Steps",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.iphone_storage",
+    "name": "iPhone Storage",
+    "area": "",
+    "integration": "mobile_app",
+    "enabled": false
+  },
+  {
+    "id": "sensor.solokitten73264_followers",
+    "name": "Followers",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "sensor.solokitten73264_following",
+    "name": "Following",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "sensor.solokitten73264_friends",
+    "name": "Friends",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "sensor.solokitten73264_gamerscore",
+    "name": "Gamerscore",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "sensor.solokitten73264_in_party",
+    "name": "In party",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "sensor.solokitten73264_last_online",
+    "name": "Last online",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "sensor.solokitten73264_now_playing",
+    "name": "Now playing",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "sensor.solokitten73264_party_join_restrictions",
+    "name": "Party join restrictions",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "sensor.solokitten73264_status",
+    "name": "Status",
+    "area": "",
+    "integration": "xbox",
+    "enabled": true
+  },
+  {
+    "id": "sensor.sonos_favorites",
+    "name": "Sonos favorites",
+    "area": "",
+    "integration": "sonos",
+    "enabled": false
+  },
+  {
+    "id": "sensor.sun_next_dawn",
+    "name": "Next dawn",
+    "area": "",
+    "integration": "sun",
+    "enabled": true
+  },
+  {
+    "id": "sensor.sun_next_dusk",
+    "name": "Next dusk",
+    "area": "",
+    "integration": "sun",
+    "enabled": true
+  },
+  {
+    "id": "sensor.sun_next_midnight",
+    "name": "Next midnight",
+    "area": "",
+    "integration": "sun",
+    "enabled": true
+  },
+  {
+    "id": "sensor.sun_next_noon",
+    "name": "Next noon",
+    "area": "",
+    "integration": "sun",
+    "enabled": true
+  },
+  {
+    "id": "sensor.sun_next_rising",
+    "name": "Next rising",
+    "area": "",
+    "integration": "sun",
+    "enabled": true
+  },
+  {
+    "id": "sensor.sun_next_setting",
+    "name": "Next setting",
+    "area": "",
+    "integration": "sun",
+    "enabled": true
+  },
+  {
+    "id": "sensor.sun_solar_azimuth",
+    "name": "Solar azimuth",
+    "area": "",
+    "integration": "sun",
+    "enabled": false
+  },
+  {
+    "id": "sensor.sun_solar_elevation",
+    "name": "Solar elevation",
+    "area": "",
+    "integration": "sun",
+    "enabled": false
+  },
+  {
+    "id": "sensor.temperature_humidity_sensor_5c89_signal_strength",
+    "name": "Signal strength",
+    "area": "Living Room",
+    "integration": "xiaomi_ble",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_data_received",
+    "name": "Data received",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_data_sent",
+    "name": "Data sent",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_download_speed",
+    "name": "Download speed",
+    "area": "",
+    "integration": "upnp",
+    "enabled": true
+  },
+  {
+    "id": "sensor.upnp_igd_download_speed_no_rollover_handling",
+    "name": "Download speed (no rollover handling)",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_external_ip",
+    "name": "External IP",
+    "area": "",
+    "integration": "upnp",
+    "enabled": true
+  },
+  {
+    "id": "sensor.upnp_igd_packet_download_speed",
+    "name": "Packet download speed",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_packet_download_speed_no_rollover_handling",
+    "name": "Packet download speed (no rollover handling)",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_packet_upload_speed",
+    "name": "Packet upload speed",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_packet_upload_speed_no_rollover_handling",
+    "name": "Packet upload speed (no rollover handling)",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_packets_received",
+    "name": "Packets received",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_packets_sent",
+    "name": "Packets sent",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_upload_speed",
+    "name": "Upload speed",
+    "area": "",
+    "integration": "upnp",
+    "enabled": true
+  },
+  {
+    "id": "sensor.upnp_igd_upload_speed_no_rollover_handling",
+    "name": "Upload speed (no rollover handling)",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_uptime",
+    "name": "Uptime",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.upnp_igd_wan_status",
+    "name": "WAN status",
+    "area": "",
+    "integration": "upnp",
+    "enabled": false
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_action_result_p_2_67",
+    "name": " Robot Cleaner Action Result",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_ai_picture_info_p_17_2",
+    "name": "* AI icon ai-picture-info",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_backup_map_list_p_10_13",
+    "name": " Vacuum Map Backup Map List",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_base_station_water_tank_status_p_2_100",
+    "name": " Robot Cleaner Base Station Water Tank Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_base_station_working_status_p_2_18",
+    "name": " Robot Cleaner Base Station Working Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_battery_level_p_3_1",
+    "name": " Battery Battery Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_brush_left_time_p_12_2",
+    "name": " Brush Cleaner Brush Left Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_brush_left_time_p_13_2",
+    "name": " Brush Cleaner Brush Left Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_brush_life_level_p_12_1",
+    "name": " Brush Cleaner Brush Life Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_brush_life_level_p_13_1",
+    "name": " Brush Cleaner Brush Life Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_carpet_obj_name_p_10_7",
+    "name": " Vacuum Map Carpet Obj Name",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_charging_state_p_3_2",
+    "name": " Battery Charging State",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_clean_record_p_10_3",
+    "name": " Vacuum Map Clean Record",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_cleaning_area_p_2_6",
+    "name": " Robot Cleaner Cleaning Area",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_cleaning_progress_p_2_89",
+    "name": " Robot Cleaner Cleaning Progress",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_cleaning_time_p_2_7",
+    "name": " Robot Cleaner Cleaning Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_cloud_clean_record_p_10_15",
+    "name": " Vacuum Map Cloud Clean Record",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_cur_voice_p_15_2",
+    "name": " Voice Management Cur Voice",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_current_cleaning_config_p_2_40",
+    "name": " Robot Cleaner Current Cleaning Config",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_current_map_id_p_10_6",
+    "name": " Vacuum Map Current Map Id",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_detergent_left_level_p_18_1",
+    "name": " Detergent Management Detergent Left Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_detergent_left_time_p_18_4",
+    "name": " Detergent Management Detergent Left Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_download_progress_p_15_4",
+    "name": " Voice Management Download Progress",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_download_status_p_15_3",
+    "name": " Voice Management Download Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_dry_left_time_p_2_90",
+    "name": " Robot Cleaner Dry Left Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_drying_progress_p_2_88",
+    "name": " Robot Cleaner Drying Progress",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_dust_bag_left_time_p_19_2",
+    "name": " Dust Bag Dust Bag Left Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_dust_bag_life_level_p_19_1",
+    "name": " Dust Bag Dust Bag Life Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_fault_ids_p_2_66",
+    "name": " Robot Cleaner Fault Ids",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_fault_p_2_3",
+    "name": " Robot Cleaner Device Fault",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_filter_left_time_p_14_2",
+    "name": " Filter Filter Left Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_filter_life_level_p_14_1",
+    "name": " Filter Filter Life Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_furniture_for_automation_p_2_102",
+    "name": " Robot Cleaner Furniture For Automation",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_host_water_tank_status_p_2_101",
+    "name": " Robot Cleaner Host Water Tank Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_last_clean_time_p_2_17",
+    "name": " Robot Cleaner Last Clean Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_map_3d_info_p_10_9",
+    "name": " Vacuum Map Map Three Dimensional Info",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_map_management_p_10_5",
+    "name": " Vacuum Map Map Management",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_map_obj_name_p_10_1",
+    "name": " Vacuum Map Map Obj Name",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_map_upload_stop_action_result_p_10_12",
+    "name": " Vacuum Map Map Upload Stop Action Result",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_mop_left_time_p_9_2",
+    "name": " Mop Mop Left Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_mop_life_level_p_9_1",
+    "name": " Mop Mop Life Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_notice_p_2_72",
+    "name": " Robot Cleaner Notice",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_order_clean_p_2_19",
+    "name": " Robot Cleaner Order Clean",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_restore_map_result_p_10_14",
+    "name": " Vacuum Map Restore Map Result",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_room_information_p_2_16",
+    "name": " Robot Cleaner Room Information",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_sewage_tank_status_p_2_97",
+    "name": " Robot Cleaner Sewage Tank Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_statistical_clean_area_p_2_85",
+    "name": " Robot Cleaner Statistical Clean Area",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_statistical_cleaning_duration_p_2_87",
+    "name": " Robot Cleaner Statistical Cleaning Duration",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_statistical_cleaning_times_p_2_86",
+    "name": " Robot Cleaner Statistical Cleaning Times",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_sweep_ai_object_p_2_56",
+    "name": " Robot Cleaner Sweep Ai Object",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_sweep_mop_status_p_2_96",
+    "name": " Robot Cleaner Sweep Mop Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_trajectory_obj_name_p_10_2",
+    "name": " Vacuum Map Trajectory Obj Name",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_updata_difference_p_20_3",
+    "name": "* custom updata-difference",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_user_define_sweep_cfg_p_2_42",
+    "name": " Robot Cleaner User Define Sweep Cfg",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_user_define_sweep_id_p_2_43",
+    "name": " Robot Cleaner User Define Sweep Id",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_vacuum_frameware_version_p_2_1",
+    "name": " Robot Cleaner Vacuum Frameware Version",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_vacuum_position_p_10_4",
+    "name": " Vacuum Map Vacuum Position",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_voltage_p_3_3",
+    "name": " Battery Voltage",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_water_check_list_p_2_53",
+    "name": " Robot Cleaner Water Check List",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_water_check_status_p_2_54",
+    "name": " Robot Cleaner Water Check Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_water_tank_status_p_2_98",
+    "name": " Robot Cleaner Water Tank Status",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.xiaomi_de_1173620033_ov81gl_zone_ids_p_2_12",
+    "name": " Robot Cleaner Zone IDs",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_aqi_runstate_p_13_7",
+    "name": "* Aqi Aqi Runstate",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_aqi_state_p_13_8",
+    "name": "* Aqi Aqi State",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_aqi_zone_p_13_4",
+    "name": "* Aqi Aqi Zone",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_average_aqi_cnt_p_13_3",
+    "name": "* Aqi Average Aqi Cnt",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_average_aqi_p_13_2",
+    "name": "* Aqi Average Aqi",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_button_pressed_p_8_1",
+    "name": "* Button Button Pressed",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_fault_p_2_1",
+    "name": " Air Purifier Error",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_filter_life_level_p_4_3",
+    "name": " Filter Filter Life Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_filter_used_time_p_4_5",
+    "name": " Filter Filter Used Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_hw_version_p_15_8",
+    "name": "* Others Hw Version",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_iic_error_count_p_15_9",
+    "name": "* Others Iic Error Count",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_manual_level_p_15_10",
+    "name": "* Others Manual Level",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_motor_set_speed_p_10_9",
+    "name": "* Motor Speed Motor Set Speed",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_motor_speed_p_10_8",
+    "name": "* Motor Speed Motor Speed",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_pm2_5_density_p_3_6",
+    "name": " Environment PM2.5",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_purify_volume_p_13_1",
+    "name": "* Aqi Purify Volume",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_reboot_cause_p_15_6",
+    "name": "* Others Reboot Cause",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_relative_humidity_p_3_7",
+    "name": " Environment Relative Humidity",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_rfid_factory_id_p_14_2",
+    "name": "* Rfid Rfid Factory Id",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_rfid_product_id_p_14_3",
+    "name": "* Rfid Rfid Product Id",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_rfid_serial_num_p_14_5",
+    "name": "* Rfid Rfid Serial Num",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_rfid_tag_p_14_1",
+    "name": "* Rfid Rfid Tag",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_rfid_time_p_14_4",
+    "name": "* Rfid Rfid Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_sensor_state_p_13_5",
+    "name": "* Aqi Sensor State",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_temperature_p_3_8",
+    "name": " Environment Temperature",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "sensor.zhimi_de_436875919_mb3a_use_time_p_12_1",
+    "name": "* Use Time Use Time",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.card_mod_pre_release",
+    "name": "Pre-release",
+    "area": "",
+    "integration": "hacs",
+    "enabled": false
+  },
+  {
+    "id": "switch.clock_weather_card_pre_release",
+    "name": "Pre-release",
+    "area": "",
+    "integration": "hacs",
+    "enabled": false
+  },
+  {
+    "id": "switch.graphite_theme_pre_release",
+    "name": "Pre-release",
+    "area": "",
+    "integration": "hacs",
+    "enabled": false
+  },
+  {
+    "id": "switch.hisense_vidaa_tv_cdp_pre_release",
+    "name": "Pre-release",
+    "area": "",
+    "integration": "hacs",
+    "enabled": false
+  },
+  {
+    "id": "switch.ipc_audio_recording",
+    "name": "Audio recording",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "switch.ipc_motion_detection",
+    "name": "Motion detection",
+    "area": "Living Room",
+    "integration": "imou",
+    "enabled": true
+  },
+  {
+    "id": "switch.kiosk_mode_pre_release",
+    "name": "Pre-release",
+    "area": "",
+    "integration": "hacs",
+    "enabled": false
+  },
+  {
+    "id": "switch.living_room_hacs_pre_release",
+    "name": "Pre-release",
+    "area": "Living Room",
+    "integration": "hacs",
+    "enabled": false
+  },
+  {
+    "id": "switch.living_room_living_room_crossfade",
+    "name": "Crossfade",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.living_room_living_room_loudness",
+    "name": "Loudness",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.living_room_living_room_status_light",
+    "name": "Status light",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": false
+  },
+  {
+    "id": "switch.living_room_living_room_touch_controls",
+    "name": "Touch controls",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": false
+  },
+  {
+    "id": "switch.living_room_living_room_tv_autoplay",
+    "name": "TV autoplay",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.living_room_living_room_ungroup_on_autoplay",
+    "name": "Ungroup on autoplay",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.mini_media_player_pre_release",
+    "name": "Pre-release",
+    "area": "",
+    "integration": "hacs",
+    "enabled": false
+  },
+  {
+    "id": "switch.mushroom_pre_release",
+    "name": "Pre-release",
+    "area": "",
+    "integration": "hacs",
+    "enabled": false
+  },
+  {
+    "id": "switch.sonos_alarm_1",
+    "name": "Daily alarm 08:20",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.sonos_alarm_109",
+    "name": "Once alarm 10:30",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.sonos_alarm_110",
+    "name": "Once alarm 21:30",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.sonos_alarm_13",
+    "name": "Weekdays alarm 09:30",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.sonos_alarm_38",
+    "name": "Weekdays alarm 09:40",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.sonos_alarm_6",
+    "name": "Once alarm 08:30",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.sonos_alarm_85",
+    "name": "Once alarm 07:35",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.sonos_alarm_90",
+    "name": "Once alarm 09:10",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.sonos_alarm_95",
+    "name": "Once alarm 09:35",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.sonos_alarm_98",
+    "name": "Once alarm 09:43",
+    "area": "Living Room",
+    "integration": "sonos",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_ai_cleaning_p_2_37",
+    "name": " Robot Cleaner AI Cleaning",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_ai_managed_cleaning_p_2_69",
+    "name": " Robot Cleaner AI Managed Cleaning",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_ai_wake_up_p_2_95",
+    "name": " Robot Cleaner Ai Wake Up",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_alarm_p_4_1",
+    "name": " Alarm Alarm",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_auto_dust_arrest_p_2_32",
+    "name": " Robot Cleaner Auto Dust Arrest",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_auto_mop_dry_p_2_34",
+    "name": " Robot Cleaner Auto Mop Dry",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_auto_night_fill_light_p_2_94",
+    "name": " Robot Cleaner Auto Night Fill Light",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_auto_water_change_p_2_35",
+    "name": " Robot Cleaner Auto Water Change",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_brush_outswing_p_2_91",
+    "name": " Robot Cleaner Brush Outswing",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_carpet_avoidance_p_2_21",
+    "name": " Robot Cleaner Carpet Avoidance",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_carpet_boost_p_2_20",
+    "name": " Robot Cleaner Carpet Boost",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_carpet_display_p_2_22",
+    "name": " Robot Cleaner Carpet Display",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_cut_hair_config_p_2_63",
+    "name": " Robot Cleaner Cut Hair Config",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_defecation_detection_p_2_50",
+    "name": " Robot Cleaner Defecation Detection",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_detergent_depletion_reminder_p_2_71",
+    "name": " Robot Cleaner Detergent Depletion Reminder",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_detergent_self_delivery_p_18_2",
+    "name": " Detergent Management Detergent Self Delivery",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_detergent_self_delivery_p_2_59",
+    "name": " Robot Cleaner Detergent Self Delivery",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_dirt_detection_p_2_46",
+    "name": " Robot Cleaner Dirt Detection",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_edge_swing_tail_sweep_p_2_55",
+    "name": " Robot Cleaner Edge Swing Tail Sweep",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_enable_mop_wash_p_2_28",
+    "name": " Robot Cleaner Enable Mop Wash",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_exit_remote_dialog_p_2_38",
+    "name": " Robot Cleaner Exit Remote Dialog",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_floor_material_detection_p_2_49",
+    "name": " Robot Cleaner Floor Material Detection",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_hot_water_mop_wash_p_2_41",
+    "name": " Robot Cleaner Hot Water Mop Wash",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_liquid_dirt_detection_p_2_51",
+    "name": " Robot Cleaner Liquid Dirt Detection",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_map_upload_stop_p_10_11",
+    "name": " Vacuum Map Map Upload Stop",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_mop_auto_lift_p_2_44",
+    "name": " Robot Cleaner Mop Auto Lift",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_no_disturb_p_11_1",
+    "name": " No Disturb No Disturb",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_object_detection_p_2_47",
+    "name": " Robot Cleaner Object Detection",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_physical_controls_locked_p_5_1",
+    "name": " Physical Control Locked Physical Control Locked",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_real_scene_capture_p_2_93",
+    "name": " Robot Cleaner Real Scene Capture",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_repeat_wash_mop_p_2_92",
+    "name": " Robot Cleaner Repeat Wash Mop",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_room_detection_p_2_48",
+    "name": " Robot Cleaner Room Detection",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_sweep_ai_detection_p_2_45",
+    "name": " Robot Cleaner Sweep Ai Detection",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_sweep_break_switch_p_2_23",
+    "name": " Robot Cleaner Sweep Break Switch",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_de_1173620033_ov81gl_use_detergent_p_2_36",
+    "name": " Robot Cleaner Use Detergent",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.xiaomi_home_pre_release",
+    "name": "Pre-release",
+    "area": "",
+    "integration": "hacs",
+    "enabled": false
+  },
+  {
+    "id": "switch.zhimi_de_436875919_mb3a_alarm_p_5_1",
+    "name": " Alarm Alarm",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "switch.zhimi_de_436875919_mb3a_physical_controls_locked_p_7_1",
+    "name": " Physical Control Locked Physical Control Locked",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "text.xiaomi_de_1173620033_ov81gl_carpet_object_p_2_58",
+    "name": " Robot Cleaner Carpet Object",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "text.xiaomi_de_1173620033_ov81gl_plugin_info_remind_p_2_70",
+    "name": " Robot Cleaner Plugin Info Remind",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "text.xiaomi_de_1173620033_ov81gl_restricted_sweep_areas_p_2_13",
+    "name": " Robot Cleaner Restricted Sweep Areas",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "text.xiaomi_de_1173620033_ov81gl_restricted_walls_p_2_14",
+    "name": " Robot Cleaner Restricted Walls",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "text.xiaomi_de_1173620033_ov81gl_sill_p_2_99",
+    "name": " Robot Cleaner Sill",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "text.xiaomi_de_1173620033_ov81gl_sweep_furniture_p_2_57",
+    "name": " Robot Cleaner Sweep Furniture",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "text.xiaomi_de_1173620033_ov81gl_target_voice_p_15_1",
+    "name": " Voice Management Target Voice",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "todo.shopping_list",
+    "name": "Shopping list",
+    "area": "",
+    "integration": "shopping_list",
+    "enabled": true
+  },
+  {
+    "id": "todo.todo",
+    "name": "Todo",
+    "area": "",
+    "integration": "local_todo",
+    "enabled": true
+  },
+  {
+    "id": "tts.google_translate_en_com",
+    "name": "Google Translate en com",
+    "area": "",
+    "integration": "google_translate",
+    "enabled": true
+  },
+  {
+    "id": "update.card_mod_update",
+    "name": "card-mod update",
+    "area": "",
+    "integration": "hacs",
+    "enabled": true
+  },
+  {
+    "id": "update.clock_weather_card_update",
+    "name": "Clock Weather Card update",
+    "area": "",
+    "integration": "hacs",
+    "enabled": true
+  },
+  {
+    "id": "update.graphite_theme_update",
+    "name": "Graphite Theme update",
+    "area": "",
+    "integration": "hacs",
+    "enabled": true
+  },
+  {
+    "id": "update.hacs_update",
+    "name": "HACS update",
+    "area": "Living Room",
+    "integration": "hacs",
+    "enabled": true
+  },
+  {
+    "id": "update.hisense_vidaa_tv_cdp_update",
+    "name": "Hisense VIDAA TV (CDP) update",
+    "area": "",
+    "integration": "hacs",
+    "enabled": true
+  },
+  {
+    "id": "update.kiosk_mode_update",
+    "name": "Kiosk Mode update",
+    "area": "",
+    "integration": "hacs",
+    "enabled": true
+  },
+  {
+    "id": "update.mini_media_player_update",
+    "name": "Mini Media Player update",
+    "area": "",
+    "integration": "hacs",
+    "enabled": true
+  },
+  {
+    "id": "update.mushroom_update",
+    "name": "Mushroom update",
+    "area": "",
+    "integration": "hacs",
+    "enabled": true
+  },
+  {
+    "id": "update.xiaomi_home_update",
+    "name": "Xiaomi Home update",
+    "area": "",
+    "integration": "hacs",
+    "enabled": true
+  },
+  {
+    "id": "vacuum.xiaomi_de_1173620033_ov81gl",
+    "name": "Xiaomi Robot Vacuum S40",
+    "area": "Living Room",
+    "integration": "xiaomi_home",
+    "enabled": true
+  },
+  {
+    "id": "weather.home",
+    "name": "",
+    "area": "Living Room",
+    "integration": "open_meteo",
+    "enabled": true
+  }
+]
